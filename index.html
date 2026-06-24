@@ -218,8 +218,6 @@
 
   /* cost */
   .numbox .pre{font:500 14px var(--sans);color:var(--muted);padding-right:2px;}
-  .cost-compare{margin-top:16px;background:#FFF8EE;border:1px solid #F2E0C4;border-radius:var(--r-sm);padding:12px 15px;font-size:13px;color:#7a4f10;line-height:1.55;}
-  .cost-compare b{font-weight:600;color:#5e3d0a;font-variant-numeric:tabular-nums;}
 
   /* verdict */
   .verdict{border-color:#CFE0F2;box-shadow:0 1px 2px rgba(12,23,64,.04),0 22px 50px -30px rgba(12,23,64,.42);}
@@ -229,7 +227,7 @@
   .recap{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;}
   .recap .rc{background:#F6F9FD;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--muted);}
   .recap .rc b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;display:block;font:600 15px var(--disp);margin-top:2px;}
-  .verdict-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px;}
+  .verdict-compare{display:grid;grid-template-columns:1fr;gap:14px;margin-top:26px;}
   .vc-card{border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;background:#fff;}
   .vc-rec{border:1.5px solid var(--accent);box-shadow:0 10px 26px -18px rgba(0,120,170,.55);}
   .vc-title{font:600 14px var(--disp);color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
@@ -282,16 +280,16 @@
             <p>The two streams above, added together — this is the number the rest of the forecast builds on.</p>
           </div>
         </div>
-        <div class="total-num"><span class="big" id="t_total">1,236</span><span class="rl">total participants</span></div>
+        <div class="total-num"><span class="big" id="t_total">20</span><span class="rl">total participants</span></div>
         <div class="merge">
-          <div class="mstream snew"><span class="mv" id="t_new">396</span><span class="mk">New FTDs (from stage 1)</span></div>
+          <div class="mstream snew"><span class="mv" id="t_new">12</span><span class="mk">New FTDs (from stage 1)</span></div>
           <span class="plus">+</span>
-          <div class="mstream sexi"><span class="mv" id="t_ex">840</span><span class="mk">Activated accounts (from stage 2)</span></div>
+          <div class="mstream sexi"><span class="mv" id="t_ex">8</span><span class="mk">Activated accounts (from stage 2)</span></div>
         </div>
         <div class="stackbar"><div class="seg-new" id="t_segnew"></div><div class="seg-ex" id="t_segex"></div></div>
         <div class="stack-leg">
-          <span><i class="dot dnew"></i>New FTDs · <b id="t_newp">32%</b></span>
-          <span><i class="dot dex"></i>Activated · <b id="t_exp">68%</b></span>
+          <span><i class="dot dnew"></i>New FTDs · <b id="t_newp">60%</b></span>
+          <span><i class="dot dex"></i>Activated · <b id="t_exp">40%</b></span>
         </div>
       </section>
 
@@ -320,13 +318,13 @@
             </div></div>
           </div>
           <div class="viz">
-            <div class="result"><span class="big" id="l_completers">371</span><span class="rl">complete all missions</span></div>
+            <div class="result"><span class="big" id="l_completers">6</span><span class="rl">complete all missions</span></div>
             <div class="sub-res">These <b>completers</b> earn the full reward ladder — the number that drives most of the cost.</div>
             <div class="ladder-viz">
-              <div class="rung"><div class="rung-cap"><b>Tier 3 · complete all</b> · $300 + 10 lots · <i>earns the full reward</i></div><div class="rung-bar r3" id="l_bar3" style="width:30%"><span class="rc" id="l_ct3">371</span></div><div class="rung-sub"><span id="l_p3">30</span>% reach the top</div></div>
-              <div class="rung"><div class="rung-cap"><b>Tier 2</b> · 2nd deposit &amp; trade · $200 + 5 lots</div><div class="rung-bar r2" id="l_bar2" style="width:45%"><span class="rc" id="l_ct2">556</span></div><div class="rung-sub"><span id="l_p2">45</span>% climb this high</div></div>
-              <div class="rung"><div class="rung-cap"><b>Tier 1</b> · FTD &amp; FTT · $100 + 2 lots</div><div class="rung-bar r1" id="l_bar1" style="width:72%"><span class="rc" id="l_ct1">890</span></div><div class="rung-sub"><span id="l_p1">72</span>% take the first step</div></div>
-              <div class="rung"><div class="rung-cap"><b>Entry</b> · everyone who deposited</div><div class="rung-bar r0" id="l_bar0" style="width:100%"><span class="rc" id="l_ct0">1,236</span></div><div class="rung-sub">all participants</div></div>
+              <div class="rung"><div class="rung-cap"><b>Tier 3 · complete all</b> · $300 + 10 lots · <i>earns the full reward</i></div><div class="rung-bar r3" id="l_bar3" style="width:30%"><span class="rc" id="l_ct3">6</span></div><div class="rung-sub"><span id="l_p3">30</span>% reach the top</div></div>
+              <div class="rung"><div class="rung-cap"><b>Tier 2</b> · 2nd deposit &amp; trade · $200 + 5 lots</div><div class="rung-bar r2" id="l_bar2" style="width:45%"><span class="rc" id="l_ct2">9</span></div><div class="rung-sub"><span id="l_p2">45</span>% climb this high</div></div>
+              <div class="rung"><div class="rung-cap"><b>Tier 1</b> · FTD &amp; FTT · $100 + 2 lots</div><div class="rung-bar r1" id="l_bar1" style="width:72%"><span class="rc" id="l_ct1">14</span></div><div class="rung-sub"><span id="l_p1">72</span>% take the first step</div></div>
+              <div class="rung"><div class="rung-cap"><b>Entry</b> · everyone who deposited</div><div class="rung-bar r0" id="l_bar0" style="width:100%"><span class="rc" id="l_ct0">20</span></div><div class="rung-sub">all participants</div></div>
             </div>
           </div>
         </div>
@@ -430,7 +428,7 @@
             </div>
             <div class="field"><div class="lab"><span class="name">Real-world mix</span><span class="hint">cheaper or richer than planned</span></div>
               <div class="row"><input type="range" id="r_driftRange" min="0.45" max="1.25" step="0.05" value="1" aria-label="Real-world mix factor" /><div class="numbox"><input type="number" id="r_driftNum" value="1.00" step="0.05" aria-label="Real-world mix factor value" /><span class="suf">×</span></div></div>
-              <div class="mix-help">A safety dial for the table being just a guess. Below ×1.00 = clients trade lower-earning products than planned, so profit per lot drops. Above ×1.00 = higher-earning, so it rises. ×1.00 = the mix lands exactly as the table assumes.</div></div>
+              <div class="mix-help">Think of running a small drinks stall. You keep more profit on a fancy smoothie than on a plain bottle of water, so what you take home at the end of the day depends on what people actually order. The table above is our best guess of what clients will “order” here, meaning the mix of products they choose to trade, and every product earns the company a different amount.<br><br>This dial is the “what if that guess is a little off” knob.<br><br><b>At ×1.00</b> you’re saying real life lands exactly as the table guesses.<br><b>Below ×1.00</b> means clients leaned toward the cheaper, lower-earning products, so the money earned on the average trade comes out smaller than planned.<br><b>Above ×1.00</b> means they leaned toward the richer, higher-earning products, so the average trade earns the company a bit more than planned.</div></div>
             <div class="presets"><div class="pl">Jump to a scenario</div><div class="chips" id="r_chips">
               <div class="chip" data-drift="0.45"><span class="ct">Worst</span><span class="cs">cheaper mix</span></div>
               <div class="chip on" data-drift="1"><span class="ct">Base</span><span class="cs">as planned</span></div>
@@ -468,12 +466,8 @@
         </div>
         <div class="grid">
           <div class="controls">
-            <div class="field"><div class="lab"><span class="name">Reward scenario</span><span class="hint">the open S1 vs S2 decision</span></div>
-              <div class="seg" role="tablist" aria-label="Reward scenario">
-                <button id="co_s1" class="on" role="tab" aria-selected="true">S1 · lean</button>
-                <button id="co_s2" role="tab" aria-selected="false">S2 · rich</button>
-              </div>
-              <div class="seg-note" id="co_scennote">S1: $5 / $10 / $20 credit ladder + 1g gold catch.</div>
+            <div class="field"><div class="lab"><span class="name">Reward</span><span class="hint">the locked design</span></div>
+              <div class="seg-note" id="co_scennote">$5 / $10 / $20 trading credit (cumulative per tier) + 1g gold catch for the first 3 to finish.</div>
             </div>
             <div class="field"><div class="lab"><span class="name">Cost per sign-up</span><span class="hint">media spend per registration</span></div>
               <div class="row"><input type="range" id="co_cacRange" min="5" max="50" step="1" value="18" aria-label="Cost per sign-up" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_cacNum" value="18" aria-label="Cost per sign-up value" /></div></div></div>
@@ -487,7 +481,7 @@
           </div>
           <div class="viz">
             <div class="result"><span class="big" id="co_total">$53,224</span><span class="rl">total campaign cost</span></div>
-            <div class="sub-res">For the selected reward scenario. Media to bring people in is usually the biggest piece.</div>
+            <div class="sub-res">Media to bring people in is usually the biggest piece.</div>
             <div class="vol-comp"><div id="co_segM" style="background:#2C5FAD"></div><div id="co_segC" style="background:#00A8DE"></div><div id="co_segP" style="background:#8C99B8"></div><div id="co_segG" style="background:#E0A82E"></div></div>
             <div class="vol-leg">
               <div class="vrow"><span class="dot" style="background:#2C5FAD"></span><span class="vlab">Media · <span id="co_lblRegs">1,800</span> sign-ups × <span id="co_lblCac">$18</span></span><span class="vct" id="co_vM">$32,400</span><span class="vsh" id="co_sM">61%</span></div>
@@ -495,7 +489,6 @@
               <div class="vrow"><span class="dot" style="background:#8C99B8"></span><span class="vlab">Creative &amp; production · fixed one-off</span><span class="vct" id="co_vP">$3,000</span><span class="vsh" id="co_sP">6%</span></div>
               <div class="vrow"><span class="dot" style="background:#E0A82E"></span><span class="vlab">Gold catch · <span id="co_lblGw">3</span> winners × <span id="co_lblGv">$131</span></span><span class="vct" id="co_vG">$394</span><span class="vsh" id="co_sG">1%</span></div>
             </div>
-            <div class="cost-compare" id="co_compare">Scenario 2 would cost <b id="co_otherT">$74,167</b> — about <b id="co_delta">$20,900</b> more, almost all of it richer reward credit.</div>
           </div>
         </div>
         <div class="explain"><span class="ic">i</span><p id="co_explainP"></p></div>
@@ -528,7 +521,7 @@
             </div>
           </div>
           <div class="viz">
-            <div class="result"><span class="big" id="vd_hero">3.18×</span><span class="rl">in client deposits for every $1 spent (Scenario 1)</span></div>
+            <div class="result"><span class="big" id="vd_hero">3.18×</span><span class="rl">in client deposits for every $1 spent</span></div>
             <div class="sub-res">The honest read: judged on trading alone it loses money, but judged on the client deposits it pulls in, it works. Whether it's worth it comes down to what those clients are worth later, which this model doesn't try to guess.</div>
             <div class="lens-box">
               <div class="lens"><b>Does the trading pay for it?</b> We earn spread and commission on every trade. If that's less than what the campaign costs, the trading alone doesn't cover it. (Shown below as "back from trading", the commercial ROI: below zero means no.)</div>
@@ -538,18 +531,11 @@
         </div>
         <div class="verdict-compare">
           <div class="vc-card vc-rec">
-            <div class="vc-title">Scenario 1 · lean <span class="vc-tag">recommended</span></div>
+            <div class="vc-title">The bottom line</div>
             <div class="vcm"><span class="vcm-l">What it costs</span><span class="vcm-v" id="vd_c1">$53,221</span></div>
             <div class="vcm"><span class="vcm-l">Back from trading</span><span class="vcm-v bad" id="vd_comm1">−55%</span></div>
             <div class="vcm"><span class="vcm-l">Deposits in, per $1 spent</span><span class="vcm-v good" id="vd_mkt1">3.18×</span></div>
             <div class="vcm"><span class="vcm-l">Trading income − cost</span><span class="vcm-v bad" id="vd_flow1">−$29,337</span></div>
-          </div>
-          <div class="vc-card">
-            <div class="vc-title">Scenario 2 · rich</div>
-            <div class="vcm"><span class="vcm-l">What it costs</span><span class="vcm-v" id="vd_c2">$74,160</span></div>
-            <div class="vcm"><span class="vcm-l">Back from trading</span><span class="vcm-v bad" id="vd_comm2">−68%</span></div>
-            <div class="vcm"><span class="vcm-l">Deposits in, per $1 spent</span><span class="vcm-v good" id="vd_mkt2">2.28×</span></div>
-            <div class="vcm"><span class="vcm-l">Trading income − cost</span><span class="vcm-v bad" id="vd_flow2">−$50,276</span></div>
           </div>
         </div>
         <div class="be-strip">
@@ -813,8 +799,8 @@
   }
 
   var CO={scen:'s1',cac:18,creative:3000};
-  var CREDIT={s1:[5,10,20],s2:[10,20,50]};
-  var GOLDRM={s1:544.75,s2:272.375}, MYR=4.15, GOLDCAP=3;
+  var CREDIT={s1:[5,10,20]};
+  var GOLDRM={s1:544.75}, MYR=4.15, GOLDCAP=3;
   function costParts(scen,regs,stopT1,stopT2,comp){
     var cr=CREDIT[scen];
     var media=regs*CO.cac;
@@ -823,20 +809,15 @@
     return {media:media,credit:credit,gold:gold,creative:CO.creative,total:media+credit+gold+CO.creative};
   }
   function setCostScenNote(){
-    var s=CO.scen;
-    var notes={s1:'S1: $5 / $10 / $20 credit ladder + 1g gold catch.',s2:'S2: $10 / $20 / $50 credit ladder + 0.5g gold catch.'};
-    var el=document.getElementById('co_scennote'); if(el)el.textContent=notes[s];
-    ['s1','s2'].forEach(function(k){var b=document.getElementById('co_'+k);b.classList.toggle('on',k===s);b.setAttribute('aria-selected',k===s);});
+    var el=document.getElementById('co_scennote');
+    if(el)el.textContent='$5 / $10 / $20 trading credit (cumulative per tier) + 1g gold catch for the first 3 to finish.';
   }
   function renderCost(){
     if(L.c1==null||!newApi)return;
     var regs=newApi.top();
     var stopT1=Math.max(L.c1-L.c2,0), stopT2=Math.max(L.c2-L.c3,0), comp=L.c3;
     var p=costParts(CO.scen,regs,stopT1,stopT2,comp);
-    var other=CO.scen==='s1'?'s2':'s1';
-    var po=costParts(other,regs,stopT1,stopT2,comp);
-    CO.s1total=costParts('s1',regs,stopT1,stopT2,comp).total;
-    CO.s2total=costParts('s2',regs,stopT1,stopT2,comp).total;
+    CO.s1total=p.total;
     CO.total=p.total;
     var T=p.total||1;
     var hero=document.getElementById('co_total'); if(hero)animateMoney(hero,p.total,'cotot');
@@ -850,11 +831,6 @@
     setTxt('co_vG',money(p.gold)); setTxt('co_sG',Math.round(p.gold/T*100)+'%');
     setTxt('co_lblRegs',fmt(regs)); setTxt('co_lblCac',money(CO.cac));
     setTxt('co_lblGw',fmt(Math.min(comp,GOLDCAP))); setTxt('co_lblGv',money(GOLDRM[CO.scen]/MYR));
-    var cmp=document.getElementById('co_compare');
-    if(cmp){
-      var oname=other==='s1'?'Scenario 1':'Scenario 2', delta=po.total-p.total, ml=delta>=0?'more':'less';
-      cmp.innerHTML=oname+' would cost <b>'+money(po.total)+'</b> — about <b>'+money(Math.abs(delta))+'</b> '+ml+', almost all of it the reward credit.';
-    }
     var ep=document.getElementById('co_explainP');
     if(ep)ep.innerHTML='Bringing in <b>'+fmt(regs)+'</b> sign-ups at <b>'+money(CO.cac)+'</b> each is <b>'+money(p.media)+'</b> of media — the biggest piece. Reward credit adds <b>'+money(p.credit)+'</b> (completers earn the full ladder), the gold catch is only <b>'+money(p.gold)+'</b> because it is capped at 3 winners, and production is <b>'+money(p.creative)+'</b>. Total: <b>'+money(p.total)+'</b>.';
     setCostScenNote();
@@ -876,21 +852,16 @@
   }
   function renderVerdict(){
     if(L.c1==null||!newApi||R.rev==null||CO.s1total==null)return;
-    var rev=R.rev, effLots=(V.eff||0), nd=computeNetDeposit(), c1=CO.s1total, c2=CO.s2total;
+    var rev=R.rev, effLots=(V.eff||0), nd=computeNetDeposit(), c1=CO.s1total;
     function sp(x){return (x>=0?'+':'−')+Math.abs(Math.round(x*100))+'%';}
     function mult(x){return x.toFixed(2)+'×';}
     var commS1=(rev-c1)/c1, mktS1=c1>0?nd/c1:0, flowS1=rev-c1, covS1=c1>0?rev/c1:0, beS1=effLots>0?c1/effLots:0;
-    var commS2=(rev-c2)/c2, mktS2=c2>0?nd/c2:0, flowS2=rev-c2;
     var achieved=effLots>0?rev/effLots:0;
     var hero=document.getElementById('vd_hero'); if(hero)animateMult(hero,mktS1,'vdhero');
     setTxt('vd_c1',money(c1));
     setEl('vd_comm1',sp(commS1),commS1>=0?'good':'bad');
     setEl('vd_mkt1',mult(mktS1),mktS1>=1?'good':'warn');
     setEl('vd_flow1',(flowS1>=0?'':'−')+money(Math.abs(flowS1)),flowS1>=0?'good':'bad');
-    setTxt('vd_c2',money(c2));
-    setEl('vd_comm2',sp(commS2),commS2>=0?'good':'bad');
-    setEl('vd_mkt2',mult(mktS2),mktS2>=1?'good':'warn');
-    setEl('vd_flow2',(flowS2>=0?'':'−')+money(Math.abs(flowS2)),flowS2>=0?'good':'bad');
     setTxt('vd_ach',money2(achieved));
     setTxt('vd_be1',money2(beS1));
     setEl('vd_cov1',Math.round(covS1*100)+'%',covS1>=1?'good':'warn');
@@ -969,16 +940,16 @@
     title:'Top of the funnel — new clients',
     desc:'How many people sign up, and how many of them actually fund their account.',
     primNameF:'New registrations', primHintF:'People who sign up',
-    topMinF:0, topMaxF:6000, topStepF:50, topDefF:1800,
+    topMinF:0, topMaxF:6000, topStepF:10, topDefF:150,
     primNameB:'Target new FTDs', primHintB:'Funded clients you want',
-    topMinB:0, topMaxB:2000, topStepB:10, topDefB:396,
+    topMinB:0, topMaxB:2000, topStepB:1, topDefB:12,
     rateName:'FTD conversion', rateHint:'Share who fund their account',
-    rateMin:1, rateMax:50, rateDef:22, badgeWord:'fund',
-    resDef:396, resLabF:'new funded clients', resLabB:'registrations needed',
+    rateMin:1, rateMax:50, rateDef:8, badgeWord:'fund',
+    resDef:12, resLabF:'new funded clients', resLabB:'registrations needed',
     subResF:'This is your <b>New FTDs</b> — the first stream into the funnel.',
     subResB:'That’s how many <b>sign-ups</b> you’d need to hit the target above.',
     funTopCap:'registrations', funBotCap:'new FTDs', dropWord:'signed up but didn’t fund',
-    presets:[{label:'Worst',sub:'600 · 12%',top:600,rate:12},{label:'Base',sub:'1,800 · 22%',top:1800,rate:22},{label:'Best',sub:'4,000 · 32%',top:4000,rate:32}],
+    presets:[{label:'Worst',sub:'100 · 5%',top:100,rate:5},{label:'Base',sub:'150 · 8%',top:150,rate:8},{label:'Best',sub:'300 · 15%',top:300,rate:15}],
     explainF:function(t,r,b,d){return 'Of <b>'+fmt(t)+'</b> sign-ups, <b>'+r+'%</b> fund their account — that’s <b>'+fmt(b)+'</b> new funded clients. The other '+fmt(d)+' registered but never deposited.';},
     explainB:function(t,r,b){return 'To reach <b>'+fmt(b)+'</b> new funded clients at a <b>'+r+'%</b> funding rate, you’d need about <b>'+fmt(t)+'</b> sign-ups at the top.';}
   };
@@ -988,23 +959,23 @@
     title:'Dormant accounts — who finally funds',
     desc:'Accounts that registered but never funded. How many make a first deposit during the promo.',
     primNameF:'Dormant account base', primHintF:'registered, never funded',
-    topMinF:0, topMaxF:40000, topStepF:500, topDefF:12000,
+    topMinF:0, topMaxF:40000, topStepF:50, topDefF:800,
     primNameB:'Target activations', primHintB:'first deposits you want',
-    topMinB:0, topMaxB:6000, topStepB:50, topDefB:840,
+    topMinB:0, topMaxB:6000, topStepB:1, topDefB:8,
     rateName:'Activation rate', rateHint:'share who finally fund',
-    rateMin:1, rateMax:30, rateDef:7, badgeWord:'fund',
-    resDef:840, resLabF:'dormant accounts activated', resLabB:'dormant accounts needed',
+    rateMin:1, rateMax:30, rateDef:1, badgeWord:'fund',
+    resDef:8, resLabF:'dormant accounts activated', resLabB:'dormant accounts needed',
     subResF:'These are your <b>activated accounts</b> — dormant clients funding for the first time, the second stream into the funnel.',
     subResB:'That’s how big a <b>dormant base</b> you’d need to hit the target above.',
     funTopCap:'dormant accounts', funBotCap:'activated', dropWord:'stayed dormant',
-    presets:[{label:'Worst',sub:'5,000 · 3%',top:5000,rate:3},{label:'Base',sub:'12,000 · 7%',top:12000,rate:7},{label:'Best',sub:'20,000 · 12%',top:20000,rate:12}],
+    presets:[{label:'Worst',sub:'500 · 1%',top:500,rate:1},{label:'Base',sub:'800 · 1%',top:800,rate:1},{label:'Best',sub:'1,500 · 2%',top:1500,rate:2}],
     explainF:function(t,r,b,d){return 'Of <b>'+fmt(t)+'</b> dormant accounts, <b>'+r+'%</b> finally fund — that’s <b>'+fmt(b)+'</b> activated. The other '+fmt(d)+' stayed dormant.';},
     explainB:function(t,r,b){return 'To reach <b>'+fmt(b)+'</b> activated accounts at a <b>'+r+'%</b> activation rate, you’d need a dormant base of about <b>'+fmt(t)+'</b>.';}
   };
 
-  animState.tt=1236;
-  animState.lc=371;
-  animState.vg=5302;
+  animState.tt=20;
+  animState.lc=6;
+  animState.vg=85;
   newApi=wireSection('sec-new', newCfg);
   exApi=wireSection('sec-existing', exCfg);
 
@@ -1045,12 +1016,9 @@
   document.querySelectorAll('#r_chips .chip').forEach(function(ch){
     ch.addEventListener('click',function(){ setDrift(+ch.dataset.drift); });
   });
-  animState.rrev=23884;
+  animState.rrev=383;
   setGroupNote();
 
-  ['s1','s2'].forEach(function(s){
-    document.getElementById('co_'+s).addEventListener('click',function(){ CO.scen=s; renderCost(); });
-  });
   (function(){
     var Rc=document.getElementById('co_cacRange'),Nc=document.getElementById('co_cacNum');
     Rc.addEventListener('input',function(){setCac(+Rc.value);});
@@ -1062,7 +1030,7 @@
   document.querySelectorAll('#co_chips .chip').forEach(function(ch){
     ch.addEventListener('click',function(){ setCac(+ch.dataset.cac); });
   });
-  animState.cotot=53224;
+  animState.cotot=6374;
   fillRange(document.getElementById('co_cacRange'));
   fillRange(document.getElementById('co_crRange'));
   setCostScenNote();
@@ -1075,7 +1043,7 @@
   document.querySelectorAll('#vd_chips .chip').forEach(function(ch){
     ch.addEventListener('click',function(){ VER.incr=+ch.dataset.incr; var Ri=document.getElementById('vd_incrRange'),Ni=document.getElementById('vd_incrNum'); Ri.value=VER.incr;Ni.value=VER.incr;fillRange(Ri); document.querySelectorAll('#vd_chips .chip').forEach(function(c){c.classList.toggle('on',(+c.dataset.incr)===VER.incr);}); renderVerdict(); });
   });
-  animState.vdhero=3.18;
+  animState.vdhero=0.44;
   fillRange(document.getElementById('vd_incrRange'));
 
   newApi.render();
