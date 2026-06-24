@@ -263,7 +263,7 @@
     <div class="wrap">
       <div class="eyebrow">TMGM · National Day Challenge · Forecast Explorer</div>
       <h1>See how every number is built.</h1>
-      <p>Type in your own assumptions and watch the funnel flow. Two streams feed the campaign — new clients and existing clients — and here’s how each one adds up.</p>
+      <p>Type in your own assumptions and watch the funnel flow. Two streams feed the campaign — new clients coming in, and dormant accounts coming alive — and here’s how each one adds up.</p>
     </div>
   </header>
 
@@ -286,12 +286,12 @@
         <div class="merge">
           <div class="mstream snew"><span class="mv" id="t_new">396</span><span class="mk">New FTDs (from stage 1)</span></div>
           <span class="plus">+</span>
-          <div class="mstream sexi"><span class="mv" id="t_ex">840</span><span class="mk">Existing participants (from stage 2)</span></div>
+          <div class="mstream sexi"><span class="mv" id="t_ex">840</span><span class="mk">Activated accounts (from stage 2)</span></div>
         </div>
         <div class="stackbar"><div class="seg-new" id="t_segnew"></div><div class="seg-ex" id="t_segex"></div></div>
         <div class="stack-leg">
           <span><i class="dot dnew"></i>New FTDs · <b id="t_newp">32%</b></span>
-          <span><i class="dot dex"></i>Existing · <b id="t_exp">68%</b></span>
+          <span><i class="dot dex"></i>Activated · <b id="t_exp">68%</b></span>
         </div>
       </section>
 
@@ -508,54 +508,54 @@
           <span class="badge">STAGE 7</span>
           <div class="txt">
             <h2>The verdict</h2>
-            <p>Revenue and cost, brought together — read two ways, because a deposit-driven promo rarely pays for itself on the trading edge alone.</p>
+            <p>Revenue and cost brought together, read two ways: does the trading pay for the campaign, and does it pull in client money?</p>
           </div>
         </div>
         <div class="grid">
           <div class="controls">
-            <div class="field"><div class="lab"><span class="name">Truly-new existing deposit</span><span class="hint">incrementality</span></div>
-              <div class="row"><input type="range" id="vd_incrRange" min="0" max="100" step="1" value="25" aria-label="Existing deposit incrementality" /><div class="numbox"><input type="number" id="vd_incrNum" value="25" aria-label="Existing deposit incrementality value" /><span class="suf">%</span></div></div>
-              <div class="mix-help">Existing clients might've deposited anyway. This is the share that's genuinely extra because of the promo. 25% means a quarter of their deposits count as new money.</div>
+            <div class="field"><div class="lab"><span class="name">New money from dormant clients</span><span class="hint">share that's truly extra</span></div>
+              <div class="row"><input type="range" id="vd_incrRange" min="0" max="100" step="1" value="90" aria-label="Dormant deposit incrementality" /><div class="numbox"><input type="number" id="vd_incrNum" value="90" aria-label="Dormant deposit incrementality value" /><span class="suf">%</span></div></div>
+              <div class="mix-help">These are dormant accounts, registered but never funded. They've shown they won't deposit on their own, so almost all of this is new money the promo creates. 90% means nearly all of it counts as new.</div>
             </div>
-            <div class="presets"><div class="pl">Incrementality scenario</div><div class="chips" id="vd_chips">
-              <div class="chip" data-incr="10"><span class="ct">Worst</span><span class="cs">10%</span></div>
-              <div class="chip on" data-incr="25"><span class="ct">Base</span><span class="cs">25%</span></div>
-              <div class="chip" data-incr="40"><span class="ct">Best</span><span class="cs">40%</span></div>
+            <div class="presets"><div class="pl">How much is truly new</div><div class="chips" id="vd_chips">
+              <div class="chip" data-incr="75"><span class="ct">Worst</span><span class="cs">75%</span></div>
+              <div class="chip on" data-incr="90"><span class="ct">Base</span><span class="cs">90%</span></div>
+              <div class="chip" data-incr="100"><span class="ct">Best</span><span class="cs">100%</span></div>
             </div></div>
             <div class="recap">
-              <div class="rc">Trading revenue<b id="vd_recapRev">$23,884</b></div>
-              <div class="rc">Net deposit captured<b id="vd_recapND">$89,082</b></div>
+              <div class="rc">Trading income<b id="vd_recapRev">$23,884</b></div>
+              <div class="rc">Client deposits in<b id="vd_recapND">$169,344</b></div>
             </div>
           </div>
           <div class="viz">
-            <div class="result"><span class="big" id="vd_hero">1.67×</span><span class="rl">net deposit captured per $1 spent (S1)</span></div>
-            <div class="sub-res">Honest read: on the trading edge alone it runs at a loss. The case rests on the deposits it pulls in, plus retention and lifetime value, which this model doesn't count.</div>
+            <div class="result"><span class="big" id="vd_hero">3.18×</span><span class="rl">in client deposits for every $1 spent (Scenario 1)</span></div>
+            <div class="sub-res">The honest read: judged on trading alone it loses money, but judged on the client deposits it pulls in, it works. Whether it's worth it comes down to what those clients are worth later, which this model doesn't try to guess.</div>
             <div class="lens-box">
-              <div class="lens"><b>Commercial ROI</b> = (revenue − cost) ÷ cost. Does the spread and commission alone pay for the campaign? Below zero means no, not on their own.</div>
-              <div class="lens"><b>Marketing ROI</b> = net deposit captured ÷ cost. How much client money comes in per $1 spent. Above 1 means the deposits more than cover the spend.</div>
+              <div class="lens"><b>Does the trading pay for it?</b> We earn spread and commission on every trade. If that's less than what the campaign costs, the trading alone doesn't cover it. (Shown below as "back from trading", the commercial ROI: below zero means no.)</div>
+              <div class="lens"><b>Does it pull in client money?</b> Clients deposit to climb the tiers. If that deposit money is more than we spend, the promo brings in more than it costs. (Shown below as "deposits in, per $1 spent", the marketing ROI: above 1× means yes.)</div>
             </div>
           </div>
         </div>
         <div class="verdict-compare">
           <div class="vc-card vc-rec">
             <div class="vc-title">Scenario 1 · lean <span class="vc-tag">recommended</span></div>
-            <div class="vcm"><span class="vcm-l">Total cost</span><span class="vcm-v" id="vd_c1">$53,221</span></div>
-            <div class="vcm"><span class="vcm-l">Commercial ROI</span><span class="vcm-v bad" id="vd_comm1">−55%</span></div>
-            <div class="vcm"><span class="vcm-l">Marketing ROI</span><span class="vcm-v good" id="vd_mkt1">1.67×</span></div>
-            <div class="vcm"><span class="vcm-l">Net flow (rev − cost)</span><span class="vcm-v bad" id="vd_flow1">−$29,337</span></div>
+            <div class="vcm"><span class="vcm-l">What it costs</span><span class="vcm-v" id="vd_c1">$53,221</span></div>
+            <div class="vcm"><span class="vcm-l">Back from trading</span><span class="vcm-v bad" id="vd_comm1">−55%</span></div>
+            <div class="vcm"><span class="vcm-l">Deposits in, per $1 spent</span><span class="vcm-v good" id="vd_mkt1">3.18×</span></div>
+            <div class="vcm"><span class="vcm-l">Trading income − cost</span><span class="vcm-v bad" id="vd_flow1">−$29,337</span></div>
           </div>
           <div class="vc-card">
             <div class="vc-title">Scenario 2 · rich</div>
-            <div class="vcm"><span class="vcm-l">Total cost</span><span class="vcm-v" id="vd_c2">$74,160</span></div>
-            <div class="vcm"><span class="vcm-l">Commercial ROI</span><span class="vcm-v bad" id="vd_comm2">−68%</span></div>
-            <div class="vcm"><span class="vcm-l">Marketing ROI</span><span class="vcm-v good" id="vd_mkt2">1.20×</span></div>
-            <div class="vcm"><span class="vcm-l">Net flow (rev − cost)</span><span class="vcm-v bad" id="vd_flow2">−$50,276</span></div>
+            <div class="vcm"><span class="vcm-l">What it costs</span><span class="vcm-v" id="vd_c2">$74,160</span></div>
+            <div class="vcm"><span class="vcm-l">Back from trading</span><span class="vcm-v bad" id="vd_comm2">−68%</span></div>
+            <div class="vcm"><span class="vcm-l">Deposits in, per $1 spent</span><span class="vcm-v good" id="vd_mkt2">2.28×</span></div>
+            <div class="vcm"><span class="vcm-l">Trading income − cost</span><span class="vcm-v bad" id="vd_flow2">−$50,276</span></div>
           </div>
         </div>
         <div class="be-strip">
-          <div class="be-stat"><span class="be-l">Profit / lot achieved</span><span class="be-v" id="vd_ach">$4.90</span></div>
-          <div class="be-stat"><span class="be-l">Needed to break even (S1)</span><span class="be-v warn" id="vd_be1">$10.91</span></div>
-          <div class="be-stat"><span class="be-l">Revenue covers of cost (S1)</span><span class="be-v warn" id="vd_cov1">45%</span></div>
+          <div class="be-stat"><span class="be-l">We earn per lot</span><span class="be-v" id="vd_ach">$4.90</span></div>
+          <div class="be-stat"><span class="be-l">Break-even needs per lot</span><span class="be-v warn" id="vd_be1">$10.91</span></div>
+          <div class="be-stat"><span class="be-l">Trading covers of cost</span><span class="be-v warn" id="vd_cov1">45%</span></div>
         </div>
         <div class="explain"><span class="ic">i</span><p id="vd_explainP"></p></div>
       </section>
@@ -864,7 +864,7 @@
   function setCac(v){ if(isNaN(v))return; v=Math.max(5,Math.min(50,Math.round(v))); CO.cac=v; var Rg=document.getElementById('co_cacRange'),Nn=document.getElementById('co_cacNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
   function setCreative(v){ if(isNaN(v))return; v=Math.max(0,Math.min(10000,Math.round(v/100)*100)); CO.creative=v; var Rg=document.getElementById('co_crRange'),Nn=document.getElementById('co_crNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
 
-  var VER={incr:25};
+  var VER={incr:90};
   function animateMult(el,to,key){var from=animState[key]==null?to:animState[key];animState[key]=to;var st=performance.now();function step(t){var k=Math.min((t-st)/420,1);var e=1-Math.pow(1-k,3);el.textContent=(from+(to-from)*e).toFixed(2)+'×';if(k<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
   function setEl(id,txt,cls){var el=document.getElementById(id);if(!el)return;el.textContent=txt;el.classList.remove('good','bad','warn');if(cls)el.classList.add(cls);}
   function computeNetDeposit(){
@@ -897,7 +897,7 @@
     setTxt('vd_recapRev',money(rev));
     setTxt('vd_recapND',money(nd));
     var ep=document.getElementById('vd_explainP');
-    if(ep)ep.innerHTML='For every $1 spent on Scenario 1, the campaign pulls in about <b>'+mult(mktS1)+'</b> in net client deposits ('+money(nd)+' total) — that is the marketing case. On the trading edge alone it is <b>'+sp(commS1)+'</b>: revenue of <b>'+money(rev)+'</b> covers about <b>'+Math.round(covS1*100)+'%</b> of the <b>'+money(c1)+'</b> cost, so you would need <b>'+money2(beS1)+'</b> per lot to break even but are making <b>'+money2(achieved)+'</b>. Whether it is worth doing rests on retention and lifetime value beyond this campaign, which the model does not score.';
+    if(ep)ep.innerHTML='For every $1 spent on Scenario 1, the campaign pulls in about <b>$'+mktS1.toFixed(2)+'</b> of client deposits (<b>'+money(nd)+'</b> in total). That is the money-in case, and it is good. But on the trading itself it loses money: we earn <b>'+money(rev)+'</b>, which only covers about <b>'+Math.round(covS1*100)+'%</b> of the <b>'+money(c1)+'</b> cost, so we would need to earn <b>'+money2(beS1)+'</b> per lot to break even and we are earning <b>'+money2(achieved)+'</b>. Whether it is worth doing comes down to what these clients are worth later (more trading, staying active, depositing again), which this model does not count.';
   }
   function setIncr(v){ if(isNaN(v))return; v=Math.max(0,Math.min(100,Math.round(v))); VER.incr=v; var Rg=document.getElementById('vd_incrRange'),Nn=document.getElementById('vd_incrNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderVerdict(); }
 
@@ -985,21 +985,21 @@
 
   var exCfg={
     prefix:'e', badge:'STAGE 2', accentClass:'sec-teal',
-    title:'Existing clients — who joins in',
-    desc:'How many of our existing Malaysia clients take part in the promo.',
-    primNameF:'Eligible existing base', primHintF:'Existing clients we can target',
+    title:'Dormant accounts — who finally funds',
+    desc:'Accounts that registered but never funded. How many make a first deposit during the promo.',
+    primNameF:'Dormant account base', primHintF:'registered, never funded',
     topMinF:0, topMaxF:40000, topStepF:500, topDefF:12000,
-    primNameB:'Target existing participants', primHintB:'Participants you want',
+    primNameB:'Target activations', primHintB:'first deposits you want',
     topMinB:0, topMaxB:6000, topStepB:50, topDefB:840,
-    rateName:'Participation rate', rateHint:'Share of existing who take part',
-    rateMin:1, rateMax:30, rateDef:7, badgeWord:'take part',
-    resDef:840, resLabF:'existing participants', resLabB:'eligible clients needed',
-    subResF:'These are your <b>existing participants</b> — the second stream into the funnel.',
-    subResB:'That’s how big an <b>eligible base</b> you’d need to hit the target above.',
-    funTopCap:'eligible clients', funBotCap:'participants', dropWord:'eligible but didn’t join',
+    rateName:'Activation rate', rateHint:'share who finally fund',
+    rateMin:1, rateMax:30, rateDef:7, badgeWord:'fund',
+    resDef:840, resLabF:'dormant accounts activated', resLabB:'dormant accounts needed',
+    subResF:'These are your <b>activated accounts</b> — dormant clients funding for the first time, the second stream into the funnel.',
+    subResB:'That’s how big a <b>dormant base</b> you’d need to hit the target above.',
+    funTopCap:'dormant accounts', funBotCap:'activated', dropWord:'stayed dormant',
     presets:[{label:'Worst',sub:'5,000 · 3%',top:5000,rate:3},{label:'Base',sub:'12,000 · 7%',top:12000,rate:7},{label:'Best',sub:'20,000 · 12%',top:20000,rate:12}],
-    explainF:function(t,r,b,d){return 'Of <b>'+fmt(t)+'</b> eligible existing clients, <b>'+r+'%</b> take part — that’s <b>'+fmt(b)+'</b> participants. The other '+fmt(d)+' were eligible but didn’t join.';},
-    explainB:function(t,r,b){return 'To reach <b>'+fmt(b)+'</b> existing participants at a <b>'+r+'%</b> take-up rate, you’d need an eligible base of about <b>'+fmt(t)+'</b>.';}
+    explainF:function(t,r,b,d){return 'Of <b>'+fmt(t)+'</b> dormant accounts, <b>'+r+'%</b> finally fund — that’s <b>'+fmt(b)+'</b> activated. The other '+fmt(d)+' stayed dormant.';},
+    explainB:function(t,r,b){return 'To reach <b>'+fmt(b)+'</b> activated accounts at a <b>'+r+'%</b> activation rate, you’d need a dormant base of about <b>'+fmt(t)+'</b>.';}
   };
 
   animState.tt=1236;
@@ -1075,7 +1075,7 @@
   document.querySelectorAll('#vd_chips .chip').forEach(function(ch){
     ch.addEventListener('click',function(){ VER.incr=+ch.dataset.incr; var Ri=document.getElementById('vd_incrRange'),Ni=document.getElementById('vd_incrNum'); Ri.value=VER.incr;Ni.value=VER.incr;fillRange(Ri); document.querySelectorAll('#vd_chips .chip').forEach(function(c){c.classList.toggle('on',(+c.dataset.incr)===VER.incr);}); renderVerdict(); });
   });
-  animState.vdhero=1.67;
+  animState.vdhero=3.18;
   fillRange(document.getElementById('vd_incrRange'));
 
   newApi.render();
