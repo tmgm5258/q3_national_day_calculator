@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>National Day Challenge — Forecast Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#000B50; --mid:#2C5FAD; --reg:#3F69B5; --accent:#00B3EB; --accent-d:#0A7FB0;
+    --teal:#12A594; --teal-d:#0E8169;
+    --ink:#0C1740; --body:#46557A; --muted:#8C99B8; --line:#E4EAF3;
+    --bg:#EDF1F8; --card:#FFFFFF; --drop:#D9E2F0;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Space Grotesk',var(--sans);
+    --r:14px; --r-sm:10px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px;}
+
+  header.hero{background:var(--navy);color:#fff;padding:54px 0 58px;}
+  .eyebrow{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#7FE3FF;display:flex;align-items:center;gap:9px;}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);display:inline-block;}
+  header.hero h1{font:600 38px/1.08 var(--disp);margin:18px 0 12px;letter-spacing:-.01em;color:#fff;max-width:640px;}
+  header.hero p{margin:0;color:#B9C4E6;font-size:16px;max-width:560px;}
+
+  main{padding:34px 0 56px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:0 1px 2px rgba(12,23,64,.04),0 18px 40px -28px rgba(12,23,64,.28);padding:30px 30px 26px;}
+  .sec-teal{--accent:var(--teal);--accent-d:var(--teal-d);}
+
+  .stage-head{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:24px;}
+  .badge{font:700 12px/1 var(--disp);letter-spacing:.06em;color:var(--navy);background:#EEF3FA;border:1px solid #DCE6F3;padding:8px 12px;border-radius:99px;white-space:nowrap;}
+  .stage-head .txt h2{font:600 21px/1.2 var(--disp);color:var(--ink);margin:0 0 4px;letter-spacing:-.01em;}
+  .stage-head .txt p{margin:0;font-size:14.5px;color:var(--muted);}
+
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:34px;align-items:start;}
+
+  .seg{display:inline-flex;background:#EEF2F9;border:1px solid var(--line);border-radius:99px;padding:4px;margin-bottom:22px;width:100%;}
+  .seg button{flex:1;border:0;background:transparent;cursor:pointer;font:500 13px var(--sans);color:var(--body);padding:9px 10px;border-radius:99px;transition:.18s;white-space:nowrap;}
+  .seg button.on{background:#fff;color:var(--navy);font-weight:600;box-shadow:0 1px 2px rgba(12,23,64,.12);}
+
+  .field{margin-bottom:22px;}
+  .field .lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px;}
+  .field .lab .name{font:600 13.5px var(--sans);color:var(--ink);}
+  .field .lab .hint{font-size:12px;color:var(--muted);}
+  .row{display:flex;align-items:center;gap:14px;}
+  input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--accent) 0%,var(--accent) var(--fill,40%),#E1E8F3 var(--fill,40%),#E1E8F3 100%);outline:none;cursor:pointer;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 2px 6px rgba(0,90,140,.3);cursor:pointer;transition:.12s;}
+  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12);}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 2px 6px rgba(0,90,140,.3);cursor:pointer;}
+  .numbox{display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:var(--r-sm);padding:0 10px;height:42px;min-width:104px;transition:.15s;}
+  .numbox:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,179,235,.16);}
+  .numbox input{border:0;outline:none;width:100%;font:600 16px var(--disp);color:var(--ink);text-align:right;background:transparent;-moz-appearance:textfield;}
+  .numbox input::-webkit-outer-spin-button,.numbox input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .numbox .suf{font:500 14px var(--sans);color:var(--muted);padding-left:5px;}
+
+  .presets .pl{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;font-weight:600;}
+  .chips{display:flex;gap:9px;}
+  .chip{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:var(--r-sm);padding:11px 8px;cursor:pointer;text-align:center;transition:.16s;}
+  .chip:hover{border-color:#B9CBEA;background:#FAFCFE;}
+  .chip.on{border-color:var(--accent);background:#F0FAFE;}
+  .chip .ct{font:600 13px var(--sans);color:var(--ink);display:block;}
+  .chip .cs{font-size:11px;color:var(--muted);margin-top:2px;display:block;}
+
+  .result{display:flex;align-items:baseline;gap:11px;margin-bottom:6px;}
+  .result .big{font:700 52px/1 var(--disp);color:var(--navy);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .result .rl{font:600 14px var(--sans);color:var(--accent-d);}
+  .sub-res{font-size:13px;color:var(--muted);margin-bottom:20px;}
+
+  .funnel{max-width:430px;margin:0 auto;}
+  .tier{position:relative;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;transition:width .42s cubic-bezier(.4,0,.2,1),background .3s;}
+  .tier .tv{font:700 19px var(--disp);font-variant-numeric:tabular-nums;}
+  .tier .tk{font:500 11px var(--sans);opacity:.85;margin-left:7px;letter-spacing:.02em;}
+  .t-reg{height:58px;width:100%;background:var(--reg);}
+  .taper{height:62px;background:var(--drop);transition:clip-path .42s cubic-bezier(.4,0,.2,1);position:relative;display:flex;align-items:center;justify-content:center;}
+  .taper .conv{font:700 15px var(--disp);color:var(--navy);background:#fff;border:1px solid var(--line);padding:5px 12px;border-radius:99px;box-shadow:0 2px 8px rgba(12,23,64,.1);font-variant-numeric:tabular-nums;}
+  .t-ftd{height:58px;background:var(--accent);margin:0 auto;min-width:8%;}
+  .ftd-cap{text-align:center;margin-top:12px;}
+  .ftd-cap .fv{font:700 22px var(--disp);color:var(--accent-d);font-variant-numeric:tabular-nums;}
+  .ftd-cap .fk{font:500 12px var(--sans);color:var(--muted);display:block;margin-top:1px;}
+  .drop-note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:14px;}
+  .drop-note b{color:var(--body);font-weight:600;font-variant-numeric:tabular-nums;}
+
+  .explain{margin-top:26px;background:#F5F8FC;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;}
+  .explain .ic{flex:none;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px var(--disp);margin-top:1px;}
+  .explain p{margin:0;font-size:14.5px;color:var(--ink);line-height:1.55;}
+  .explain b{font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;}
+
+  /* equation operators between cards */
+  .join{display:flex;justify-content:center;margin:18px 0;}
+  .join span{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 5px 16px rgba(12,23,64,.1);display:flex;align-items:center;justify-content:center;font:600 21px var(--disp);color:var(--mid);}
+
+  /* total panel */
+  .total{border-color:#CFE0F2;box-shadow:0 1px 2px rgba(12,23,64,.04),0 22px 50px -30px rgba(12,23,64,.4);}
+  .total .tbadge{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .total-num{display:flex;align-items:baseline;gap:13px;margin-bottom:20px;}
+  .total-num .big{font:700 62px/1 var(--disp);color:var(--navy);letter-spacing:-.025em;font-variant-numeric:tabular-nums;}
+  .total-num .rl{font:600 15px var(--sans);color:var(--body);}
+  .merge{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;}
+  .mstream{background:#F6F9FD;border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 20px;min-width:158px;flex:1;}
+  .mstream .mv{font:700 26px var(--disp);font-variant-numeric:tabular-nums;display:block;letter-spacing:-.01em;}
+  .mstream .mk{font-size:12.5px;color:var(--muted);margin-top:3px;}
+  .mstream.snew .mv{color:var(--accent-d);}
+  .mstream.sexi .mv{color:var(--teal-d);}
+  .merge .plus{font:600 24px var(--disp);color:var(--muted);}
+  .stackbar{display:flex;height:32px;border-radius:8px;overflow:hidden;margin-bottom:11px;background:#EEF2F9;}
+  .stackbar>div{transition:width .42s cubic-bezier(.4,0,.2,1);min-width:2px;}
+  .seg-new{background:var(--accent);}
+  .seg-ex{background:var(--teal);}
+  .stack-leg{display:flex;gap:22px;font-size:12.5px;color:var(--body);flex-wrap:wrap;}
+  .stack-leg .dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:7px;vertical-align:-1px;}
+  .stack-leg .dnew{background:var(--accent);}
+  .stack-leg .dex{background:var(--teal);}
+  .stack-leg b{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600;}
+
+  /* ladder */
+  .ladder-viz{margin-top:2px;}
+  .rung{text-align:center;margin-bottom:15px;}
+  .rung:last-child{margin-bottom:0;}
+  .rung-cap{font-size:11.5px;color:var(--body);margin-bottom:7px;line-height:1.4;}
+  .rung-cap b{color:var(--ink);font-weight:600;}
+  .rung-cap i{color:var(--accent-d);font-style:normal;font-weight:600;}
+  .rung-bar{height:46px;border-radius:8px;margin:0 auto;display:flex;align-items:center;justify-content:center;min-width:54px;transition:width .45s cubic-bezier(.4,0,.2,1);}
+  .rung-bar .rc{font:700 18px var(--disp);color:#fff;font-variant-numeric:tabular-nums;}
+  .rung-sub{font-size:11.5px;color:var(--muted);margin-top:6px;}
+  .rung-bar.r3{background:#00A8DE;}
+  .rung-bar.r2{background:#2C84C8;}
+  .rung-bar.r1{background:var(--reg);}
+  .rung-bar.r0{background:#7488B5;}
+
+  /* volume */
+  .vol-comp{display:flex;height:32px;border-radius:8px;overflow:hidden;margin:16px 0 14px;background:#EEF2F9;}
+  .vol-comp>div{transition:width .42s cubic-bezier(.4,0,.2,1);min-width:0;}
+  .vc-c{background:#00A8DE;} .vc-t2{background:#2C84C8;} .vc-t1{background:var(--reg);}
+  .vol-leg{display:flex;flex-direction:column;gap:8px;}
+  .vrow{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--body);}
+  .vrow .dot{width:10px;height:10px;border-radius:2px;flex:none;}
+  .vrow .dc{background:#00A8DE;} .vrow .dt2{background:#2C84C8;} .vrow .dt1{background:var(--reg);}
+  .vrow .vlab{flex:1;}
+  .vrow .vct{font:600 14px var(--disp);color:var(--ink);font-variant-numeric:tabular-nums;}
+  .vrow .vsh{color:var(--muted);font-size:11.5px;min-width:34px;text-align:right;}
+  .eff-box{margin-top:18px;background:#F5FAFE;border:1px solid #D4E9F7;border-radius:var(--r-sm);padding:13px 16px;}
+  .eb-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--body);padding:3px 0;}
+  .eb-row b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+  .eb-minus{color:#B45309;}
+  .eb-eff{border-top:1px dashed #C5DEF0;margin-top:5px;padding-top:9px;font-size:14px;}
+  .eb-eff b{color:var(--accent-d);font-size:18px;}
+
+  /* bridge: reached -> stopped explainer */
+  .bridge{background:#F7FAFE;border:1px dashed #C4D7EC;box-shadow:none;}
+  .bridge-eyebrow{font:700 11.5px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--accent-d);display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+  .bridge-eyebrow::before{content:"";width:20px;height:2px;background:var(--accent);}
+  .bintro{margin:0 0 14px;font-size:14px;color:var(--ink);max-width:660px;line-height:1.55;}
+  .bintro b{font-weight:600;color:var(--navy);}
+  .bridge-rule{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 14px;font:600 13.5px var(--sans);color:var(--navy);margin-bottom:18px;}
+  .bridge-rule .hl{color:var(--accent-d);}
+  .bridge-legend{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;color:var(--body);}
+  .bridge-legend i{display:inline-block;width:18px;height:11px;border-radius:3px;margin-right:7px;vertical-align:-1px;}
+  .lg-past{background:repeating-linear-gradient(45deg,#D4DEEC,#D4DEEC 4px,#C3D0E4 4px,#C3D0E4 8px);}
+  .lg-stop{background:var(--accent);}
+  .beq{display:grid;grid-template-columns:86px 1fr 150px;gap:16px;align-items:center;padding:10px 0;}
+  .beq + .beq{border-top:1px solid #E7EEF6;}
+  .beq-label{display:flex;align-items:center;gap:8px;font:600 13px var(--sans);color:var(--ink);}
+  .beq-label .dot{width:11px;height:11px;border-radius:3px;flex:none;}
+  .dot.s1d{background:var(--reg);} .dot.s2d{background:#2C84C8;} .dot.s3d{background:#00A8DE;}
+  .beq-bar{position:relative;height:30px;background:#EAF0F7;border-radius:6px;display:flex;overflow:hidden;}
+  .beq-past{height:100%;background:repeating-linear-gradient(45deg,#D4DEEC,#D4DEEC 5px,#C5D2E5 5px,#C5D2E5 10px);transition:width .45s cubic-bezier(.4,0,.2,1);}
+  .beq-stop{height:100%;transition:width .45s cubic-bezier(.4,0,.2,1);}
+  .beq-stop.s1{background:var(--reg);} .beq-stop.s2{background:#2C84C8;} .beq-stop.s3{background:#00A8DE;}
+  .beq-formula{font:600 14.5px var(--disp);color:var(--body);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .beq-formula b{color:var(--ink);font-weight:600;}
+  .beq-formula .res{color:var(--accent-d);font-size:16px;}
+  .beq-summit .beq-formula .zero{color:#B45309;}
+  .beq-note{font-size:12.5px;color:#8a5a12;background:#FFF8EE;border:1px solid #F2E0C4;border-radius:8px;padding:11px 14px;margin-top:14px;line-height:1.5;}
+  .beq-note b{font-weight:600;color:#7a4f10;}
+  @media (max-width:760px){
+    .beq{grid-template-columns:1fr auto;grid-template-areas:"label formula" "bar bar";gap:7px 12px;}
+    .beq-label{grid-area:label;} .beq-formula{grid-area:formula;text-align:left;} .beq-bar{grid-area:bar;}
+  }
+
+  /* revenue */
+  .revenue .seg{margin-bottom:9px;}
+  .seg-note{font-size:11.5px;color:var(--muted);margin:0 0 18px;line-height:1.45;}
+  .mix-help{font-size:11.5px;color:var(--muted);margin:10px 0 0;line-height:1.5;}
+  .rev-chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font:600 14px var(--disp);color:var(--body);margin:2px 0 14px;}
+  .rev-chain b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600;}
+  .rev-chain .rev-out b{color:var(--accent-d);font-size:17px;}
+  .blend-box{background:#F5FAFE;border:1px solid #D4E9F7;border-radius:var(--r-sm);padding:11px 14px;font-size:13px;color:var(--body);line-height:1.7;}
+  .blend-box b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+  .blend-box .be{color:var(--accent-d);}
+  .prodmix{margin-top:26px;border-top:1px solid var(--line);padding-top:22px;}
+  .pm-head{font:600 14px var(--sans);color:var(--ink);margin-bottom:14px;}
+  .pm-scroll{overflow-x:auto;}
+  .pm-table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px;}
+  .pm-table th{font:600 10.5px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:0 12px 9px;border-bottom:1px solid var(--line);text-align:left;}
+  .pm-table th.num{text-align:right;}
+  .pm-table td{padding:9px 12px;border-bottom:1px solid #EEF2F8;color:var(--body);vertical-align:middle;}
+  .pm-table td.num{text-align:right;}
+  .pm-sym{font:600 13px var(--disp);color:var(--ink);}
+  .pm-cls{font-size:11px;color:var(--muted);}
+  .pm-ppl{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink);}
+  .pm-mixin{display:inline-flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:7px;padding:0 8px;height:33px;width:76px;transition:.15s;}
+  .pm-mixin:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,179,235,.14);}
+  .pm-mixin input{border:0;outline:none;width:100%;text-align:right;font:600 13px var(--disp);color:var(--ink);background:transparent;-moz-appearance:textfield;}
+  .pm-mixin input::-webkit-outer-spin-button,.pm-mixin input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .pm-mixin .pmsuf{font-size:11px;color:var(--muted);padding-left:3px;}
+  .pm-contrib{display:flex;align-items:center;gap:10px;justify-content:flex-end;}
+  .pm-cbar{height:8px;border-radius:99px;background:var(--accent);width:0;min-width:0;transition:width .42s cubic-bezier(.4,0,.2,1);}
+  .pm-cval{font-variant-numeric:tabular-nums;color:var(--body);min-width:38px;text-align:right;font-size:12px;}
+  .pm-table tfoot td{border-top:2px solid var(--line);border-bottom:none;font-weight:600;color:var(--ink);padding-top:11px;}
+  .pm-blend{color:var(--accent-d);font:700 15px var(--disp);font-variant-numeric:tabular-nums;}
+  .pm-note{font-size:12px;color:var(--muted);margin-top:13px;line-height:1.55;max-width:700px;}
+
+  /* cost */
+  .numbox .pre{font:500 14px var(--sans);color:var(--muted);padding-right:2px;}
+  .cost-compare{margin-top:16px;background:#FFF8EE;border:1px solid #F2E0C4;border-radius:var(--r-sm);padding:12px 15px;font-size:13px;color:#7a4f10;line-height:1.55;}
+  .cost-compare b{font-weight:600;color:#5e3d0a;font-variant-numeric:tabular-nums;}
+
+  /* verdict */
+  .verdict{border-color:#CFE0F2;box-shadow:0 1px 2px rgba(12,23,64,.04),0 22px 50px -30px rgba(12,23,64,.42);}
+  .lens-box{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+  .lens{background:#F5F8FC;border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 14px;font-size:12.5px;color:var(--body);line-height:1.5;}
+  .lens b{color:var(--navy);font-weight:600;}
+  .recap{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;}
+  .recap .rc{background:#F6F9FD;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--muted);}
+  .recap .rc b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;display:block;font:600 15px var(--disp);margin-top:2px;}
+  .verdict-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px;}
+  .vc-card{border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;background:#fff;}
+  .vc-rec{border:1.5px solid var(--accent);box-shadow:0 10px 26px -18px rgba(0,120,170,.55);}
+  .vc-title{font:600 14px var(--disp);color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+  .vc-tag{font:600 10px var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--accent-d);background:#E4F6FD;border:1px solid #C5ECF8;padding:3px 8px;border-radius:99px;}
+  .vcm{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid #F0F4F9;}
+  .vcm:last-child{border-bottom:none;}
+  .vcm-l{font-size:12.5px;color:var(--body);}
+  .vcm-v{font:700 16px var(--disp);color:var(--ink);font-variant-numeric:tabular-nums;}
+  .vcm-v.good{color:#0E7C5A;} .vcm-v.bad{color:#C0392B;} .vcm-v.warn{color:#B45309;}
+  .be-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;background:#FBFCFE;border:1px solid var(--line);border-radius:var(--r-sm);padding:16px;}
+  .be-stat{text-align:center;}
+  .be-l{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px;line-height:1.3;}
+  .be-v{font:700 18px var(--disp);color:var(--ink);font-variant-numeric:tabular-nums;}
+  .be-v.good{color:#0E7C5A;} .be-v.warn{color:#B45309;}
+  @media (max-width:760px){.verdict-compare{grid-template-columns:1fr;}.be-strip{grid-template-columns:1fr;gap:14px;}}
+
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:8px 0 40px;line-height:1.7;}
+  footer b{color:var(--body);font-weight:600;}
+
+  @media (max-width:760px){
+    header.hero h1{font-size:29px;}
+    .card{padding:24px 18px 22px;}
+    .grid{grid-template-columns:1fr;gap:30px;}
+    .result .big{font-size:44px;}
+    .total-num .big{font-size:50px;}
+  }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">TMGM · National Day Challenge · Forecast Explorer</div>
+      <h1>See how every number is built.</h1>
+      <p>Type in your own assumptions and watch the funnel flow. Two streams feed the campaign — new clients and existing clients — and here’s how each one adds up.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div id="sec-new"></div>
+      <div class="join"><span>+</span></div>
+      <div id="sec-existing"></div>
+      <div class="join"><span>=</span></div>
+
+      <section class="card total">
+        <div class="stage-head">
+          <span class="badge tbadge">TOTAL</span>
+          <div class="txt">
+            <h2>Total participants</h2>
+            <p>The two streams above, added together — this is the number the rest of the forecast builds on.</p>
+          </div>
+        </div>
+        <div class="total-num"><span class="big" id="t_total">1,236</span><span class="rl">total participants</span></div>
+        <div class="merge">
+          <div class="mstream snew"><span class="mv" id="t_new">396</span><span class="mk">New FTDs (from stage 1)</span></div>
+          <span class="plus">+</span>
+          <div class="mstream sexi"><span class="mv" id="t_ex">840</span><span class="mk">Existing participants (from stage 2)</span></div>
+        </div>
+        <div class="stackbar"><div class="seg-new" id="t_segnew"></div><div class="seg-ex" id="t_segex"></div></div>
+        <div class="stack-leg">
+          <span><i class="dot dnew"></i>New FTDs · <b id="t_newp">32%</b></span>
+          <span><i class="dot dex"></i>Existing · <b id="t_exp">68%</b></span>
+        </div>
+      </section>
+
+      <div class="join"><span>↓</span></div>
+
+      <section class="card ladder">
+        <div class="stage-head">
+          <span class="badge">STAGE 3</span>
+          <div class="txt">
+            <h2>The deposit-and-trade ladder</h2>
+            <p>Of your participants, how many climb each tier — and how many fall away. This drop-off is the single biggest driver of cost.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="controls">
+            <div class="field"><div class="lab"><span class="name">Tier 1 reach</span><span class="hint">$100 + 2 lots</span></div>
+              <div class="row"><input type="range" id="l_t1Range" min="0" max="100" step="1" value="72" aria-label="Tier 1 reach" /><div class="numbox"><input type="number" id="l_t1Num" value="72" aria-label="Tier 1 reach value" /><span class="suf">%</span></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Tier 2 reach</span><span class="hint">$200 + 5 lots</span></div>
+              <div class="row"><input type="range" id="l_t2Range" min="0" max="100" step="1" value="45" aria-label="Tier 2 reach" /><div class="numbox"><input type="number" id="l_t2Num" value="45" aria-label="Tier 2 reach value" /><span class="suf">%</span></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Tier 3 reach — complete all</span><span class="hint">$300 + 10 lots</span></div>
+              <div class="row"><input type="range" id="l_t3Range" min="0" max="100" step="1" value="30" aria-label="Tier 3 reach" /><div class="numbox"><input type="number" id="l_t3Num" value="30" aria-label="Tier 3 reach value" /><span class="suf">%</span></div></div></div>
+            <div class="presets"><div class="pl">Jump to a scenario</div><div class="chips" id="l_chips">
+              <div class="chip" data-t1="55" data-t2="30" data-t3="15"><span class="ct">Worst</span><span class="cs">55/30/15</span></div>
+              <div class="chip on" data-t1="72" data-t2="45" data-t3="30"><span class="ct">Base</span><span class="cs">72/45/30</span></div>
+              <div class="chip" data-t1="85" data-t2="60" data-t3="45"><span class="ct">Best</span><span class="cs">85/60/45</span></div>
+            </div></div>
+          </div>
+          <div class="viz">
+            <div class="result"><span class="big" id="l_completers">371</span><span class="rl">complete all missions</span></div>
+            <div class="sub-res">These <b>completers</b> earn the full reward ladder — the number that drives most of the cost.</div>
+            <div class="ladder-viz">
+              <div class="rung"><div class="rung-cap"><b>Tier 3 · complete all</b> · $300 + 10 lots · <i>earns the full reward</i></div><div class="rung-bar r3" id="l_bar3" style="width:30%"><span class="rc" id="l_ct3">371</span></div><div class="rung-sub"><span id="l_p3">30</span>% reach the top</div></div>
+              <div class="rung"><div class="rung-cap"><b>Tier 2</b> · 2nd deposit &amp; trade · $200 + 5 lots</div><div class="rung-bar r2" id="l_bar2" style="width:45%"><span class="rc" id="l_ct2">556</span></div><div class="rung-sub"><span id="l_p2">45</span>% climb this high</div></div>
+              <div class="rung"><div class="rung-cap"><b>Tier 1</b> · FTD &amp; FTT · $100 + 2 lots</div><div class="rung-bar r1" id="l_bar1" style="width:72%"><span class="rc" id="l_ct1">890</span></div><div class="rung-sub"><span id="l_p1">72</span>% take the first step</div></div>
+              <div class="rung"><div class="rung-cap"><b>Entry</b> · everyone who deposited</div><div class="rung-bar r0" id="l_bar0" style="width:100%"><span class="rc" id="l_ct0">1,236</span></div><div class="rung-sub">all participants</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="explain"><span class="ic">i</span><p id="l_explainP"></p></div>
+      </section>
+
+      <div class="join"><span>↓</span></div>
+
+      <section class="card bridge">
+        <div class="bridge-eyebrow">From "reached" to "stopped at"</div>
+        <p class="bintro">The ladder above counts how <b>high</b> people climbed, so the groups overlap — a completer is also counted in Tier 2 and Tier 1. To turn that into lots, each person has to be counted <b>once</b>, grouped by where they stopped. One rule does it:</p>
+        <div class="bridge-rule">Stopped at a tier = <span class="hl">reached that tier − the ones who climbed past it</span></div>
+        <div class="bridge-legend">
+          <span><i class="lg-past"></i>climbed past — counted in a higher tier</span>
+          <span><i class="lg-stop"></i>stopped here — this is who trades at this tier</span>
+        </div>
+        <div class="bridge-eqs">
+          <div class="beq">
+            <div class="beq-label"><span class="dot s1d"></span>Tier 1</div>
+            <div class="beq-bar"><div class="beq-past" id="b_past1" style="width:45%"></div><div class="beq-stop s1" id="b_stop1" style="width:27%"></div></div>
+            <div class="beq-formula"><b id="b_r1">890</b> − <b id="b_p1">556</b> = <b class="res" id="b_s1">334</b></div>
+          </div>
+          <div class="beq">
+            <div class="beq-label"><span class="dot s2d"></span>Tier 2</div>
+            <div class="beq-bar"><div class="beq-past" id="b_past2" style="width:30%"></div><div class="beq-stop s2" id="b_stop2" style="width:15%"></div></div>
+            <div class="beq-formula"><b id="b_r2">556</b> − <b id="b_p2">371</b> = <b class="res" id="b_s2">185</b></div>
+          </div>
+          <div class="beq beq-summit">
+            <div class="beq-label"><span class="dot s3d"></span>Tier 3 · top</div>
+            <div class="beq-bar"><div class="beq-past" id="b_past3" style="width:0%"></div><div class="beq-stop s3" id="b_stop3" style="width:30%"></div></div>
+            <div class="beq-formula"><b id="b_r3">371</b> − <b class="zero">0</b> = <b class="res" id="b_s3">371</b></div>
+          </div>
+          <div class="beq-note"><b>Why completers doesn't change:</b> the top is the end of the road — nothing climbs higher than Tier 3, so there's no one to subtract (− 0). Everyone who reached the top also stopped at the top. That's why completers stays the same in both stages, while the two tiers below shrink once you remove the climbers who went past them.</div>
+        </div>
+      </section>
+
+      <div class="join"><span>×</span></div>
+
+      <section class="card volume">
+        <div class="stage-head">
+          <span class="badge">STAGE 4</span>
+          <div class="txt">
+            <h2>Trading volume</h2>
+            <p>Each cohort trades the lots their tier requires. Completers trade the most, and there are the most of them — so they drive the volume.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="controls">
+            <div class="field"><div class="lab"><span class="name">Tier 1 lots</span><span class="hint">to clear the first gate</span></div>
+              <div class="row"><input type="range" id="v_l1Range" min="0" max="15" step="1" value="2" aria-label="Tier 1 lots" /><div class="numbox"><input type="number" id="v_l1Num" value="2" aria-label="Tier 1 lots value" /><span class="suf">lots</span></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Tier 2 lots</span><span class="hint">cumulative</span></div>
+              <div class="row"><input type="range" id="v_l2Range" min="0" max="25" step="1" value="5" aria-label="Tier 2 lots" /><div class="numbox"><input type="number" id="v_l2Num" value="5" aria-label="Tier 2 lots value" /><span class="suf">lots</span></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Completer lots</span><span class="hint">cumulative, to finish</span></div>
+              <div class="row"><input type="range" id="v_l3Range" min="0" max="40" step="1" value="10" aria-label="Completer lots" /><div class="numbox"><input type="number" id="v_l3Num" value="10" aria-label="Completer lots value" /><span class="suf">lots</span></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Abuse leakage</span><span class="hint">churned / hedged volume</span></div>
+              <div class="row"><input type="range" id="v_leakRange" min="0" max="50" step="1" value="8" aria-label="Abuse leakage" /><div class="numbox"><input type="number" id="v_leakNum" value="8" aria-label="Abuse leakage value" /><span class="suf">%</span></div></div></div>
+            <div class="presets"><div class="pl">Jump to a scenario</div><div class="chips" id="v_chips">
+              <div class="chip" data-l1="2" data-l2="5" data-l3="10" data-leak="25"><span class="ct">Worst</span><span class="cs">25% leak</span></div>
+              <div class="chip on" data-l1="2" data-l2="5" data-l3="10" data-leak="8"><span class="ct">Base</span><span class="cs">8% leak</span></div>
+              <div class="chip" data-l1="2" data-l2="5" data-l3="10" data-leak="2"><span class="ct">Best</span><span class="cs">2% leak</span></div>
+            </div></div>
+          </div>
+          <div class="viz">
+            <div class="result"><span class="big" id="v_gross">5,302</span><span class="rl">qualifying lots traded</span></div>
+            <div class="sub-res">Grouped by where each person stopped — counted once each, since lots are cumulative. Non-climbers trade nothing that qualifies.</div>
+            <div class="vol-comp"><div class="vc-c" id="v_segc"></div><div class="vc-t2" id="v_segt2"></div><div class="vc-t1" id="v_segt1"></div></div>
+            <div class="vol-leg">
+              <div class="vrow"><span class="dot dc"></span><span class="vlab">Completers · <span id="v_nc">371</span> × <span id="v_lc">10</span> lots</span><span class="vct" id="v_lotsc">3,710</span><span class="vsh" id="v_shc">70%</span></div>
+              <div class="vrow"><span class="dot dt2"></span><span class="vlab">Stopped at Tier 2 · <span id="v_n2">185</span> × <span id="v_l2d">5</span> lots</span><span class="vct" id="v_lots2">925</span><span class="vsh" id="v_sh2">17%</span></div>
+              <div class="vrow"><span class="dot dt1"></span><span class="vlab">Stopped at Tier 1 · <span id="v_n1">334</span> × <span id="v_l1d">2</span> lots</span><span class="vct" id="v_lots1">668</span><span class="vsh" id="v_sh1">13%</span></div>
+            </div>
+            <div class="eff-box">
+              <div class="eb-row"><span>Gross qualifying lots</span><b id="v_gross2">5,302</b></div>
+              <div class="eb-row eb-minus"><span>− abuse leakage <span id="v_leakpct">8%</span></span><b id="v_leaklots">−424</b></div>
+              <div class="eb-row eb-eff"><span>Effective lots → revenue</span><b id="v_eff">4,878</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="explain"><span class="ic">i</span><p id="v_explainP"></p></div>
+      </section>
+
+      <div class="join"><span>×</span></div>
+
+      <section class="card revenue">
+        <div class="stage-head">
+          <span class="badge">STAGE 5</span>
+          <div class="txt">
+            <h2>Trading revenue</h2>
+            <p>The effective lots finally turn into money — multiplied by profit per lot, which depends on who's trading and what they trade.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="controls">
+            <div class="field"><div class="lab"><span class="name">Account group</span><span class="hint">who is trading</span></div>
+              <div class="seg seg3" role="tablist" aria-label="Account group">
+                <button id="rg_std" class="on" role="tab" aria-selected="true">Standard</button>
+                <button id="rg_pro" role="tab" aria-selected="false">Pro</button>
+                <button id="rg_rw07" role="tab" aria-selected="false">Raw</button>
+              </div>
+              <div class="seg-note" id="rg_note">Standard clients pay through the spread, so profit per lot is highest.</div>
+            </div>
+            <div class="field"><div class="lab"><span class="name">Real-world mix</span><span class="hint">cheaper or richer than planned</span></div>
+              <div class="row"><input type="range" id="r_driftRange" min="0.45" max="1.25" step="0.05" value="1" aria-label="Real-world mix factor" /><div class="numbox"><input type="number" id="r_driftNum" value="1.00" step="0.05" aria-label="Real-world mix factor value" /><span class="suf">×</span></div></div>
+              <div class="mix-help">A safety dial for the table being just a guess. Below ×1.00 = clients trade lower-earning products than planned, so profit per lot drops. Above ×1.00 = higher-earning, so it rises. ×1.00 = the mix lands exactly as the table assumes.</div></div>
+            <div class="presets"><div class="pl">Jump to a scenario</div><div class="chips" id="r_chips">
+              <div class="chip" data-drift="0.45"><span class="ct">Worst</span><span class="cs">cheaper mix</span></div>
+              <div class="chip on" data-drift="1"><span class="ct">Base</span><span class="cs">as planned</span></div>
+              <div class="chip" data-drift="1.25"><span class="ct">Best</span><span class="cs">richer mix</span></div>
+            </div></div>
+          </div>
+          <div class="viz">
+            <div class="result"><span class="big" id="r_rev">$23,884</span><span class="rl">trading revenue</span></div>
+            <div class="sub-res">What the qualifying volume earns in spread and commission — the conservative edge, before any B-book client losses.</div>
+            <div class="rev-chain"><span><b id="r_lots">4,879</b> effective lots</span><span>×</span><span><b id="r_ppl">$4.90</b> / lot</span><span>=</span><span class="rev-out"><b id="r_rev2">$23,884</b></span></div>
+            <div class="blend-box">Blended profit / lot <span id="r_grouplab">(Standard)</span>: <b id="r_blended">$4.8961</b> &nbsp;×&nbsp; <b id="r_driftx">1.00</b> for the real mix &nbsp;=&nbsp; <b class="be" id="r_eff">$4.90</b> per lot</div>
+          </div>
+        </div>
+        <div class="prodmix">
+          <div class="pm-head">How that blended profit per lot is built — the eligible products and their assumed mix</div>
+          <div class="pm-scroll"><table class="pm-table">
+            <thead><tr><th>Symbol</th><th class="num">Profit / lot</th><th class="num">Mix %</th><th class="num">Contribution to blend</th></tr></thead>
+            <tbody id="pm_body"></tbody>
+            <tfoot><tr><td>Total</td><td class="num"></td><td class="num" id="pm_totmix">100%</td><td class="num pm-blend" id="pm_blendcell">$4.8961</td></tr></tfoot>
+          </table></div>
+          <p class="pm-note">BTC sits at 0% in the base plan — its profit per lot is huge but it's volatile and lot-capped, so the model leaves it out of the blend. Give it a few percent to see the swing. The blend is a weighted average, so it still works if the total isn't exactly 100%.</p>
+        </div>
+        <div class="explain"><span class="ic">i</span><p id="r_explainP"></p></div>
+      </section>
+
+      <div class="join"><span>↓</span></div>
+
+      <section class="card cost">
+        <div class="stage-head">
+          <span class="badge">STAGE 6</span>
+          <div class="txt">
+            <h2>What it costs</h2>
+            <p>The other side of the ledger — the media to bring people in, the reward credit they earn, the gold catch, and fixed production.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="controls">
+            <div class="field"><div class="lab"><span class="name">Reward scenario</span><span class="hint">the open S1 vs S2 decision</span></div>
+              <div class="seg" role="tablist" aria-label="Reward scenario">
+                <button id="co_s1" class="on" role="tab" aria-selected="true">S1 · lean</button>
+                <button id="co_s2" role="tab" aria-selected="false">S2 · rich</button>
+              </div>
+              <div class="seg-note" id="co_scennote">S1: $5 / $10 / $20 credit ladder + 1g gold catch.</div>
+            </div>
+            <div class="field"><div class="lab"><span class="name">Cost per sign-up</span><span class="hint">media spend per registration</span></div>
+              <div class="row"><input type="range" id="co_cacRange" min="5" max="50" step="1" value="18" aria-label="Cost per sign-up" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_cacNum" value="18" aria-label="Cost per sign-up value" /></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Creative &amp; production</span><span class="hint">one-off, fixed</span></div>
+              <div class="row"><input type="range" id="co_crRange" min="0" max="10000" step="500" value="3000" aria-label="Creative and production" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_crNum" value="3000" aria-label="Creative and production value" /></div></div></div>
+            <div class="presets"><div class="pl">Cost-per-sign-up scenario</div><div class="chips" id="co_chips">
+              <div class="chip" data-cac="30"><span class="ct">Worst</span><span class="cs">$30</span></div>
+              <div class="chip on" data-cac="18"><span class="ct">Base</span><span class="cs">$18</span></div>
+              <div class="chip" data-cac="10"><span class="ct">Best</span><span class="cs">$10</span></div>
+            </div></div>
+          </div>
+          <div class="viz">
+            <div class="result"><span class="big" id="co_total">$53,224</span><span class="rl">total campaign cost</span></div>
+            <div class="sub-res">For the selected reward scenario. Media to bring people in is usually the biggest piece.</div>
+            <div class="vol-comp"><div id="co_segM" style="background:#2C5FAD"></div><div id="co_segC" style="background:#00A8DE"></div><div id="co_segP" style="background:#8C99B8"></div><div id="co_segG" style="background:#E0A82E"></div></div>
+            <div class="vol-leg">
+              <div class="vrow"><span class="dot" style="background:#2C5FAD"></span><span class="vlab">Media · <span id="co_lblRegs">1,800</span> sign-ups × <span id="co_lblCac">$18</span></span><span class="vct" id="co_vM">$32,400</span><span class="vsh" id="co_sM">61%</span></div>
+              <div class="vrow"><span class="dot" style="background:#00A8DE"></span><span class="vlab">Reward credit · cumulative per tier</span><span class="vct" id="co_vC">$17,430</span><span class="vsh" id="co_sC">33%</span></div>
+              <div class="vrow"><span class="dot" style="background:#8C99B8"></span><span class="vlab">Creative &amp; production · fixed one-off</span><span class="vct" id="co_vP">$3,000</span><span class="vsh" id="co_sP">6%</span></div>
+              <div class="vrow"><span class="dot" style="background:#E0A82E"></span><span class="vlab">Gold catch · <span id="co_lblGw">3</span> winners × <span id="co_lblGv">$131</span></span><span class="vct" id="co_vG">$394</span><span class="vsh" id="co_sG">1%</span></div>
+            </div>
+            <div class="cost-compare" id="co_compare">Scenario 2 would cost <b id="co_otherT">$74,167</b> — about <b id="co_delta">$20,900</b> more, almost all of it richer reward credit.</div>
+          </div>
+        </div>
+        <div class="explain"><span class="ic">i</span><p id="co_explainP"></p></div>
+      </section>
+
+      <div class="join"><span>=</span></div>
+
+      <section class="card verdict">
+        <div class="stage-head">
+          <span class="badge">STAGE 7</span>
+          <div class="txt">
+            <h2>The verdict</h2>
+            <p>Revenue and cost, brought together — read two ways, because a deposit-driven promo rarely pays for itself on the trading edge alone.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="controls">
+            <div class="field"><div class="lab"><span class="name">Truly-new existing deposit</span><span class="hint">incrementality</span></div>
+              <div class="row"><input type="range" id="vd_incrRange" min="0" max="100" step="1" value="25" aria-label="Existing deposit incrementality" /><div class="numbox"><input type="number" id="vd_incrNum" value="25" aria-label="Existing deposit incrementality value" /><span class="suf">%</span></div></div>
+              <div class="mix-help">Existing clients might've deposited anyway. This is the share that's genuinely extra because of the promo. 25% means a quarter of their deposits count as new money.</div>
+            </div>
+            <div class="presets"><div class="pl">Incrementality scenario</div><div class="chips" id="vd_chips">
+              <div class="chip" data-incr="10"><span class="ct">Worst</span><span class="cs">10%</span></div>
+              <div class="chip on" data-incr="25"><span class="ct">Base</span><span class="cs">25%</span></div>
+              <div class="chip" data-incr="40"><span class="ct">Best</span><span class="cs">40%</span></div>
+            </div></div>
+            <div class="recap">
+              <div class="rc">Trading revenue<b id="vd_recapRev">$23,884</b></div>
+              <div class="rc">Net deposit captured<b id="vd_recapND">$89,082</b></div>
+            </div>
+          </div>
+          <div class="viz">
+            <div class="result"><span class="big" id="vd_hero">1.67×</span><span class="rl">net deposit captured per $1 spent (S1)</span></div>
+            <div class="sub-res">Honest read: on the trading edge alone it runs at a loss. The case rests on the deposits it pulls in, plus retention and lifetime value, which this model doesn't count.</div>
+            <div class="lens-box">
+              <div class="lens"><b>Commercial ROI</b> = (revenue − cost) ÷ cost. Does the spread and commission alone pay for the campaign? Below zero means no, not on their own.</div>
+              <div class="lens"><b>Marketing ROI</b> = net deposit captured ÷ cost. How much client money comes in per $1 spent. Above 1 means the deposits more than cover the spend.</div>
+            </div>
+          </div>
+        </div>
+        <div class="verdict-compare">
+          <div class="vc-card vc-rec">
+            <div class="vc-title">Scenario 1 · lean <span class="vc-tag">recommended</span></div>
+            <div class="vcm"><span class="vcm-l">Total cost</span><span class="vcm-v" id="vd_c1">$53,221</span></div>
+            <div class="vcm"><span class="vcm-l">Commercial ROI</span><span class="vcm-v bad" id="vd_comm1">−55%</span></div>
+            <div class="vcm"><span class="vcm-l">Marketing ROI</span><span class="vcm-v good" id="vd_mkt1">1.67×</span></div>
+            <div class="vcm"><span class="vcm-l">Net flow (rev − cost)</span><span class="vcm-v bad" id="vd_flow1">−$29,337</span></div>
+          </div>
+          <div class="vc-card">
+            <div class="vc-title">Scenario 2 · rich</div>
+            <div class="vcm"><span class="vcm-l">Total cost</span><span class="vcm-v" id="vd_c2">$74,160</span></div>
+            <div class="vcm"><span class="vcm-l">Commercial ROI</span><span class="vcm-v bad" id="vd_comm2">−68%</span></div>
+            <div class="vcm"><span class="vcm-l">Marketing ROI</span><span class="vcm-v good" id="vd_mkt2">1.20×</span></div>
+            <div class="vcm"><span class="vcm-l">Net flow (rev − cost)</span><span class="vcm-v bad" id="vd_flow2">−$50,276</span></div>
+          </div>
+        </div>
+        <div class="be-strip">
+          <div class="be-stat"><span class="be-l">Profit / lot achieved</span><span class="be-v" id="vd_ach">$4.90</span></div>
+          <div class="be-stat"><span class="be-l">Needed to break even (S1)</span><span class="be-v warn" id="vd_be1">$10.91</span></div>
+          <div class="be-stat"><span class="be-l">Revenue covers of cost (S1)</span><span class="be-v warn" id="vd_cov1">45%</span></div>
+        </div>
+        <div class="explain"><span class="ic">i</span><p id="vd_explainP"></p></div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      The figures you type are <b>planning assumptions</b> — real registrations come from the media plan, the real rates from TMGM’s CRM.<br>
+      More stages to come below: who climbs the deposit-and-trade ladder, the volume they trade, and the revenue and cost it drives.
+    </div>
+  </footer>
+
+<script>
+(function(){
+  var animState={};
+  function fmt(n){return Math.round(n).toLocaleString('en-US');}
+  function fillRange(el){var p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--fill',p+'%');}
+  function animateNum(el,to,key){
+    var from=animState[key]==null?to:animState[key];animState[key]=to;
+    var start=performance.now(),dur=420;
+    function step(t){var k=Math.min((t-start)/dur,1);var e=1-Math.pow(1-k,3);el.textContent=fmt(from+(to-from)*e);if(k<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+
+  function cardHTML(c){
+    var p=c.prefix;
+    var chips=c.presets.map(function(pr,i){return '<div class="chip'+(i===1?' on':'')+'" data-top="'+pr.top+'" data-rate="'+pr.rate+'"><span class="ct">'+pr.label+'</span><span class="cs">'+pr.sub+'</span></div>';}).join('');
+    return ''+
+    '<section class="card '+(c.accentClass||'')+'">'+
+      '<div class="stage-head"><span class="badge">'+c.badge+'</span><div class="txt"><h2>'+c.title+'</h2><p>'+c.desc+'</p></div></div>'+
+      '<div class="grid">'+
+        '<div class="controls">'+
+          '<div class="seg" role="tablist" aria-label="Direction">'+
+            '<button id="'+p+'_modeFwd" class="on" role="tab" aria-selected="true">I have inputs → result</button>'+
+            '<button id="'+p+'_modeBwd" role="tab" aria-selected="false">I have a target → inputs</button>'+
+          '</div>'+
+          '<div class="field"><div class="lab"><span class="name" id="'+p+'_primName">'+c.primNameF+'</span><span class="hint" id="'+p+'_primHint">'+c.primHintF+'</span></div>'+
+            '<div class="row"><input type="range" id="'+p+'_primRange" min="'+c.topMinF+'" max="'+c.topMaxF+'" step="'+c.topStepF+'" value="'+c.topDefF+'" aria-label="'+c.primNameF+'" />'+
+            '<div class="numbox"><input type="number" id="'+p+'_primNum" value="'+c.topDefF+'" aria-label="'+c.primNameF+' value" /></div></div></div>'+
+          '<div class="field"><div class="lab"><span class="name">'+c.rateName+'</span><span class="hint">'+c.rateHint+'</span></div>'+
+            '<div class="row"><input type="range" id="'+p+'_rateRange" min="'+c.rateMin+'" max="'+c.rateMax+'" step="1" value="'+c.rateDef+'" aria-label="'+c.rateName+'" />'+
+            '<div class="numbox"><input type="number" id="'+p+'_rateNum" value="'+c.rateDef+'" aria-label="'+c.rateName+' value" /><span class="suf">%</span></div></div></div>'+
+          '<div class="presets"><div class="pl">Jump to a scenario</div><div class="chips" id="'+p+'_chips">'+chips+'</div></div>'+
+        '</div>'+
+        '<div class="viz">'+
+          '<div class="result"><span class="big" id="'+p+'_resBig">'+fmt(c.resDef)+'</span><span class="rl" id="'+p+'_resLab">'+c.resLabF+'</span></div>'+
+          '<div class="sub-res" id="'+p+'_subRes">'+c.subResF+'</div>'+
+          '<div class="funnel">'+
+            '<div class="tier t-reg" id="'+p+'_tReg"><span class="tv" id="'+p+'_regTV">'+fmt(c.topDefF)+'</span><span class="tk">'+c.funTopCap+'</span></div>'+
+            '<div class="taper" id="'+p+'_taper"><span class="conv" id="'+p+'_convBadge">'+c.rateDef+'% '+c.badgeWord+'</span></div>'+
+            '<div class="tier t-ftd" id="'+p+'_tFtd" style="width:'+c.rateDef+'%"></div>'+
+            '<div class="ftd-cap"><span class="fv" id="'+p+'_ftdCap">'+fmt(c.resDef)+'</span><span class="fk">'+c.funBotCap+'</span></div>'+
+            '<div class="drop-note"><b id="'+p+'_dropNum"></b> '+c.dropWord+'</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="explain"><span class="ic">i</span><p id="'+p+'_explainP"></p></div>'+
+    '</section>';
+  }
+
+  var newApi=null, exApi=null;
+  function renderTotal(){
+    if(!newApi||!exApi)return;
+    var n=newApi.output(), e=exApi.output(), t=n+e;
+    animateNum(document.getElementById('t_total'),t,'tt');
+    document.getElementById('t_new').textContent=fmt(n);
+    document.getElementById('t_ex').textContent=fmt(e);
+    var np=t?n/t*100:0;
+    document.getElementById('t_segnew').style.width=np+'%';
+    document.getElementById('t_segex').style.width=(100-np)+'%';
+    document.getElementById('t_newp').textContent=Math.round(np)+'%';
+    document.getElementById('t_exp').textContent=Math.round(100-np)+'%';
+    renderLadder();
+  }
+
+  var L={t1:72,t2:45,t3:30};
+  function renderLadder(){
+    if(!newApi||!exApi)return;
+    var entry=newApi.output()+exApi.output();
+    var c1=Math.round(entry*L.t1/100), c2=Math.round(entry*L.t2/100), c3=Math.round(entry*L.t3/100);
+    L.c1=c1; L.c2=c2; L.c3=c3;
+    animateNum(document.getElementById('l_completers'), c3, 'lc');
+    document.getElementById('l_bar0').style.width='100%';
+    document.getElementById('l_bar1').style.width=Math.max(L.t1,6)+'%';
+    document.getElementById('l_bar2').style.width=Math.max(L.t2,6)+'%';
+    document.getElementById('l_bar3').style.width=Math.max(L.t3,6)+'%';
+    document.getElementById('l_ct0').textContent=fmt(entry);
+    document.getElementById('l_ct1').textContent=fmt(c1);
+    document.getElementById('l_ct2').textContent=fmt(c2);
+    document.getElementById('l_ct3').textContent=fmt(c3);
+    document.getElementById('l_p1').textContent=L.t1;
+    document.getElementById('l_p2').textContent=L.t2;
+    document.getElementById('l_p3').textContent=L.t3;
+    document.getElementById('l_explainP').innerHTML=
+      'Of <b>'+fmt(entry)+'</b> participants, <b>'+L.t1+'%</b> reach Tier 1 (<b>'+fmt(c1)+'</b>), <b>'+L.t2+'%</b> reach Tier 2 (<b>'+fmt(c2)+'</b>), and <b>'+L.t3+'%</b> complete all three (<b>'+fmt(c3)+'</b>). Those <b>'+fmt(c3)+'</b> completers earn the full reward and trigger most of the cost — which is why the completion rate matters more than any number above it.';
+    document.querySelectorAll('#l_chips .chip').forEach(function(ch){
+      ch.classList.toggle('on', (+ch.dataset.t1===L.t1)&&(+ch.dataset.t2===L.t2)&&(+ch.dataset.t3===L.t3));
+    });
+    renderBridge();
+    renderVolume();
+    renderCost();
+  }
+  function syncLadder(){
+    ['t1','t2','t3'].forEach(function(k){
+      var R=document.getElementById('l_'+k+'Range'), N=document.getElementById('l_'+k+'Num');
+      R.value=L[k]; N.value=L[k]; fillRange(R);
+    });
+  }
+  function setTier(which,v){
+    v=Math.max(0,Math.min(100,Math.round(v)));
+    L[which]=v;
+    L.t2=Math.min(L.t2,L.t1); L.t3=Math.min(L.t3,L.t2);
+    syncLadder(); renderLadder();
+  }
+
+  var V={l1:2,l2:5,l3:10,leak:8};
+  var LOTMAX={l1:15,l2:25,l3:40};
+  function setTxt(id,val){var el=document.getElementById(id);if(el)el.textContent=val;}
+  function pctOf(x,g){return Math.round(x/g*100)+'%';}
+  function renderVolume(){
+    if(L.c1==null)return;
+    var coC=Math.max(L.c3,0), coT2=Math.max(L.c2-L.c3,0), coT1=Math.max(L.c1-L.c2,0);
+    var lotsC=coC*V.l3, lots2=coT2*V.l2, lots1=coT1*V.l1;
+    var gross=lotsC+lots2+lots1;
+    var leakLots=gross*V.leak/100;
+    var eff=gross-leakLots;
+    V.eff=eff;
+    var g=gross||1;
+    animateNum(document.getElementById('v_gross'), gross, 'vg');
+    document.getElementById('v_segc').style.width=(lotsC/g*100)+'%';
+    document.getElementById('v_segt2').style.width=(lots2/g*100)+'%';
+    document.getElementById('v_segt1').style.width=(lots1/g*100)+'%';
+    setTxt('v_nc',fmt(coC)); setTxt('v_lc',V.l3); setTxt('v_lotsc',fmt(lotsC)); setTxt('v_shc',pctOf(lotsC,g));
+    setTxt('v_n2',fmt(coT2)); setTxt('v_l2d',V.l2); setTxt('v_lots2',fmt(lots2)); setTxt('v_sh2',pctOf(lots2,g));
+    setTxt('v_n1',fmt(coT1)); setTxt('v_l1d',V.l1); setTxt('v_lots1',fmt(lots1)); setTxt('v_sh1',pctOf(lots1,g));
+    setTxt('v_gross2',fmt(gross)); setTxt('v_leakpct',V.leak+'%'); setTxt('v_leaklots','−'+fmt(leakLots)); setTxt('v_eff',fmt(eff));
+    document.getElementById('v_explainP').innerHTML=
+      'The <b>'+fmt(coC)+'</b> completers each trade <b>'+V.l3+'</b> lots — that alone is <b>'+fmt(lotsC)+'</b> lots, about <b>'+pctOf(lotsC,g)+'</b> of all volume. The two cohorts who stopped lower add the rest, for <b>'+fmt(gross)+'</b> gross lots. After an <b>'+V.leak+'%</b> haircut for churned or hedged volume, <b>'+fmt(eff)+'</b> lots actually earn revenue — and that is the number the revenue stage multiplies by profit per lot.';
+    document.querySelectorAll('#v_chips .chip').forEach(function(ch){
+      ch.classList.toggle('on', (+ch.dataset.l1===V.l1)&&(+ch.dataset.l2===V.l2)&&(+ch.dataset.l3===V.l3)&&(+ch.dataset.leak===V.leak));
+    });
+    renderRevenue();
+  }
+  function syncVol(){
+    [['l1',LOTMAX.l1],['l2',LOTMAX.l2],['l3',LOTMAX.l3]].forEach(function(p){
+      var R=document.getElementById('v_'+p[0]+'Range'), N=document.getElementById('v_'+p[0]+'Num');
+      R.value=V[p[0]]; N.value=V[p[0]]; fillRange(R);
+    });
+    var LR=document.getElementById('v_leakRange'), LN=document.getElementById('v_leakNum');
+    LR.value=V.leak; LN.value=V.leak; fillRange(LR);
+  }
+  function setLot(which,v){
+    v=Math.max(0,Math.min(LOTMAX[which],Math.round(v)));
+    V[which]=v;
+    V.l2=Math.max(V.l2,V.l1); V.l3=Math.max(V.l3,V.l2);
+    syncVol(); renderVolume();
+  }
+  function setLeak(v){ v=Math.max(0,Math.min(50,Math.round(v))); V.leak=v; syncVol(); renderVolume(); }
+
+  function renderBridge(){
+    if(L.c1==null)return;
+    var e=(newApi.output()+exApi.output())||1;
+    function row(t,reached,past){
+      var stop=Math.max(reached-past,0);
+      document.getElementById('b_past'+t).style.width=(past/e*100)+'%';
+      document.getElementById('b_stop'+t).style.width=(stop/e*100)+'%';
+      setTxt('b_r'+t,fmt(reached)); setTxt('b_p'+t,fmt(past)); setTxt('b_s'+t,fmt(stop));
+    }
+    row(1,L.c1,L.c2);
+    row(2,L.c2,L.c3);
+    row(3,L.c3,0);
+  }
+
+  var SYMBOLS=[
+    {s:'EURUSD',c:'FX Major',std:4.53,pro:3.53,rw07:3.53,mix:30},
+    {s:'GBPUSD',c:'FX Major',std:4.46,pro:3.46,rw07:3.46,mix:18},
+    {s:'AUDUSD',c:'FX Major',std:5.73,pro:4.73,rw07:4.73,mix:10},
+    {s:'NZDUSD',c:'FX Major',std:3.77,pro:2.77,rw07:2.77,mix:5},
+    {s:'USDCAD',c:'FX Major',std:1.23,pro:2.69,rw07:4.60,mix:4},
+    {s:'USDCHF',c:'FX Major',std:7.22,pro:3.89,rw07:2.08,mix:5},
+    {s:'XAGUSD',c:'Silver',std:4.72,pro:4.72,rw07:4.72,mix:18},
+    {s:'XPTUSD',c:'Platinum',std:7.13,pro:7.13,rw07:7.13,mix:10},
+    {s:'BTCUSD',c:'Bitcoin (×10)',std:121.5,pro:121.5,rw07:121.5,mix:0}
+  ];
+  var R={group:'std',drift:1};
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function money2(n){return '$'+n.toFixed(2);}
+  function money4(n){return '$'+n.toFixed(4);}
+  function animateMoney(el,to,key){var from=animState[key]==null?to:animState[key];animState[key]=to;var st=performance.now();function step(t){var k=Math.min((t-st)/420,1);var e=1-Math.pow(1-k,3);el.textContent=money(from+(to-from)*e);if(k<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+  function buildProdTable(){
+    var body=document.getElementById('pm_body');
+    body.innerHTML=SYMBOLS.map(function(x,i){
+      return '<tr>'+
+        '<td><span class="pm-sym">'+x.s+'</span><br><span class="pm-cls">'+x.c+'</span></td>'+
+        '<td class="num"><span class="pm-ppl" id="pm_ppl_'+i+'">'+x.std.toFixed(2)+'</span></td>'+
+        '<td class="num"><span class="pm-mixin"><input type="number" id="pm_mix_'+i+'" value="'+x.mix+'" aria-label="'+x.s+' mix percent" /><span class="pmsuf">%</span></span></td>'+
+        '<td class="num"><div class="pm-contrib"><div class="pm-cbar" id="pm_bar_'+i+'"></div><span class="pm-cval" id="pm_cv_'+i+'">0.00</span></div></td>'+
+      '</tr>';
+    }).join('');
+    SYMBOLS.forEach(function(x,i){
+      var inp=document.getElementById('pm_mix_'+i);
+      inp.addEventListener('input',function(){
+        var raw=inp.value, v=raw===''?0:Math.round(+raw);
+        if(isNaN(v))v=0; v=Math.max(0,Math.min(100,v));
+        SYMBOLS[i].mix=v; renderRevenue();
+      });
+    });
+  }
+  function setGroupNote(){
+    var g=R.group;
+    var notes={std:'Standard clients pay through the spread, so profit per lot is highest.',pro:'Pro clients get tighter spreads and pay a commission instead — usually a little less per lot.',rw07:'Raw clients trade on raw spreads; profit per lot swings most from symbol to symbol.'};
+    var el=document.getElementById('rg_note'); if(el)el.textContent=notes[g];
+    ['std','pro','rw07'].forEach(function(k){var b=document.getElementById('rg_'+k);b.classList.toggle('on',k===g);b.setAttribute('aria-selected',k===g);});
+  }
+  function renderRevenue(){
+    var body=document.getElementById('pm_body');
+    if(!body||!body.children.length)return;
+    var g=R.group, sw=0, spw=0, maxc=0;
+    SYMBOLS.forEach(function(x){sw+=x.mix;spw+=x[g]*x.mix;});
+    var blend=sw>0?spw/sw:0;
+    SYMBOLS.forEach(function(x){var c=sw>0?x[g]*x.mix/sw:0;if(c>maxc)maxc=c;});
+    SYMBOLS.forEach(function(x,i){
+      var ppl=x[g], c=sw>0?ppl*x.mix/sw:0;
+      setTxt('pm_ppl_'+i, ppl.toFixed(2));
+      setTxt('pm_cv_'+i, c.toFixed(2));
+      var bar=document.getElementById('pm_bar_'+i); if(bar)bar.style.width=(maxc>0?c/maxc*100:0)+'%';
+    });
+    var eff=blend*R.drift, lots=(V.eff!=null?V.eff:0), rev=lots*eff;
+    R.rev=rev;
+    var rEl=document.getElementById('r_rev'); if(rEl)animateMoney(rEl, rev, 'rrev');
+    setTxt('r_rev2', money(rev));
+    setTxt('r_lots', fmt(lots));
+    setTxt('r_ppl', money2(eff));
+    setTxt('r_blended', money4(blend));
+    setTxt('r_driftx', R.drift.toFixed(2));
+    setTxt('r_eff', money2(eff));
+    setTxt('pm_totmix', Math.round(sw)+'%');
+    setTxt('pm_blendcell', money4(blend));
+    setTxt('r_grouplab', g==='std'?'(Standard)':g==='pro'?'(Pro)':'(Raw / RW07)');
+    var ep=document.getElementById('r_explainP');
+    if(ep)ep.innerHTML='The <b>'+fmt(lots)+'</b> effective lots each earn about <b>'+money2(eff)+'</b> — a weighted average across the products clients trade, on the <b>'+(g==='std'?'Standard':g==='pro'?'Pro':'Raw')+'</b> book — for <b>'+money(rev)+'</b> in trading revenue. This is the spread-and-commission edge only; any B-book client losses would sit on top, so it is a conservative floor.';
+    document.querySelectorAll('#r_chips .chip').forEach(function(ch){
+      ch.classList.toggle('on', Math.abs((+ch.dataset.drift)-R.drift)<0.001);
+    });
+    renderVerdict();
+  }
+  function setDrift(v){
+    if(isNaN(v))return;
+    v=Math.max(0.45,Math.min(1.25,Math.round(v/0.05)*0.05));
+    R.drift=v;
+    var Rg=document.getElementById('r_driftRange'),Nn=document.getElementById('r_driftNum');
+    Rg.value=v; Nn.value=v.toFixed(2); fillRange(Rg);
+    renderRevenue();
+  }
+
+  var CO={scen:'s1',cac:18,creative:3000};
+  var CREDIT={s1:[5,10,20],s2:[10,20,50]};
+  var GOLDRM={s1:544.75,s2:272.375}, MYR=4.15, GOLDCAP=3;
+  function costParts(scen,regs,stopT1,stopT2,comp){
+    var cr=CREDIT[scen];
+    var media=regs*CO.cac;
+    var credit=stopT1*cr[0]+stopT2*(cr[0]+cr[1])+comp*(cr[0]+cr[1]+cr[2]);
+    var gold=Math.min(comp,GOLDCAP)*(GOLDRM[scen]/MYR);
+    return {media:media,credit:credit,gold:gold,creative:CO.creative,total:media+credit+gold+CO.creative};
+  }
+  function setCostScenNote(){
+    var s=CO.scen;
+    var notes={s1:'S1: $5 / $10 / $20 credit ladder + 1g gold catch.',s2:'S2: $10 / $20 / $50 credit ladder + 0.5g gold catch.'};
+    var el=document.getElementById('co_scennote'); if(el)el.textContent=notes[s];
+    ['s1','s2'].forEach(function(k){var b=document.getElementById('co_'+k);b.classList.toggle('on',k===s);b.setAttribute('aria-selected',k===s);});
+  }
+  function renderCost(){
+    if(L.c1==null||!newApi)return;
+    var regs=newApi.top();
+    var stopT1=Math.max(L.c1-L.c2,0), stopT2=Math.max(L.c2-L.c3,0), comp=L.c3;
+    var p=costParts(CO.scen,regs,stopT1,stopT2,comp);
+    var other=CO.scen==='s1'?'s2':'s1';
+    var po=costParts(other,regs,stopT1,stopT2,comp);
+    CO.s1total=costParts('s1',regs,stopT1,stopT2,comp).total;
+    CO.s2total=costParts('s2',regs,stopT1,stopT2,comp).total;
+    CO.total=p.total;
+    var T=p.total||1;
+    var hero=document.getElementById('co_total'); if(hero)animateMoney(hero,p.total,'cotot');
+    document.getElementById('co_segM').style.width=(p.media/T*100)+'%';
+    document.getElementById('co_segC').style.width=(p.credit/T*100)+'%';
+    document.getElementById('co_segP').style.width=(p.creative/T*100)+'%';
+    document.getElementById('co_segG').style.width=(p.gold/T*100)+'%';
+    setTxt('co_vM',money(p.media)); setTxt('co_sM',Math.round(p.media/T*100)+'%');
+    setTxt('co_vC',money(p.credit)); setTxt('co_sC',Math.round(p.credit/T*100)+'%');
+    setTxt('co_vP',money(p.creative)); setTxt('co_sP',Math.round(p.creative/T*100)+'%');
+    setTxt('co_vG',money(p.gold)); setTxt('co_sG',Math.round(p.gold/T*100)+'%');
+    setTxt('co_lblRegs',fmt(regs)); setTxt('co_lblCac',money(CO.cac));
+    setTxt('co_lblGw',fmt(Math.min(comp,GOLDCAP))); setTxt('co_lblGv',money(GOLDRM[CO.scen]/MYR));
+    var cmp=document.getElementById('co_compare');
+    if(cmp){
+      var oname=other==='s1'?'Scenario 1':'Scenario 2', delta=po.total-p.total, ml=delta>=0?'more':'less';
+      cmp.innerHTML=oname+' would cost <b>'+money(po.total)+'</b> — about <b>'+money(Math.abs(delta))+'</b> '+ml+', almost all of it the reward credit.';
+    }
+    var ep=document.getElementById('co_explainP');
+    if(ep)ep.innerHTML='Bringing in <b>'+fmt(regs)+'</b> sign-ups at <b>'+money(CO.cac)+'</b> each is <b>'+money(p.media)+'</b> of media — the biggest piece. Reward credit adds <b>'+money(p.credit)+'</b> (completers earn the full ladder), the gold catch is only <b>'+money(p.gold)+'</b> because it is capped at 3 winners, and production is <b>'+money(p.creative)+'</b>. Total: <b>'+money(p.total)+'</b>.';
+    setCostScenNote();
+    document.querySelectorAll('#co_chips .chip').forEach(function(ch){ ch.classList.toggle('on',(+ch.dataset.cac)===CO.cac); });
+    renderVerdict();
+  }
+  function setCac(v){ if(isNaN(v))return; v=Math.max(5,Math.min(50,Math.round(v))); CO.cac=v; var Rg=document.getElementById('co_cacRange'),Nn=document.getElementById('co_cacNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
+  function setCreative(v){ if(isNaN(v))return; v=Math.max(0,Math.min(10000,Math.round(v/100)*100)); CO.creative=v; var Rg=document.getElementById('co_crRange'),Nn=document.getElementById('co_crNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
+
+  var VER={incr:25};
+  function animateMult(el,to,key){var from=animState[key]==null?to:animState[key];animState[key]=to;var st=performance.now();function step(t){var k=Math.min((t-st)/420,1);var e=1-Math.pow(1-k,3);el.textContent=(from+(to-from)*e).toFixed(2)+'×';if(k<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+  function setEl(id,txt,cls){var el=document.getElementById(id);if(!el)return;el.textContent=txt;el.classList.remove('good','bad','warn');if(cls)el.classList.add(cls);}
+  function computeNetDeposit(){
+    var nf=newApi.output(), ex=exApi.output();
+    var t1=L.t1/100,t2=L.t2/100,t3=L.t3/100;
+    var ndNew=nf*(t1-t2)*100 + nf*(t2-t3)*200 + nf*t3*300;
+    var ndExFull=ex*(t1-t2)*100 + ex*(t2-t3)*200 + ex*t3*300;
+    return ndNew + ndExFull*(VER.incr/100);
+  }
+  function renderVerdict(){
+    if(L.c1==null||!newApi||R.rev==null||CO.s1total==null)return;
+    var rev=R.rev, effLots=(V.eff||0), nd=computeNetDeposit(), c1=CO.s1total, c2=CO.s2total;
+    function sp(x){return (x>=0?'+':'−')+Math.abs(Math.round(x*100))+'%';}
+    function mult(x){return x.toFixed(2)+'×';}
+    var commS1=(rev-c1)/c1, mktS1=c1>0?nd/c1:0, flowS1=rev-c1, covS1=c1>0?rev/c1:0, beS1=effLots>0?c1/effLots:0;
+    var commS2=(rev-c2)/c2, mktS2=c2>0?nd/c2:0, flowS2=rev-c2;
+    var achieved=effLots>0?rev/effLots:0;
+    var hero=document.getElementById('vd_hero'); if(hero)animateMult(hero,mktS1,'vdhero');
+    setTxt('vd_c1',money(c1));
+    setEl('vd_comm1',sp(commS1),commS1>=0?'good':'bad');
+    setEl('vd_mkt1',mult(mktS1),mktS1>=1?'good':'warn');
+    setEl('vd_flow1',(flowS1>=0?'':'−')+money(Math.abs(flowS1)),flowS1>=0?'good':'bad');
+    setTxt('vd_c2',money(c2));
+    setEl('vd_comm2',sp(commS2),commS2>=0?'good':'bad');
+    setEl('vd_mkt2',mult(mktS2),mktS2>=1?'good':'warn');
+    setEl('vd_flow2',(flowS2>=0?'':'−')+money(Math.abs(flowS2)),flowS2>=0?'good':'bad');
+    setTxt('vd_ach',money2(achieved));
+    setTxt('vd_be1',money2(beS1));
+    setEl('vd_cov1',Math.round(covS1*100)+'%',covS1>=1?'good':'warn');
+    setTxt('vd_recapRev',money(rev));
+    setTxt('vd_recapND',money(nd));
+    var ep=document.getElementById('vd_explainP');
+    if(ep)ep.innerHTML='For every $1 spent on Scenario 1, the campaign pulls in about <b>'+mult(mktS1)+'</b> in net client deposits ('+money(nd)+' total) — that is the marketing case. On the trading edge alone it is <b>'+sp(commS1)+'</b>: revenue of <b>'+money(rev)+'</b> covers about <b>'+Math.round(covS1*100)+'%</b> of the <b>'+money(c1)+'</b> cost, so you would need <b>'+money2(beS1)+'</b> per lot to break even but are making <b>'+money2(achieved)+'</b>. Whether it is worth doing rests on retention and lifetime value beyond this campaign, which the model does not score.';
+  }
+  function setIncr(v){ if(isNaN(v))return; v=Math.max(0,Math.min(100,Math.round(v))); VER.incr=v; var Rg=document.getElementById('vd_incrRange'),Nn=document.getElementById('vd_incrNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderVerdict(); }
+
+  function wireSection(containerId, c){
+    var p=c.prefix;
+    document.getElementById(containerId).innerHTML=cardHTML(c);
+    var $=function(s){return document.getElementById(p+'_'+s);};
+    var st={mode:'forward', top:c.topDefF, rate:c.rateDef, target:c.topDefB};
+    var primRange=$('primRange'),primNum=$('primNum'),rateRange=$('rateRange'),rateNum=$('rateNum');
+    var resBig=$('resBig'),resLab=$('resLab'),subRes=$('subRes'),regTV=$('regTV'),tFtd=$('tFtd'),taper=$('taper'),convBadge=$('convBadge'),ftdCap=$('ftdCap'),dropNum=$('dropNum'),explainP=$('explainP');
+    var primName=$('primName'),primHint=$('primHint'),fwd=$('modeFwd'),bwd=$('modeBwd');
+    var chips=$('chips').querySelectorAll('.chip');
+
+    function output(){return st.mode==='forward'?Math.round(st.top*st.rate/100):st.target;}
+
+    function render(){
+      var top,bot,resultVal,rate=st.rate;
+      if(st.mode==='forward'){bot=Math.round(st.top*rate/100);top=st.top;resultVal=bot;}
+      else{top=rate>0?Math.ceil(st.target/(rate/100)):0;bot=st.target;resultVal=top;}
+      var drop=Math.max(top-bot,0), w=Math.max(rate,5);
+      animateNum(resBig,resultVal,p+'res');
+      resLab.textContent=st.mode==='forward'?c.resLabF:c.resLabB;
+      subRes.innerHTML=st.mode==='forward'?c.subResF:c.subResB;
+      regTV.textContent=fmt(top);
+      tFtd.style.width=w+'%';
+      taper.style.clipPath='polygon(0 0, 100% 0, '+(50+w/2)+'% 100%, '+(50-w/2)+'% 100%)';
+      convBadge.textContent=rate+'% '+c.badgeWord;
+      animateNum(ftdCap,bot,p+'ftd');
+      dropNum.textContent=fmt(drop);
+      explainP.innerHTML=st.mode==='forward'?c.explainF(top,rate,bot,drop):c.explainB(top,rate,bot);
+      chips.forEach(function(ch){ch.classList.toggle('on', st.mode==='forward' && (+ch.dataset.top)===st.top && (+ch.dataset.rate)===st.rate);});
+      renderTotal();
+    }
+
+    function setPrim(v){v=Math.max(+primRange.min,Math.min(+primRange.max,Math.round(v)));if(st.mode==='forward')st.top=v;else st.target=v;primRange.value=v;primNum.value=v;fillRange(primRange);render();}
+    function setRate(v){v=Math.max(+rateRange.min,Math.min(+rateRange.max,Math.round(v)));st.rate=v;rateRange.value=v;rateNum.value=v;fillRange(rateRange);render();}
+
+    primRange.addEventListener('input',function(){setPrim(+primRange.value);});
+    primNum.addEventListener('input',function(){if(primNum.value!=='')setPrim(+primNum.value);});
+    rateRange.addEventListener('input',function(){setRate(+rateRange.value);});
+    rateNum.addEventListener('input',function(){if(rateNum.value!=='')setRate(+rateNum.value);});
+
+    chips.forEach(function(ch){ch.addEventListener('click',function(){
+      if(st.mode!=='forward')switchMode('forward',true);
+      st.top=+ch.dataset.top;st.rate=+ch.dataset.rate;
+      primRange.value=st.top;primNum.value=st.top;rateRange.value=st.rate;rateNum.value=st.rate;
+      fillRange(primRange);fillRange(rateRange);render();
+    });});
+
+    function switchMode(m,silent){
+      st.mode=m;var f=(m==='forward');
+      fwd.classList.toggle('on',f);bwd.classList.toggle('on',!f);
+      fwd.setAttribute('aria-selected',f);bwd.setAttribute('aria-selected',!f);
+      if(f){primName.textContent=c.primNameF;primHint.textContent=c.primHintF;primRange.min=c.topMinF;primRange.max=c.topMaxF;primRange.step=c.topStepF;primRange.value=st.top;primNum.value=st.top;}
+      else{primName.textContent=c.primNameB;primHint.textContent=c.primHintB;primRange.min=c.topMinB;primRange.max=c.topMaxB;primRange.step=c.topStepB;primRange.value=st.target;primNum.value=st.target;}
+      fillRange(primRange);if(!silent)render();
+    }
+    fwd.addEventListener('click',function(){switchMode('forward');});
+    bwd.addEventListener('click',function(){switchMode('backward');});
+
+    fillRange(primRange);fillRange(rateRange);
+    animState[p+'res']=c.resDef;animState[p+'ftd']=c.resDef;
+    function topVal(){ return st.mode==='forward'? st.top : (st.rate>0?Math.ceil(st.target/(st.rate/100)):0); }
+    return {output:output, render:render, top:topVal};
+  }
+
+  var newCfg={
+    prefix:'n', badge:'STAGE 1', accentClass:'',
+    title:'Top of the funnel — new clients',
+    desc:'How many people sign up, and how many of them actually fund their account.',
+    primNameF:'New registrations', primHintF:'People who sign up',
+    topMinF:0, topMaxF:6000, topStepF:50, topDefF:1800,
+    primNameB:'Target new FTDs', primHintB:'Funded clients you want',
+    topMinB:0, topMaxB:2000, topStepB:10, topDefB:396,
+    rateName:'FTD conversion', rateHint:'Share who fund their account',
+    rateMin:1, rateMax:50, rateDef:22, badgeWord:'fund',
+    resDef:396, resLabF:'new funded clients', resLabB:'registrations needed',
+    subResF:'This is your <b>New FTDs</b> — the first stream into the funnel.',
+    subResB:'That’s how many <b>sign-ups</b> you’d need to hit the target above.',
+    funTopCap:'registrations', funBotCap:'new FTDs', dropWord:'signed up but didn’t fund',
+    presets:[{label:'Worst',sub:'600 · 12%',top:600,rate:12},{label:'Base',sub:'1,800 · 22%',top:1800,rate:22},{label:'Best',sub:'4,000 · 32%',top:4000,rate:32}],
+    explainF:function(t,r,b,d){return 'Of <b>'+fmt(t)+'</b> sign-ups, <b>'+r+'%</b> fund their account — that’s <b>'+fmt(b)+'</b> new funded clients. The other '+fmt(d)+' registered but never deposited.';},
+    explainB:function(t,r,b){return 'To reach <b>'+fmt(b)+'</b> new funded clients at a <b>'+r+'%</b> funding rate, you’d need about <b>'+fmt(t)+'</b> sign-ups at the top.';}
+  };
+
+  var exCfg={
+    prefix:'e', badge:'STAGE 2', accentClass:'sec-teal',
+    title:'Existing clients — who joins in',
+    desc:'How many of our existing Malaysia clients take part in the promo.',
+    primNameF:'Eligible existing base', primHintF:'Existing clients we can target',
+    topMinF:0, topMaxF:40000, topStepF:500, topDefF:12000,
+    primNameB:'Target existing participants', primHintB:'Participants you want',
+    topMinB:0, topMaxB:6000, topStepB:50, topDefB:840,
+    rateName:'Participation rate', rateHint:'Share of existing who take part',
+    rateMin:1, rateMax:30, rateDef:7, badgeWord:'take part',
+    resDef:840, resLabF:'existing participants', resLabB:'eligible clients needed',
+    subResF:'These are your <b>existing participants</b> — the second stream into the funnel.',
+    subResB:'That’s how big an <b>eligible base</b> you’d need to hit the target above.',
+    funTopCap:'eligible clients', funBotCap:'participants', dropWord:'eligible but didn’t join',
+    presets:[{label:'Worst',sub:'5,000 · 3%',top:5000,rate:3},{label:'Base',sub:'12,000 · 7%',top:12000,rate:7},{label:'Best',sub:'20,000 · 12%',top:20000,rate:12}],
+    explainF:function(t,r,b,d){return 'Of <b>'+fmt(t)+'</b> eligible existing clients, <b>'+r+'%</b> take part — that’s <b>'+fmt(b)+'</b> participants. The other '+fmt(d)+' were eligible but didn’t join.';},
+    explainB:function(t,r,b){return 'To reach <b>'+fmt(b)+'</b> existing participants at a <b>'+r+'%</b> take-up rate, you’d need an eligible base of about <b>'+fmt(t)+'</b>.';}
+  };
+
+  animState.tt=1236;
+  animState.lc=371;
+  animState.vg=5302;
+  newApi=wireSection('sec-new', newCfg);
+  exApi=wireSection('sec-existing', exCfg);
+
+  ['t1','t2','t3'].forEach(function(k){
+    var R=document.getElementById('l_'+k+'Range'), N=document.getElementById('l_'+k+'Num');
+    R.addEventListener('input',function(){setTier(k,+R.value);});
+    N.addEventListener('input',function(){if(N.value!=='')setTier(k,+N.value);});
+  });
+  document.querySelectorAll('#l_chips .chip').forEach(function(ch){
+    ch.addEventListener('click',function(){ L.t1=+ch.dataset.t1; L.t2=+ch.dataset.t2; L.t3=+ch.dataset.t3; syncLadder(); renderLadder(); });
+  });
+  syncLadder();
+
+  ['l1','l2','l3'].forEach(function(k){
+    var R=document.getElementById('v_'+k+'Range'), N=document.getElementById('v_'+k+'Num');
+    R.addEventListener('input',function(){setLot(k,+R.value);});
+    N.addEventListener('input',function(){if(N.value!=='')setLot(k,+N.value);});
+  });
+  (function(){
+    var R=document.getElementById('v_leakRange'), N=document.getElementById('v_leakNum');
+    R.addEventListener('input',function(){setLeak(+R.value);});
+    N.addEventListener('input',function(){if(N.value!=='')setLeak(+N.value);});
+  })();
+  document.querySelectorAll('#v_chips .chip').forEach(function(ch){
+    ch.addEventListener('click',function(){ V.l1=+ch.dataset.l1; V.l2=+ch.dataset.l2; V.l3=+ch.dataset.l3; V.leak=+ch.dataset.leak; syncVol(); renderVolume(); });
+  });
+  syncVol();
+
+  buildProdTable();
+  ['std','pro','rw07'].forEach(function(g){
+    document.getElementById('rg_'+g).addEventListener('click',function(){ R.group=g; setGroupNote(); renderRevenue(); });
+  });
+  (function(){
+    var Rg=document.getElementById('r_driftRange'), Nn=document.getElementById('r_driftNum');
+    Rg.addEventListener('input',function(){setDrift(+Rg.value);});
+    Nn.addEventListener('input',function(){if(Nn.value!=='')setDrift(+Nn.value);});
+  })();
+  document.querySelectorAll('#r_chips .chip').forEach(function(ch){
+    ch.addEventListener('click',function(){ setDrift(+ch.dataset.drift); });
+  });
+  animState.rrev=23884;
+  setGroupNote();
+
+  ['s1','s2'].forEach(function(s){
+    document.getElementById('co_'+s).addEventListener('click',function(){ CO.scen=s; renderCost(); });
+  });
+  (function(){
+    var Rc=document.getElementById('co_cacRange'),Nc=document.getElementById('co_cacNum');
+    Rc.addEventListener('input',function(){setCac(+Rc.value);});
+    Nc.addEventListener('input',function(){if(Nc.value!=='')setCac(+Nc.value);});
+    var Rp=document.getElementById('co_crRange'),Np=document.getElementById('co_crNum');
+    Rp.addEventListener('input',function(){setCreative(+Rp.value);});
+    Np.addEventListener('input',function(){if(Np.value!=='')setCreative(+Np.value);});
+  })();
+  document.querySelectorAll('#co_chips .chip').forEach(function(ch){
+    ch.addEventListener('click',function(){ setCac(+ch.dataset.cac); });
+  });
+  animState.cotot=53224;
+  fillRange(document.getElementById('co_cacRange'));
+  fillRange(document.getElementById('co_crRange'));
+  setCostScenNote();
+
+  (function(){
+    var Ri=document.getElementById('vd_incrRange'),Ni=document.getElementById('vd_incrNum');
+    Ri.addEventListener('input',function(){setIncr(+Ri.value);});
+    Ni.addEventListener('input',function(){if(Ni.value!=='')setIncr(+Ni.value);});
+  })();
+  document.querySelectorAll('#vd_chips .chip').forEach(function(ch){
+    ch.addEventListener('click',function(){ VER.incr=+ch.dataset.incr; var Ri=document.getElementById('vd_incrRange'),Ni=document.getElementById('vd_incrNum'); Ri.value=VER.incr;Ni.value=VER.incr;fillRange(Ri); document.querySelectorAll('#vd_chips .chip').forEach(function(c){c.classList.toggle('on',(+c.dataset.incr)===VER.incr);}); renderVerdict(); });
+  });
+  animState.vdhero=1.67;
+  fillRange(document.getElementById('vd_incrRange'));
+
+  newApi.render();
+  exApi.render();
+  renderLadder();
+})();
+</script>
+</body>
+</html>
