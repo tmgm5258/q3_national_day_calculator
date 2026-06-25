@@ -37,6 +37,21 @@
   .badge{font:700 12px/1 var(--disp);letter-spacing:.06em;color:var(--navy);background:#EEF3FA;border:1px solid #DCE6F3;padding:8px 12px;border-radius:99px;white-space:nowrap;}
   .stage-head .txt h2{font:600 21px/1.2 var(--disp);color:var(--ink);margin:0 0 4px;letter-spacing:-.01em;}
   .stage-head .txt p{margin:0;font-size:14.5px;color:var(--muted);}
+  .info-wrap{position:relative;margin-left:auto;flex:none;}
+  .info-btn{width:25px;height:25px;border-radius:50%;border:1px solid #DCE6F3;background:#EEF3FA;color:var(--navy);font:700 13px/1 var(--disp);text-transform:none;letter-spacing:normal;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:background .15s,border-color .15s,color .15s;}
+  .info-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .info-pop{position:absolute;top:34px;right:0;width:330px;max-width:84vw;max-height:min(74vh,560px);overflow-y:auto;background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:0 10px 30px rgba(0,11,80,.16);padding:15px 17px;z-index:60;display:none;text-align:left;cursor:default;font:400 12.5px/1.55 var(--sans);text-transform:none;letter-spacing:normal;}
+  .info-pop.vpop{width:372px;}
+  .info-wrap:hover .info-pop,.info-wrap.pinned .info-pop{display:block;}
+  .info-pop h4{font:700 10.5px/1 var(--disp);letter-spacing:.06em;text-transform:uppercase;color:var(--accent-d);margin:14px 0 6px;}
+  .info-pop h4:first-child{margin-top:0;}
+  .info-pop p{margin:0;font:400 12.5px/1.55 var(--sans);color:var(--body);}
+  .info-pop .formula{background:#F5FAFE;border:1px solid #D4E9F7;border-radius:6px;padding:9px 11px;font:600 12.5px/1.6 var(--disp);color:var(--ink);}
+  .info-pop ul{margin:0;padding:0;list-style:none;}
+  .info-pop li{margin:0 0 9px;font:400 12.5px/1.5 var(--sans);color:var(--body);}
+  .info-pop li:last-child{margin-bottom:0;}
+  .info-pop li .q{display:block;font-weight:600;color:var(--ink);margin-bottom:1px;}
+  .derived{background:#EDF1F6;border:1px solid var(--line);border-radius:8px;padding:10px 14px;font:600 15px var(--disp);color:var(--muted);font-variant-numeric:tabular-nums;}
 
   .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:34px;align-items:start;}
 
@@ -194,7 +209,8 @@
   .blend-box b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
   .blend-box .be{color:var(--accent-d);}
   .prodmix{margin-top:26px;border-top:1px solid var(--line);padding-top:22px;}
-  .pm-head{font:600 14px var(--sans);color:var(--ink);margin-bottom:14px;}
+  .pm-head{font:600 14px var(--sans);color:var(--ink);margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;}
+  .pm-head>span{flex:1;min-width:0;}
   .pm-scroll{overflow-x:auto;}
   .pm-table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px;}
   .pm-table th{font:600 10.5px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:0 12px 9px;border-bottom:1px solid var(--line);text-align:left;}
@@ -279,6 +295,7 @@
             <h2>Total participants</h2>
             <p>The two streams above, added together — this is the number the rest of the forecast builds on.</p>
           </div>
+          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this panel means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>This just adds the two groups together. The new people from Stage 1, plus the dormant accounts we woke up in Stage 2, gives us everyone taking part in the promo.</p><h4>Formula</h4><div class="formula">new funded + activated = total participants<br><span id="tf_new">12</span> + <span id="tf_ex">8</span> = <span id="tf_total">20</span></div><h4>Common questions</h4><ul><li><span class="q">Why is the total <span id="tf_qtotal">20</span>?</span>Because that’s what we’ve actually seen in past campaigns. We set the starting point to match reality, not wishful thinking. If we think this promo pulls more, we drag the inputs above up and the whole forecast follows.</li><li><span class="q">Can we type a number straight in here?</span>No, this one isn’t editable. It’s simply Stage 1 plus Stage 2, so to move it we change the sign-ups, the rates, or the dormant pool above, and it updates on its own.</li></ul></div></div>
         </div>
         <div class="total-num"><span class="big" id="t_total">20</span><span class="rl">total participants</span></div>
         <div class="merge">
@@ -302,6 +319,7 @@
             <h2>The deposit-and-trade ladder</h2>
             <p>Of your participants, how many climb each tier — and how many fall away. This drop-off is the single biggest driver of cost.</p>
           </div>
+          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>The promo has three steps, or tiers. Not everyone climbs all the way: some do the first step and stop, some go further, and a few finish everything. These percentages say how many people reach each step.</p><h4>Formula</h4><div class="formula">total participants × that tier’s reach % = people who reach it<br>Reach Tier 1: <span id="l_fE1">20</span> × <span id="l_ft1">72</span>% = <span id="l_fc1">14</span><br>Reach Tier 2: <span id="l_fE2">20</span> × <span id="l_ft2">45</span>% = <span id="l_fc2">9</span><br>Finish all 3: <span id="l_fE3">20</span> × <span id="l_ft3">30</span>% = <span id="l_fc3">6</span></div><h4>Common questions</h4><ul><li><span class="q">Why do the percentages only go down as you climb?</span>Because you can’t reach step 2 without doing step 1. Each higher step is a smaller group sitting inside the one below it. The tool won’t even let us set it any other way, on purpose.</li><li><span class="q">Where are these percentages from?</span>Assumptions again, our best guess at drop-off. The sliders let us test an optimistic version and a pessimistic one.</li></ul></div></div>
         </div>
         <div class="grid">
           <div class="controls">
@@ -334,7 +352,7 @@
       <div class="join"><span>↓</span></div>
 
       <section class="card bridge">
-        <div class="bridge-eyebrow">From "reached" to "stopped at"</div>
+        <div class="bridge-eyebrow">From "reached" to "stopped at"<div class="info-wrap"><button class="info-btn" type="button" aria-label="What this step means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>The ladder counts how high people climbed, so the groups overlap: someone who finished is also counted in Tier 1 and Tier 2. To work out how much they traded, we count each person once, grouped by where they stopped. So from each tier’s “reached” count, we take away the people who climbed higher, leaving just the ones who stopped there.</p><h4>Formula</h4><div class="formula">stopped at a tier = reached it − the ones who climbed past it<br>Stopped at Tier 1: <span id="br_r1">14</span> − <span id="br_p1">9</span> = <span id="br_s1">5</span><br>Stopped at Tier 2: <span id="br_r2">9</span> − <span id="br_p2">6</span> = <span id="br_s2">3</span><br>Finished (top): <span id="br_r3">6</span> − 0 = <span id="br_s3">6</span></div><h4>Common questions</h4><ul><li><span class="q">Why do we need this extra step?</span>Because the ladder double-counts on purpose: a finisher shows up on every rung they passed. If we used those numbers to work out trading, we’d count the same person several times. This strips it back so each person counts once, where they stopped.</li><li><span class="q">Why is the finished number the same as in Stage 3?</span>Because the top is the end of the road. Nobody climbs higher than the last tier, so there’s no one to take away. Everyone who reached the top also stopped at the top, so that number carries straight through.</li></ul></div></div></div>
         <p class="bintro">The ladder above counts how <b>high</b> people climbed, so the groups overlap — a completer is also counted in Tier 2 and Tier 1. To turn that into lots, each person has to be counted <b>once</b>, grouped by where they stopped. One rule does it:</p>
         <div class="bridge-rule">Stopped at a tier = <span class="hl">reached that tier − the ones who climbed past it</span></div>
         <div class="bridge-legend">
@@ -370,6 +388,7 @@
             <h2>Trading volume</h2>
             <p>Each cohort trades the lots their tier requires. Completers trade the most, and there are the most of them — so they drive the volume.</p>
           </div>
+          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>Think of a coffee shop loyalty card, where you collect a stamp each time you buy a coffee. To reach each level of the promo, people had to collect a set number of stamps: a few for the first level, more for the next, and the most to finish. We add up all the stamps everyone collected for the grand total, then take a bit off for any that weren’t really earned, and what’s left is the trading we can rely on. (In trading, one stamp is called a “lot”, just a standard unit of how much someone trades.)</p><h4>Formula</h4><div class="formula">gross lots = each group × its lot target, added up<br>(<span id="v_fco1">5</span> × <span id="v_fl1">2</span>) + (<span id="v_fco2">3</span> × <span id="v_fl2">5</span>) + (<span id="v_fcoC">6</span> × <span id="v_fl3">10</span>) = <span id="v_fgross">85</span><br><br>effective lots = gross − leakage shave<br><span id="v_fgross2">85</span> − <span id="v_fleak">8</span>% ≈ <span id="v_feff">78</span></div><h4>Common questions</h4><ul><li><span class="q">What’s a “lot”?</span>It’s just the standard unit we measure trade size in. One lot is a fixed amount; ten lots is ten times that.</li><li><span class="q">What’s the shave for?</span>Some people try to game promos: opening and closing trades just to rack up volume, or hedging both directions so they take no real risk. We don’t want to count those, so we knock off a safety margin. The <span id="v_qleak">8</span>% is an estimate, and Risk will tighten it.</li></ul></div></div>
         </div>
         <div class="grid">
           <div class="controls">
@@ -397,9 +416,9 @@
               <div class="vrow"><span class="dot dt1"></span><span class="vlab">Stopped at Tier 1 · <span id="v_n1">334</span> × <span id="v_l1d">2</span> lots</span><span class="vct" id="v_lots1">668</span><span class="vsh" id="v_sh1">13%</span></div>
             </div>
             <div class="eff-box">
-              <div class="eb-row"><span>Gross qualifying lots</span><b id="v_gross2">5,302</b></div>
-              <div class="eb-row eb-minus"><span>− abuse leakage <span id="v_leakpct">8%</span></span><b id="v_leaklots">−424</b></div>
-              <div class="eb-row eb-eff"><span>Effective lots → revenue</span><b id="v_eff">4,878</b></div>
+              <div class="eb-row"><span>Gross qualifying lots</span><b id="v_gross2">85</b></div>
+              <div class="eb-row eb-minus"><span>− abuse leakage <span id="v_leakpct">8%</span></span><b id="v_leaklots">−7</b></div>
+              <div class="eb-row eb-eff"><span>Effective lots (carried into revenue)</span><b id="v_eff">78</b></div>
             </div>
           </div>
         </div>
@@ -415,6 +434,7 @@
             <h2>Trading revenue</h2>
             <p>The effective lots finally turn into money — multiplied by profit per lot, which depends on who's trading and what they trade.</p>
           </div>
+          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>This is the money the company makes from clients trading. Each time someone trades, the company keeps a small slice, like a phone shop keeping about $30 on a $1,000 phone, win or lose. We take the reliable trading from Stage 4 and multiply it by that slice. It’s kept low on purpose: there’s extra the company can sometimes make that we don’t count here, so the real figure is likely a bit higher.</p><h4>Formula</h4><div class="formula">effective lots × earning per lot = trading revenue<br><span id="r_fLots">78</span> × <span id="r_fPer">$4.90</span> ≈ <span id="r_fRev">$383</span></div><h4>Common questions</h4><ul><li><span class="q">Where’s the <span id="r_qPer">$4.90</span> per lot from?</span>It’s the average we earn per lot across the products in the promo, from the Risk team’s profit-per-lot sheet. Some products earn more, some less, and this is the blended average. The mix dial lets us test what happens if clients trade cheaper or richer products than we assumed.</li><li><span class="q">Is this everything the company makes?</span>No, it’s the safe, guaranteed slice only. There’s a second, bumpier way the company can earn that we leave out on purpose, so this stays a careful, low figure and the real amount is likely higher, never lower.</li></ul></div></div>
         </div>
         <div class="grid">
           <div class="controls">
@@ -437,13 +457,14 @@
           </div>
           <div class="viz">
             <div class="result"><span class="big" id="r_rev">$23,884</span><span class="rl">trading revenue</span></div>
-            <div class="sub-res">What the qualifying volume earns in spread and commission — the conservative edge, before any B-book client losses.</div>
+            <div class="sub-res">How much the company earns on all the trading that counts toward the campaign. It’s kept as a careful, low estimate on purpose.</div>
             <div class="rev-chain"><span><b id="r_lots">4,879</b> effective lots</span><span>×</span><span><b id="r_ppl">$4.90</b> / lot</span><span>=</span><span class="rev-out"><b id="r_rev2">$23,884</b></span></div>
             <div class="blend-box">Blended profit / lot <span id="r_grouplab">(Standard)</span>: <b id="r_blended">$4.8961</b> &nbsp;×&nbsp; <b id="r_driftx">1.00</b> for the real mix &nbsp;=&nbsp; <b class="be" id="r_eff">$4.90</b> per lot</div>
+            <div class="mix-help"><b>In one line:</b> this is the money the company makes from clients trading.<br><br><b>How it works.</b> Think of a phone shop. When it sells a $1,000 phone, it only keeps a small part as its own profit, maybe $30, and the rest just pays for the phone itself. The company here is the same. Each time a client trades, it keeps a small slice as profit, like the shop’s $30. Whether that client’s trade wins or loses, the company keeps its slice anyway. Add up that little slice across every trade made in the campaign, and you get this number.<br><br><b>Why it’s set low on purpose.</b> The company can sometimes earn more on top of this, but that extra part is unpredictable, so we don’t count it here. That keeps this a careful, safe figure. The real amount is likely a little higher than this, and never lower.</div>
           </div>
         </div>
         <div class="prodmix">
-          <div class="pm-head">How that blended profit per lot is built — the eligible products and their assumed mix</div>
+          <div class="pm-head"><span>How that blended profit per lot is built — the eligible products and their assumed mix</span><div class="info-wrap"><button class="info-btn" type="button" aria-label="How the blended profit per lot is built">i</button><div class="info-pop"><h4>In plain words</h4><p>Different products earn the company a different amount each time they’re traded. This table shows the products people can trade in the promo, how much each one earns per lot, and the share of the trading we expect each to get. The “blend” at the bottom is the overall average, weighted so the products people trade more of count for more. That blend is the “earning per lot” figure the revenue above is built on.</p><h4>Formula</h4><div class="formula">blend = (each product’s profit per lot × its share), added up, then divided by the total share<br>= <span id="pm_fblend">$4.8961</span> per lot, on the <span id="pm_fgroup">Standard</span> account</div><h4>Common questions</h4><ul><li><span class="q">Where do the profit-per-lot numbers come from?</span>From the Risk team’s profit-per-lot sheet. Each product has its own figure, based on what the company earns when someone trades it.</li><li><span class="q">Where does the mix come from, and can we change it?</span>It’s our best estimate of what people will trade, since we’ve no history for this exact promo. Every number here is editable, so we can try a different mix and watch the blend move.</li></ul></div></div></div>
           <div class="pm-scroll"><table class="pm-table">
             <thead><tr><th>Symbol</th><th class="num">Profit / lot</th><th class="num">Mix %</th><th class="num">Contribution to blend</th></tr></thead>
             <tbody id="pm_body"></tbody>
@@ -463,20 +484,25 @@
             <h2>What it costs</h2>
             <p>The other side of the ledger — the media to bring people in, the reward credit they earn, the gold catch, and fixed production.</p>
           </div>
+          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>This is what the whole campaign costs, split into four buckets. Media is the money we spend on ads to bring people in. Reward credit is the trading credit we hand out as prizes. Creative is the one-off cost of designing and producing the campaign. And gold is the catch prize for the first few finishers. Add the four together and that’s the total. (These figures are for the lean reward design we agreed on.)</p><h4>Formula</h4><div class="formula">media + reward credit + creative + gold = total cost<br><span id="co_fMedia">$2,700</span> + <span id="co_fCredit">$280</span> + <span id="co_fCreative">$3,000</span> + <span id="co_fGold">$394</span> ≈ <span id="co_fTotal">$6,374</span></div><h4>Common questions</h4><ul><li><span class="q">How’s the reward credit worked out?</span>Each group earns credit for the steps they finished: stopping at step 1 earns $5, step 2 earns $15, and finishing earns $35. We multiply by how many are in each group and add up. (<span id="co_qco1">5</span> × $5) + (<span id="co_qco2">3</span> × $15) + (<span id="co_qcoC">6</span> × $35) = <span id="co_qcredit">$280</span>.</li><li><span class="q">Why is creative a fixed <span id="co_qcreative">$3,000</span>?</span>Because it’s a one-off production cost (design, assets, setup) that we pay once whether 20 people join or 2,000. That’s why a small campaign struggles to cover it, which you’ll see in the verdict.</li><li><span class="q">How’s the gold worked out?</span>Only the first 3 finishers get gold, one gram each. We take the price you keyed in — RM <span id="co_qgrm">544.75</span> a gram — convert it to dollars at 4.15 (about $<span id="co_qgpw">131</span> a gram), and multiply by the <span id="co_qgw">3</span> winners. That’s <span id="co_qgtot">$394</span>.</li></ul></div></div>
         </div>
         <div class="grid">
           <div class="controls">
             <div class="field"><div class="lab"><span class="name">Reward</span><span class="hint">the locked design</span></div>
               <div class="seg-note" id="co_scennote">$5 / $10 / $20 trading credit (cumulative per tier) + 1g gold catch for the first 3 to finish.</div>
             </div>
-            <div class="field"><div class="lab"><span class="name">Cost per sign-up</span><span class="hint">media spend per registration</span></div>
-              <div class="row"><input type="range" id="co_cacRange" min="5" max="50" step="1" value="18" aria-label="Cost per sign-up" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_cacNum" value="18" aria-label="Cost per sign-up value" /></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Estimated media spend</span><span class="hint">total ad budget for the promo</span></div>
+              <div class="row"><input type="range" id="co_mediaRange" min="0" max="30000" step="100" value="2700" aria-label="Estimated media spend" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_mediaNum" value="2700" aria-label="Estimated media spend value" /></div></div></div>
             <div class="field"><div class="lab"><span class="name">Creative &amp; production</span><span class="hint">one-off, fixed</span></div>
               <div class="row"><input type="range" id="co_crRange" min="0" max="10000" step="500" value="3000" aria-label="Creative and production" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_crNum" value="3000" aria-label="Creative and production value" /></div></div></div>
-            <div class="presets"><div class="pl">Cost-per-sign-up scenario</div><div class="chips" id="co_chips">
-              <div class="chip" data-cac="30"><span class="ct">Worst</span><span class="cs">$30</span></div>
-              <div class="chip on" data-cac="18"><span class="ct">Base</span><span class="cs">$18</span></div>
-              <div class="chip" data-cac="10"><span class="ct">Best</span><span class="cs">$10</span></div>
+            <div class="field"><div class="lab"><span class="name">Gold price</span><span class="hint">today's rate, RM per gram</span></div>
+              <div class="row"><input type="range" id="co_goldRange" min="0" max="1000" step="0.25" value="544.75" aria-label="Gold price per gram in ringgit" /><div class="numbox"><span class="pre">RM</span><input type="number" id="co_goldNum" value="544.75" step="0.25" aria-label="Gold price per gram value" /></div></div></div>
+            <div class="field"><div class="lab"><span class="name">Cost per sign-up</span><span class="hint">what that budget works out to</span></div>
+              <div class="derived" id="co_cacDerived">≈ $18.00</div></div>
+            <div class="presets"><div class="pl">Media spend scenario</div><div class="chips" id="co_chips">
+              <div class="chip" data-media="4500"><span class="ct">Worst</span><span class="cs">$4,500</span></div>
+              <div class="chip on" data-media="2700"><span class="ct">Base</span><span class="cs">$2,700</span></div>
+              <div class="chip" data-media="1500"><span class="ct">Best</span><span class="cs">$1,500</span></div>
             </div></div>
           </div>
           <div class="viz">
@@ -484,7 +510,7 @@
             <div class="sub-res">Media to bring people in is usually the biggest piece.</div>
             <div class="vol-comp"><div id="co_segM" style="background:#2C5FAD"></div><div id="co_segC" style="background:#00A8DE"></div><div id="co_segP" style="background:#8C99B8"></div><div id="co_segG" style="background:#E0A82E"></div></div>
             <div class="vol-leg">
-              <div class="vrow"><span class="dot" style="background:#2C5FAD"></span><span class="vlab">Media · <span id="co_lblRegs">1,800</span> sign-ups × <span id="co_lblCac">$18</span></span><span class="vct" id="co_vM">$32,400</span><span class="vsh" id="co_sM">61%</span></div>
+              <div class="vrow"><span class="dot" style="background:#2C5FAD"></span><span class="vlab">Media · <span id="co_lblRegs">150</span> sign-ups</span><span class="vct" id="co_vM">$2,700</span><span class="vsh" id="co_sM">42%</span></div>
               <div class="vrow"><span class="dot" style="background:#00A8DE"></span><span class="vlab">Reward credit · cumulative per tier</span><span class="vct" id="co_vC">$17,430</span><span class="vsh" id="co_sC">33%</span></div>
               <div class="vrow"><span class="dot" style="background:#8C99B8"></span><span class="vlab">Creative &amp; production · fixed one-off</span><span class="vct" id="co_vP">$3,000</span><span class="vsh" id="co_sP">6%</span></div>
               <div class="vrow"><span class="dot" style="background:#E0A82E"></span><span class="vlab">Gold catch · <span id="co_lblGw">3</span> winners × <span id="co_lblGv">$131</span></span><span class="vct" id="co_vG">$394</span><span class="vsh" id="co_sG">1%</span></div>
@@ -503,6 +529,7 @@
             <h2>The verdict</h2>
             <p>Revenue and cost brought together, read two ways: does the trading pay for the campaign, and does it pull in client money?</p>
           </div>
+          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop vpop"><h4>In plain words</h4><p>This is the “is it worth it?” check, looked at two ways. First, does the money we earn from the trading cover what the campaign costs? Second, for every $1 we spend, how much client money comes in the door? When both fall short, the campaign loses money on paper, and the only reason to run it would be the longer-term value of the new clients it brings in.</p><h4>The two headline checks</h4><div class="formula">does the trading pay for it? = (revenue − cost) ÷ cost<br>(<span id="vd_frev">$383</span> − <span id="vd_fcost1">$6,374</span>) ÷ <span id="vd_fcost1b">$6,374</span> = <span id="vd_fcomm">−94%</span><br><br>does it pull money in? = deposits ÷ cost<br><span id="vd_fdep">$2,822</span> ÷ <span id="vd_fcost2">$6,374</span> = <span id="vd_fmkt">0.44×</span></div><h4>Every other number on screen</h4><div class="formula">what it costs = media + reward credit + creative + gold<br><span id="vm_m">$2,700</span> + <span id="vm_cr">$280</span> + <span id="vm_cv">$3,000</span> + <span id="vm_gd">$394</span> = <span id="vm_cost">$6,374</span><br><br>trading income − cost = revenue − cost<br><span id="vm_rev2">$383</span> − <span id="vm_cost3">$6,374</span> = <span id="vm_flow">−$5,991</span><br><br>we earn per lot = revenue ÷ effective lots<br><span id="vm_rev3">$383</span> ÷ <span id="vm_eff1">78</span> ≈ <span id="vm_ach">$4.90</span><br><br>break-even per lot = cost ÷ effective lots<br><span id="vm_cost4">$6,374</span> ÷ <span id="vm_eff2">78</span> ≈ <span id="vm_be">$81.51</span><br><br>trading covers of cost = revenue ÷ cost<br><span id="vm_rev4">$383</span> ÷ <span id="vm_cost5">$6,374</span> = <span id="vm_cov">6%</span></div><h4>What the colours mean</h4><p>Green is good — that number is working in our favour. Red means we’re losing on that measure, below zero. Amber is a watch-out: not a loss, but under where we’d want it, like the trading covering less than 100% of the cost, or under $1 of deposits for every $1 we spend.</p><h4>Common questions</h4><ul><li><span class="q">Why does a small campaign look bad here?</span>Because the fixed costs, the creative and the media, are large when only a few people take part. The trading and the deposits can’t cover them yet. It works at bigger numbers, or once we count what these clients are worth later on.</li><li><span class="q">What does “break-even needs per lot” mean?</span>We earn about <span id="vd_qach">$4.90</span> on each lot traded. To cover the whole campaign, each lot would need to earn about <span id="vd_qbe">$81.51</span>. That gap is the scale problem in a single number.</li><li><span class="q">What does “trading covers of cost” mean?</span>It’s the share of the cost that the trading income pays for. Right now that’s about <span id="vd_qcov">6%</span>, so the trading pays for a small slice and the rest leans on the deposits and the future value of these clients. The higher it climbs the more the trading pays its own way; at 100% it would cover the whole campaign on its own.</li></ul></div></div>
         </div>
         <div class="grid">
           <div class="controls">
@@ -572,7 +599,7 @@
     var chips=c.presets.map(function(pr,i){return '<div class="chip'+(i===1?' on':'')+'" data-top="'+pr.top+'" data-rate="'+pr.rate+'"><span class="ct">'+pr.label+'</span><span class="cs">'+pr.sub+'</span></div>';}).join('');
     return ''+
     '<section class="card '+(c.accentClass||'')+'">'+
-      '<div class="stage-head"><span class="badge">'+c.badge+'</span><div class="txt"><h2>'+c.title+'</h2><p>'+c.desc+'</p></div></div>'+
+      '<div class="stage-head"><span class="badge">'+c.badge+'</span><div class="txt"><h2>'+c.title+'</h2><p>'+c.desc+'</p></div>'+(c.info?'<div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop">'+c.info+'</div></div>':'')+'</div>'+
       '<div class="grid">'+
         '<div class="controls">'+
           '<div class="seg" role="tablist" aria-label="Direction">'+
@@ -615,6 +642,10 @@
     document.getElementById('t_segex').style.width=(100-np)+'%';
     document.getElementById('t_newp').textContent=Math.round(np)+'%';
     document.getElementById('t_exp').textContent=Math.round(100-np)+'%';
+    var tfn=document.getElementById('tf_new');if(tfn)tfn.textContent=fmt(n);
+    var tfe=document.getElementById('tf_ex');if(tfe)tfe.textContent=fmt(e);
+    var tft=document.getElementById('tf_total');if(tft)tft.textContent=fmt(t);
+    var tfq=document.getElementById('tf_qtotal');if(tfq)tfq.textContent=fmt(t);
     renderLadder();
   }
 
@@ -636,6 +667,9 @@
     document.getElementById('l_p1').textContent=L.t1;
     document.getElementById('l_p2').textContent=L.t2;
     document.getElementById('l_p3').textContent=L.t3;
+    setTxt('l_fE1',fmt(entry));setTxt('l_fE2',fmt(entry));setTxt('l_fE3',fmt(entry));
+    setTxt('l_ft1',L.t1);setTxt('l_ft2',L.t2);setTxt('l_ft3',L.t3);
+    setTxt('l_fc1',fmt(c1));setTxt('l_fc2',fmt(c2));setTxt('l_fc3',fmt(c3));
     document.getElementById('l_explainP').innerHTML=
       'Of <b>'+fmt(entry)+'</b> participants, <b>'+L.t1+'%</b> reach Tier 1 (<b>'+fmt(c1)+'</b>), <b>'+L.t2+'%</b> reach Tier 2 (<b>'+fmt(c2)+'</b>), and <b>'+L.t3+'%</b> complete all three (<b>'+fmt(c3)+'</b>). Those <b>'+fmt(c3)+'</b> completers earn the full reward and trigger most of the cost — which is why the completion rate matters more than any number above it.';
     document.querySelectorAll('#l_chips .chip').forEach(function(ch){
@@ -679,6 +713,8 @@
     setTxt('v_n2',fmt(coT2)); setTxt('v_l2d',V.l2); setTxt('v_lots2',fmt(lots2)); setTxt('v_sh2',pctOf(lots2,g));
     setTxt('v_n1',fmt(coT1)); setTxt('v_l1d',V.l1); setTxt('v_lots1',fmt(lots1)); setTxt('v_sh1',pctOf(lots1,g));
     setTxt('v_gross2',fmt(gross)); setTxt('v_leakpct',V.leak+'%'); setTxt('v_leaklots','−'+fmt(leakLots)); setTxt('v_eff',fmt(eff));
+    setTxt('v_fco1',fmt(coT1));setTxt('v_fl1',V.l1);setTxt('v_fco2',fmt(coT2));setTxt('v_fl2',V.l2);setTxt('v_fcoC',fmt(coC));setTxt('v_fl3',V.l3);setTxt('v_fgross',fmt(gross));
+    setTxt('v_fgross2',fmt(gross));setTxt('v_fleak',V.leak);setTxt('v_feff',fmt(eff));setTxt('v_qleak',V.leak);
     document.getElementById('v_explainP').innerHTML=
       'The <b>'+fmt(coC)+'</b> completers each trade <b>'+V.l3+'</b> lots — that alone is <b>'+fmt(lotsC)+'</b> lots, about <b>'+pctOf(lotsC,g)+'</b> of all volume. The two cohorts who stopped lower add the rest, for <b>'+fmt(gross)+'</b> gross lots. After an <b>'+V.leak+'%</b> haircut for churned or hedged volume, <b>'+fmt(eff)+'</b> lots actually earn revenue — and that is the number the revenue stage multiplies by profit per lot.';
     document.querySelectorAll('#v_chips .chip').forEach(function(ch){
@@ -714,6 +750,9 @@
     row(1,L.c1,L.c2);
     row(2,L.c2,L.c3);
     row(3,L.c3,0);
+    setTxt('br_r1',fmt(L.c1));setTxt('br_p1',fmt(L.c2));setTxt('br_s1',fmt(Math.max(L.c1-L.c2,0)));
+    setTxt('br_r2',fmt(L.c2));setTxt('br_p2',fmt(L.c3));setTxt('br_s2',fmt(Math.max(L.c2-L.c3,0)));
+    setTxt('br_r3',fmt(L.c3));setTxt('br_s3',fmt(L.c3));
   }
 
   var SYMBOLS=[
@@ -779,11 +818,13 @@
     setTxt('r_blended', money4(blend));
     setTxt('r_driftx', R.drift.toFixed(2));
     setTxt('r_eff', money2(eff));
+    setTxt('r_fLots',fmt(lots));setTxt('r_fPer',money2(eff));setTxt('r_fRev',money(rev));setTxt('r_qPer',money2(eff));
     setTxt('pm_totmix', Math.round(sw)+'%');
     setTxt('pm_blendcell', money4(blend));
+    setTxt('pm_fblend',money4(blend));setTxt('pm_fgroup',g==='std'?'Standard':g==='pro'?'Pro':'Raw');
     setTxt('r_grouplab', g==='std'?'(Standard)':g==='pro'?'(Pro)':'(Raw / RW07)');
     var ep=document.getElementById('r_explainP');
-    if(ep)ep.innerHTML='The <b>'+fmt(lots)+'</b> effective lots each earn about <b>'+money2(eff)+'</b> — a weighted average across the products clients trade, on the <b>'+(g==='std'?'Standard':g==='pro'?'Pro':'Raw')+'</b> book — for <b>'+money(rev)+'</b> in trading revenue. This is the spread-and-commission edge only; any B-book client losses would sit on top, so it is a conservative floor.';
+    if(ep)ep.innerHTML='The <b>'+fmt(lots)+'</b> effective lots each earn about <b>'+money2(eff)+'</b> — a weighted average across the products clients trade, on the <b>'+(g==='std'?'Standard':g==='pro'?'Pro':'Raw')+'</b> book — for <b>'+money(rev)+'</b> in trading revenue.';
     document.querySelectorAll('#r_chips .chip').forEach(function(ch){
       ch.classList.toggle('on', Math.abs((+ch.dataset.drift)-R.drift)<0.001);
     });
@@ -798,14 +839,14 @@
     renderRevenue();
   }
 
-  var CO={scen:'s1',cac:18,creative:3000};
+  var CO={scen:'s1',media:2700,creative:3000,goldRM:544.75};
   var CREDIT={s1:[5,10,20]};
   var GOLDRM={s1:544.75}, MYR=4.15, GOLDCAP=3;
   function costParts(scen,regs,stopT1,stopT2,comp){
     var cr=CREDIT[scen];
-    var media=regs*CO.cac;
+    var media=CO.media;
     var credit=stopT1*cr[0]+stopT2*(cr[0]+cr[1])+comp*(cr[0]+cr[1]+cr[2]);
-    var gold=Math.min(comp,GOLDCAP)*(GOLDRM[scen]/MYR);
+    var gold=Math.min(comp,GOLDCAP)*(CO.goldRM/MYR);
     return {media:media,credit:credit,gold:gold,creative:CO.creative,total:media+credit+gold+CO.creative};
   }
   function setCostScenNote(){
@@ -818,6 +859,7 @@
     var stopT1=Math.max(L.c1-L.c2,0), stopT2=Math.max(L.c2-L.c3,0), comp=L.c3;
     var p=costParts(CO.scen,regs,stopT1,stopT2,comp);
     CO.s1total=p.total;
+    CO.parts=p;
     CO.total=p.total;
     var T=p.total||1;
     var hero=document.getElementById('co_total'); if(hero)animateMoney(hero,p.total,'cotot');
@@ -829,16 +871,20 @@
     setTxt('co_vC',money(p.credit)); setTxt('co_sC',Math.round(p.credit/T*100)+'%');
     setTxt('co_vP',money(p.creative)); setTxt('co_sP',Math.round(p.creative/T*100)+'%');
     setTxt('co_vG',money(p.gold)); setTxt('co_sG',Math.round(p.gold/T*100)+'%');
-    setTxt('co_lblRegs',fmt(regs)); setTxt('co_lblCac',money(CO.cac));
-    setTxt('co_lblGw',fmt(Math.min(comp,GOLDCAP))); setTxt('co_lblGv',money(GOLDRM[CO.scen]/MYR));
+    setTxt('co_lblRegs',fmt(regs)); var dcac=regs>0?CO.media/regs:0; setTxt('co_cacDerived', regs>0?('≈ '+money2(dcac)):'—');
+    setTxt('co_lblGw',fmt(Math.min(comp,GOLDCAP))); setTxt('co_lblGv',money(CO.goldRM/MYR));
+    setTxt('co_qgw',fmt(Math.min(comp,GOLDCAP)));setTxt('co_qgrm',CO.goldRM);setTxt('co_qgpw',money(CO.goldRM/MYR));setTxt('co_qgtot',money(p.gold));
+    setTxt('co_fMedia',money(p.media));setTxt('co_fCredit',money(p.credit));setTxt('co_fCreative',money(p.creative));setTxt('co_fGold',money(p.gold));setTxt('co_fTotal',money(p.total));
+    setTxt('co_qco1',fmt(stopT1));setTxt('co_qco2',fmt(stopT2));setTxt('co_qcoC',fmt(comp));setTxt('co_qcredit',money(p.credit));setTxt('co_qcreative',money(p.creative));
     var ep=document.getElementById('co_explainP');
-    if(ep)ep.innerHTML='Bringing in <b>'+fmt(regs)+'</b> sign-ups at <b>'+money(CO.cac)+'</b> each is <b>'+money(p.media)+'</b> of media — the biggest piece. Reward credit adds <b>'+money(p.credit)+'</b> (completers earn the full ladder), the gold catch is only <b>'+money(p.gold)+'</b> because it is capped at 3 winners, and production is <b>'+money(p.creative)+'</b>. Total: <b>'+money(p.total)+'</b>.';
+    if(ep)ep.innerHTML='Media spend of <b>'+money(p.media)+'</b> to bring in <b>'+fmt(regs)+'</b> sign-ups is usually the biggest piece'+(regs>0?' (about <b>'+money2(CO.media/regs)+'</b> per sign-up)':'')+'. Reward credit adds <b>'+money(p.credit)+'</b> (completers earn the full ladder), the gold catch is only <b>'+money(p.gold)+'</b> because it is capped at 3 winners, and production is <b>'+money(p.creative)+'</b>. Total: <b>'+money(p.total)+'</b>.';
     setCostScenNote();
-    document.querySelectorAll('#co_chips .chip').forEach(function(ch){ ch.classList.toggle('on',(+ch.dataset.cac)===CO.cac); });
+    document.querySelectorAll('#co_chips .chip').forEach(function(ch){ ch.classList.toggle('on',(+ch.dataset.media)===CO.media); });
     renderVerdict();
   }
-  function setCac(v){ if(isNaN(v))return; v=Math.max(5,Math.min(50,Math.round(v))); CO.cac=v; var Rg=document.getElementById('co_cacRange'),Nn=document.getElementById('co_cacNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
+  function setMedia(v){ if(isNaN(v))return; v=Math.max(0,Math.min(30000,Math.round(v/100)*100)); CO.media=v; var Rg=document.getElementById('co_mediaRange'),Nn=document.getElementById('co_mediaNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
   function setCreative(v){ if(isNaN(v))return; v=Math.max(0,Math.min(10000,Math.round(v/100)*100)); CO.creative=v; var Rg=document.getElementById('co_crRange'),Nn=document.getElementById('co_crNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
+  function setGold(v){ if(isNaN(v))return; v=Math.max(0,Math.min(1000,Math.round(v*100)/100)); CO.goldRM=v; var Rg=document.getElementById('co_goldRange'),Nn=document.getElementById('co_goldNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderCost(); }
 
   var VER={incr:90};
   function animateMult(el,to,key){var from=animState[key]==null?to:animState[key];animState[key]=to;var st=performance.now();function step(t){var k=Math.min((t-st)/420,1);var e=1-Math.pow(1-k,3);el.textContent=(from+(to-from)*e).toFixed(2)+'×';if(k<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
@@ -867,8 +913,17 @@
     setEl('vd_cov1',Math.round(covS1*100)+'%',covS1>=1?'good':'warn');
     setTxt('vd_recapRev',money(rev));
     setTxt('vd_recapND',money(nd));
+    setTxt('vd_frev',money(rev));setTxt('vd_fcost1',money(c1));setTxt('vd_fcost1b',money(c1));setTxt('vd_fcomm',sp(commS1));
+    setTxt('vd_fdep',money(nd));setTxt('vd_fcost2',money(c1));setTxt('vd_fmkt',mult(mktS1));
+    setTxt('vd_qach',money2(achieved));setTxt('vd_qbe',money2(beS1));setTxt('vd_qcov',Math.round(covS1*100)+'%');
+    setTxt('vm_cost',money(c1));
+    if(CO.parts){setTxt('vm_m',money(CO.parts.media));setTxt('vm_cr',money(CO.parts.credit));setTxt('vm_cv',money(CO.parts.creative));setTxt('vm_gd',money(CO.parts.gold));}
+    setTxt('vm_flow',(flowS1>=0?'':'−')+money(Math.abs(flowS1)));setTxt('vm_rev2',money(rev));setTxt('vm_cost3',money(c1));
+    setTxt('vm_ach',money2(achieved));setTxt('vm_rev3',money(rev));setTxt('vm_eff1',fmt(effLots));
+    setTxt('vm_be',money2(beS1));setTxt('vm_cost4',money(c1));setTxt('vm_eff2',fmt(effLots));
+    setTxt('vm_cov',Math.round(covS1*100)+'%');setTxt('vm_rev4',money(rev));setTxt('vm_cost5',money(c1));
     var ep=document.getElementById('vd_explainP');
-    if(ep)ep.innerHTML='For every $1 spent on Scenario 1, the campaign pulls in about <b>$'+mktS1.toFixed(2)+'</b> of client deposits (<b>'+money(nd)+'</b> in total). That is the money-in case, and it is good. But on the trading itself it loses money: we earn <b>'+money(rev)+'</b>, which only covers about <b>'+Math.round(covS1*100)+'%</b> of the <b>'+money(c1)+'</b> cost, so we would need to earn <b>'+money2(beS1)+'</b> per lot to break even and we are earning <b>'+money2(achieved)+'</b>. Whether it is worth doing comes down to what these clients are worth later (more trading, staying active, depositing again), which this model does not count.';
+    if(ep)ep.innerHTML='For every $1 spent, the campaign pulls in about <b>$'+mktS1.toFixed(2)+'</b> of client deposits (<b>'+money(nd)+'</b> in total). That is the money-in case, and it is good. But on the trading itself it loses money: we earn <b>'+money(rev)+'</b>, which only covers about <b>'+Math.round(covS1*100)+'%</b> of the <b>'+money(c1)+'</b> cost, so we would need to earn <b>'+money2(beS1)+'</b> per lot to break even and we are earning <b>'+money2(achieved)+'</b>. Whether it is worth doing comes down to what these clients are worth later (more trading, staying active, depositing again), which this model does not count.';
   }
   function setIncr(v){ if(isNaN(v))return; v=Math.max(0,Math.min(100,Math.round(v))); VER.incr=v; var Rg=document.getElementById('vd_incrRange'),Nn=document.getElementById('vd_incrNum'); Rg.value=v;Nn.value=v;fillRange(Rg); renderVerdict(); }
 
@@ -898,6 +953,10 @@
       convBadge.textContent=rate+'% '+c.badgeWord;
       animateNum(ftdCap,bot,p+'ftd');
       dropNum.textContent=fmt(drop);
+      var fT=$('fTop');if(fT)fT.textContent=fmt(top);
+      var fR=$('fRate');if(fR)fR.textContent=rate;
+      var fRe=$('fRes');if(fRe)fRe.textContent=fmt(bot);
+      var qR=$('qRate');if(qR)qR.textContent=rate;
       explainP.innerHTML=st.mode==='forward'?c.explainF(top,rate,bot,drop):c.explainB(top,rate,bot);
       chips.forEach(function(ch){ch.classList.toggle('on', st.mode==='forward' && (+ch.dataset.top)===st.top && (+ch.dataset.rate)===st.rate);});
       renderTotal();
@@ -939,6 +998,7 @@
     prefix:'n', badge:'STAGE 1', accentClass:'',
     title:'Top of the funnel — new clients',
     desc:'How many people sign up, and how many of them actually fund their account.',
+    info:`<h4>In plain words</h4><p>Stage 1 is the brand-new people. We pick how many sign-ups we expect during the promo, and what share of them actually put money in. Multiply those two, and we get our new funded clients.</p><h4>Formula</h4><div class="formula">sign-ups × funding rate = new funded clients<br><span id="n_fTop">150</span> × <span id="n_fRate">8</span>% = <span id="n_fRes">12</span></div><h4>Common questions</h4><ul><li><span class="q">Where’s the <span id="n_qRate">8</span>% from?</span>It’s an assumption, our best estimate, since we’ve no history for this exact promo. Slide it, and everything below moves. When media gives us a real conversion number, we use that instead.</li><li><span class="q">What’s a “funded client”?</span>Someone who puts money in for the first time. In our world that’s an FTD, a first-time depositor.</li></ul>`,
     primNameF:'New registrations', primHintF:'People who sign up',
     topMinF:0, topMaxF:6000, topStepF:10, topDefF:150,
     primNameB:'Target new FTDs', primHintB:'Funded clients you want',
@@ -958,6 +1018,7 @@
     prefix:'e', badge:'STAGE 2', accentClass:'sec-teal',
     title:'Dormant accounts — who finally funds',
     desc:'Accounts that registered but never funded. How many make a first deposit during the promo.',
+    info:`<h4>In plain words</h4><p>Stage 2 is a different group: people who already signed up with us before but never put any money in. We call them dormant. We estimate how many there are, and what small share we can wake up and get to fund.</p><h4>Formula</h4><div class="formula">dormant accounts × activation rate = activated clients<br><span id="e_fTop">800</span> × <span id="e_fRate">1</span>% = <span id="e_fRes">8</span></div><h4>Common questions</h4><ul><li><span class="q">Why is the activation rate <span id="e_qRate">1</span>%?</span>Because these people already had their chance to fund and didn’t, so waking them up is genuinely hard. We keep it cautious on purpose. If it comes in better, great, but we’d rather under-promise here than over-promise.</li><li><span class="q">What counts as “dormant”?</span>Someone who registered an account with us in the past but has never deposited or traded. The difference from Stage 1 is just timing: Stage 1 is people signing up fresh during the promo, Stage 2 is people already on our books that we’re waking up.</li></ul>`,
     primNameF:'Dormant account base', primHintF:'registered, never funded',
     topMinF:0, topMaxF:40000, topStepF:50, topDefF:800,
     primNameB:'Target activations', primHintB:'first deposits you want',
@@ -1020,19 +1081,23 @@
   setGroupNote();
 
   (function(){
-    var Rc=document.getElementById('co_cacRange'),Nc=document.getElementById('co_cacNum');
-    Rc.addEventListener('input',function(){setCac(+Rc.value);});
-    Nc.addEventListener('input',function(){if(Nc.value!=='')setCac(+Nc.value);});
+    var Rc=document.getElementById('co_mediaRange'),Nc=document.getElementById('co_mediaNum');
+    Rc.addEventListener('input',function(){setMedia(+Rc.value);});
+    Nc.addEventListener('input',function(){if(Nc.value!=='')setMedia(+Nc.value);});
     var Rp=document.getElementById('co_crRange'),Np=document.getElementById('co_crNum');
     Rp.addEventListener('input',function(){setCreative(+Rp.value);});
     Np.addEventListener('input',function(){if(Np.value!=='')setCreative(+Np.value);});
+    var Rgd=document.getElementById('co_goldRange'),Ngd=document.getElementById('co_goldNum');
+    Rgd.addEventListener('input',function(){setGold(+Rgd.value);});
+    Ngd.addEventListener('input',function(){if(Ngd.value!=='')setGold(+Ngd.value);});
   })();
   document.querySelectorAll('#co_chips .chip').forEach(function(ch){
-    ch.addEventListener('click',function(){ setCac(+ch.dataset.cac); });
+    ch.addEventListener('click',function(){ setMedia(+ch.dataset.media); });
   });
   animState.cotot=6374;
-  fillRange(document.getElementById('co_cacRange'));
+  fillRange(document.getElementById('co_mediaRange'));
   fillRange(document.getElementById('co_crRange'));
+  fillRange(document.getElementById('co_goldRange'));
   setCostScenNote();
 
   (function(){
@@ -1045,6 +1110,19 @@
   });
   animState.vdhero=0.44;
   fillRange(document.getElementById('vd_incrRange'));
+
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest?e.target.closest('.info-btn'):null;
+    if(btn){
+      var wrap=btn.parentNode, wasPinned=wrap.classList.contains('pinned');
+      document.querySelectorAll('.info-wrap.pinned').forEach(function(w){w.classList.remove('pinned');});
+      if(!wasPinned)wrap.classList.add('pinned');
+      return;
+    }
+    if(!(e.target.closest&&e.target.closest('.info-pop'))){
+      document.querySelectorAll('.info-wrap.pinned').forEach(function(w){w.classList.remove('pinned');});
+    }
+  });
 
   newApi.render();
   exApi.render();
