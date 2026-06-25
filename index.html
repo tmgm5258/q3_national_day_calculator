@@ -442,7 +442,7 @@
               <div class="seg seg3" role="tablist" aria-label="Account group">
                 <button id="rg_std" class="on" role="tab" aria-selected="true">Standard</button>
                 <button id="rg_pro" role="tab" aria-selected="false">Pro</button>
-                <button id="rg_rw07" role="tab" aria-selected="false">Raw</button>
+                <button id="rg_rw07" role="tab" aria-selected="false">ECN</button>
               </div>
               <div class="seg-note" id="rg_note">Standard clients pay through the spread, so profit per lot is highest.</div>
             </div>
@@ -792,7 +792,7 @@
   }
   function setGroupNote(){
     var g=R.group;
-    var notes={std:'Standard clients pay through the spread, so profit per lot is highest.',pro:'Pro clients get tighter spreads and pay a commission instead — usually a little less per lot.',rw07:'Raw clients trade on raw spreads; profit per lot swings most from symbol to symbol.'};
+    var notes={std:'Standard clients pay through the spread, so profit per lot is highest.',pro:'Pro clients get tighter spreads and pay a commission instead — usually a little less per lot.',rw07:'ECN clients trade on raw spreads with a commission; profit per lot swings most from symbol to symbol.'};
     var el=document.getElementById('rg_note'); if(el)el.textContent=notes[g];
     ['std','pro','rw07'].forEach(function(k){var b=document.getElementById('rg_'+k);b.classList.toggle('on',k===g);b.setAttribute('aria-selected',k===g);});
   }
@@ -821,10 +821,10 @@
     setTxt('r_fLots',fmt(lots));setTxt('r_fPer',money2(eff));setTxt('r_fRev',money(rev));setTxt('r_qPer',money2(eff));
     setTxt('pm_totmix', Math.round(sw)+'%');
     setTxt('pm_blendcell', money4(blend));
-    setTxt('pm_fblend',money4(blend));setTxt('pm_fgroup',g==='std'?'Standard':g==='pro'?'Pro':'Raw');
-    setTxt('r_grouplab', g==='std'?'(Standard)':g==='pro'?'(Pro)':'(Raw / RW07)');
+    setTxt('pm_fblend',money4(blend));setTxt('pm_fgroup',g==='std'?'Standard':g==='pro'?'Pro':'ECN');
+    setTxt('r_grouplab', g==='std'?'(Standard)':g==='pro'?'(Pro)':'(ECN)');
     var ep=document.getElementById('r_explainP');
-    if(ep)ep.innerHTML='The <b>'+fmt(lots)+'</b> effective lots each earn about <b>'+money2(eff)+'</b> — a weighted average across the products clients trade, on the <b>'+(g==='std'?'Standard':g==='pro'?'Pro':'Raw')+'</b> book — for <b>'+money(rev)+'</b> in trading revenue.';
+    if(ep)ep.innerHTML='The <b>'+fmt(lots)+'</b> effective lots each earn about <b>'+money2(eff)+'</b> — a weighted average across the products clients trade, on the <b>'+(g==='std'?'Standard':g==='pro'?'Pro':'ECN')+'</b> book — for <b>'+money(rev)+'</b> in trading revenue.';
     document.querySelectorAll('#r_chips .chip').forEach(function(ch){
       ch.classList.toggle('on', Math.abs((+ch.dataset.drift)-R.drift)<0.001);
     });
