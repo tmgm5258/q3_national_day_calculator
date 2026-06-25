@@ -484,7 +484,7 @@
             <h2>What it costs</h2>
             <p>The other side of the ledger — the media to bring people in, the reward credit they earn, the gold catch, and fixed production.</p>
           </div>
-          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>This is what the whole campaign costs, split into four buckets. Media is the money we spend on ads to bring people in. Reward credit is the trading credit we hand out as prizes. Creative is the one-off cost of designing and producing the campaign. And gold is the catch prize for the first few finishers. Add the four together and that’s the total. (These figures are for the lean reward design we agreed on.)</p><h4>Formula</h4><div class="formula">media + reward credit + creative + gold = total cost<br><span id="co_fMedia">$2,700</span> + <span id="co_fCredit">$280</span> + <span id="co_fCreative">$3,000</span> + <span id="co_fGold">$394</span> ≈ <span id="co_fTotal">$6,374</span></div><h4>Common questions</h4><ul><li><span class="q">How’s the reward credit worked out?</span>Each group earns credit for the steps they finished: stopping at step 1 earns $5, step 2 earns $15, and finishing earns $35. We multiply by how many are in each group and add up. (<span id="co_qco1">5</span> × $5) + (<span id="co_qco2">3</span> × $15) + (<span id="co_qcoC">6</span> × $35) = <span id="co_qcredit">$280</span>.</li><li><span class="q">Why is creative a fixed <span id="co_qcreative">$3,000</span>?</span>Because it’s a one-off production cost (design, assets, setup) that we pay once whether 20 people join or 2,000. That’s why a small campaign struggles to cover it, which you’ll see in the verdict.</li><li><span class="q">How’s the gold worked out?</span>Only the first 3 finishers get gold, one gram each. We take the price you keyed in — RM <span id="co_qgrm">544.75</span> a gram — convert it to dollars at 4.15 (about $<span id="co_qgpw">131</span> a gram), and multiply by the <span id="co_qgw">3</span> winners. That’s <span id="co_qgtot">$394</span>.</li></ul></div></div>
+          <div class="info-wrap"><button class="info-btn" type="button" aria-label="What this stage means and how it is calculated">i</button><div class="info-pop"><h4>In plain words</h4><p>This is what the whole campaign costs, split into four buckets. Media is the money we spend on ads to bring people in. Reward credit is the trading credit we hand out as prizes. Creative is the one-off cost of designing and producing the campaign. And gold is the catch prize for the first few finishers. Add the four together and that’s the total. (These figures are for the lean reward design we agreed on.)</p><h4>Formula</h4><div class="formula">media + reward credit + creative + gold = total cost<br><span id="co_fMedia">$2,700</span> + <span id="co_fCredit">$280</span> + <span id="co_fCreative">$3,000</span> + <span id="co_fGold">$394</span> ≈ <span id="co_fTotal">$6,374</span></div><h4>Common questions</h4><ul><li><span class="q">How’s the reward credit worked out?</span>Each group earns credit for the steps they finished: stopping at step 1 earns $5, step 2 earns $15, and finishing earns $35. We multiply by how many are in each group and add up. (<span id="co_qco1">5</span> × $5) + (<span id="co_qco2">3</span> × $15) + (<span id="co_qcoC">6</span> × $35) = <span id="co_qcredit">$280</span>.</li><li><span class="q">Why is creative a fixed <span id="co_qcreative">$3,000</span>?</span>Because it’s a one-off production cost (design, assets, setup) that we pay once whether 20 people join or 2,000. That’s why a small campaign struggles to cover it, which you’ll see in the verdict.</li><li><span class="q">How’s the gold worked out?</span>Only the first 3 finishers get gold, one gram each. We take the price you keyed in — RM <span id="co_qgrm">548.33</span> a gram — convert it to dollars at 4.14 (about $<span id="co_qgpw">131</span> a gram), and multiply by the <span id="co_qgw">3</span> winners. That’s <span id="co_qgtot">$394</span>.</li></ul></div></div>
         </div>
         <div class="grid">
           <div class="controls">
@@ -496,7 +496,7 @@
             <div class="field"><div class="lab"><span class="name">Creative &amp; production</span><span class="hint">one-off, fixed</span></div>
               <div class="row"><input type="range" id="co_crRange" min="0" max="10000" step="500" value="3000" aria-label="Creative and production" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_crNum" value="3000" aria-label="Creative and production value" /></div></div></div>
             <div class="field"><div class="lab"><span class="name">Gold price</span><span class="hint">today's rate, RM per gram</span></div>
-              <div class="row"><input type="range" id="co_goldRange" min="0" max="1000" step="0.25" value="544.75" aria-label="Gold price per gram in ringgit" /><div class="numbox"><span class="pre">RM</span><input type="number" id="co_goldNum" value="544.75" step="0.25" aria-label="Gold price per gram value" /></div></div></div>
+              <div class="row"><input type="range" id="co_goldRange" min="0" max="1000" step="0.25" value="548.33" aria-label="Gold price per gram in ringgit" /><div class="numbox"><span class="pre">RM</span><input type="number" id="co_goldNum" value="548.33" step="0.25" aria-label="Gold price per gram value" /></div></div></div>
             <div class="field"><div class="lab"><span class="name">Cost per sign-up</span><span class="hint">what that budget works out to</span></div>
               <div class="derived" id="co_cacDerived">≈ $18.00</div></div>
             <div class="presets"><div class="pl">Media spend scenario</div><div class="chips" id="co_chips">
@@ -756,15 +756,15 @@
   }
 
   var SYMBOLS=[
-    {s:'EURUSD',c:'FX Major',std:4.53,pro:3.53,rw07:3.53,mix:30},
-    {s:'GBPUSD',c:'FX Major',std:4.46,pro:3.46,rw07:3.46,mix:18},
-    {s:'AUDUSD',c:'FX Major',std:5.73,pro:4.73,rw07:4.73,mix:10},
-    {s:'NZDUSD',c:'FX Major',std:3.77,pro:2.77,rw07:2.77,mix:5},
-    {s:'USDCAD',c:'FX Major',std:1.23,pro:2.69,rw07:4.60,mix:4},
-    {s:'USDCHF',c:'FX Major',std:7.22,pro:3.89,rw07:2.08,mix:5},
-    {s:'XAGUSD',c:'Silver',std:4.72,pro:4.72,rw07:4.72,mix:18},
-    {s:'XPTUSD',c:'Platinum',std:7.13,pro:7.13,rw07:7.13,mix:10},
-    {s:'BTCUSD',c:'Bitcoin (×10)',std:121.5,pro:121.5,rw07:121.5,mix:0}
+    {s:'EURUSD',c:'FX Major',std:7.52,pro:6.52,rw07:6.52,mix:30},
+    {s:'GBPUSD',c:'FX Major',std:8.82,pro:7.82,rw07:7.82,mix:18},
+    {s:'AUDUSD',c:'FX Major',std:8.76,pro:7.76,rw07:7.76,mix:10},
+    {s:'NZDUSD',c:'FX Major',std:11.68,pro:10.68,rw07:10.68,mix:5},
+    {s:'USDCAD',c:'FX Major',std:3.73,pro:5.28,rw07:7.26,mix:4},
+    {s:'USDCHF',c:'FX Major',std:13.12,pro:9.82,rw07:8.03,mix:5},
+    {s:'XAGUSD',c:'Silver',std:52.59,pro:52.59,rw07:52.59,mix:18},
+    {s:'XPTUSD',c:'Platinum',std:522,pro:522,rw07:522,mix:10},
+    {s:'BTCUSD',c:'Bitcoin (×10)',std:125.56,pro:125.56,rw07:125.56,mix:0}
   ];
   var R={group:'std',drift:1};
   function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
@@ -839,9 +839,9 @@
     renderRevenue();
   }
 
-  var CO={scen:'s1',media:2700,creative:3000,goldRM:544.75};
+  var CO={scen:'s1',media:2700,creative:3000,goldRM:548.33};
   var CREDIT={s1:[5,10,20]};
-  var GOLDRM={s1:544.75}, MYR=4.15, GOLDCAP=3;
+  var GOLDRM={s1:548.33}, MYR=4.14, GOLDCAP=3;
   function costParts(scen,regs,stopT1,stopT2,comp){
     var cr=CREDIT[scen];
     var media=CO.media;
