@@ -258,7 +258,8 @@
   .be-l{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px;line-height:1.3;}
   .be-v{font:700 18px var(--disp);color:var(--ink);font-variant-numeric:tabular-nums;}
   .be-v.good{color:#0E7C5A;} .be-v.warn{color:#B45309;}
-  @media (max-width:760px){.verdict-compare{grid-template-columns:1fr;}.be-strip{grid-template-columns:1fr;gap:14px;}}
+  .be-strip.cp4{grid-template-columns:repeat(4,1fr);margin-top:12px;}
+  @media (max-width:760px){.verdict-compare{grid-template-columns:1fr;}.be-strip{grid-template-columns:1fr;gap:14px;}.be-strip.cp4{grid-template-columns:1fr;}}
 
   footer{text-align:center;color:var(--muted);font-size:12.5px;padding:8px 0 40px;line-height:1.7;}
   footer b{color:var(--body);font-weight:600;}
@@ -559,16 +560,23 @@
         <div class="verdict-compare">
           <div class="vc-card vc-rec">
             <div class="vc-title">The bottom line</div>
-            <div class="vcm"><span class="vcm-l">What it costs</span><span class="vcm-v" id="vd_c1">$53,221</span></div>
-            <div class="vcm"><span class="vcm-l">Back from trading</span><span class="vcm-v bad" id="vd_comm1">−55%</span></div>
-            <div class="vcm"><span class="vcm-l">Deposits in, per $1 spent</span><span class="vcm-v good" id="vd_mkt1">3.18×</span></div>
-            <div class="vcm"><span class="vcm-l">Trading income − cost</span><span class="vcm-v bad" id="vd_flow1">−$29,337</span></div>
+            <div class="vcm"><span class="vcm-l">What it costs <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="Everything the promo costs added together: ads, materials, the credit bonuses, and the gold.">i</span></span><span class="vcm-v" id="vd_c1">$53,221</span></div>
+            <div class="vcm"><span class="vcm-l">Back from trading <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="For every 1 dollar the promo costs, how much we gain or lose counting trading alone. Minus means a loss: at minus 15% we lose 15 cents of every dollar spent.">i</span></span><span class="vcm-v bad" id="vd_comm1">−55%</span></div>
+            <div class="vcm"><span class="vcm-l">Deposits in, per $1 spent <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="For every 1 dollar we spend on the promo, how many dollars of client money comes in. Above 1 means more comes in than we spend.">i</span></span><span class="vcm-v good" id="vd_mkt1">3.18×</span></div>
+            <div class="vcm"><span class="vcm-l">Trading income − cost <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="The trading money made minus what the promo costs. If it is negative (red), trading alone does not cover the cost, so the promo is really an investment in winning new clients.">i</span></span><span class="vcm-v bad" id="vd_flow1">−$29,337</span></div>
+            <div class="vcm"><span class="vcm-l">ROI (trading rev ÷ cost) <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="For every 1 dollar the promo costs, how much comes back from trading. Above 1.00 means the trading alone pays for the promo; below 1.00 means it pays back only part.">i</span></span><span class="vcm-v warn" id="vd_roi1">0.45×</span></div>
           </div>
         </div>
         <div class="be-strip">
-          <div class="be-stat"><span class="be-l">We earn per lot</span><span class="be-v" id="vd_ach">$4.90</span></div>
-          <div class="be-stat"><span class="be-l">Break-even needs per lot</span><span class="be-v warn" id="vd_be1">$10.91</span></div>
-          <div class="be-stat"><span class="be-l">Trading covers of cost</span><span class="be-v warn" id="vd_cov1">45%</span></div>
+          <div class="be-stat"><span class="be-l">We earn per lot <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="What we actually earn per lot of trading. Compare it to the break-even number to see the gap.">i</span></span><span class="be-v" id="vd_ach">$4.90</span></div>
+          <div class="be-stat"><span class="be-l">Break-even needs per lot <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="How much each lot would need to earn for the promo to pay for itself. If it is much higher than what we actually earn per lot, trading alone cannot cover the promo.">i</span></span><span class="be-v warn" id="vd_be1">$10.91</span></div>
+          <div class="be-stat"><span class="be-l">Trading covers of cost <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="How much of the promo cost is paid for by the trading money it brings in. 100% means trading fully pays for the promo; less means it covers only part.">i</span></span><span class="be-v warn" id="vd_cov1">45%</span></div>
+        </div>
+        <div class="be-strip cp4">
+          <div class="be-stat"><span class="be-l">Cost per sign-up <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="Everything the promo costs divided by the number of people who signed up. What we pay for each new sign-up.">i</span></span><span class="be-v" id="vd_cps">$42.52</span></div>
+          <div class="be-stat"><span class="be-l">Cost per participant <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="Everything the promo costs divided by everyone who joined in with money. What we pay for each person who takes part.">i</span></span><span class="be-v" id="vd_cpp">$318.87</span></div>
+          <div class="be-stat"><span class="be-l">Cost per new FTD <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="Everything the promo costs divided by the brand-new clients who put money in. What it costs us to win each genuinely new customer.">i</span></span><span class="be-v" id="vd_cpf">$531.44</span></div>
+          <div class="be-stat"><span class="be-l">Cost per completer <span class="nd-i" tabindex="0" role="button" aria-label="What this means" data-tip="Everything the promo costs divided by the people who finished all three levels. What each champion costs us. It looks high because champions also earn the biggest rewards.">i</span></span><span class="be-v" id="vd_cpc">$1,062.89</span></div>
         </div>
         <div class="explain"><span class="ic">i</span><p id="vd_explainP"></p></div>
       </section>
@@ -630,12 +638,14 @@ function nd_compute(inp){
   var ndNew=newFTD*per, ndEx=activated*per, nd=ndNew + ndEx*(inp.incr/100);
   var commPct=cost>0?(rev-cost)/cost:0, mkt=cost>0?nd/cost:0, flow=rev-cost,
       cov=cost>0?rev/cost:0, be=eff>0?cost/eff:0, ach=eff>0?rev/eff:0;
+  var cps=regs>0?cost/regs:0, cpp=entry>0?cost/entry:0, cpf=newFTD>0?cost/newFTD:0, cpc=coC>0?cost/coC:0;
   return { newFTD:newFTD, regs:regs, activated:activated, dorm:dorm, entry:entry,
     c1:c1, c2:c2, c3:c3, coC:coC, coT2:coT2, coT1:coT1,
     gross:gross, leakLots:leakLots, eff:eff,
     blend:blend, ppl:ppl, rev:rev, sw:sw,
     credit:credit, gold:gold, cost:cost, cac:cac,
-    nd:nd, commPct:commPct, mkt:mkt, flow:flow, cov:cov, be:be, ach:ach };
+    nd:nd, commPct:commPct, mkt:mkt, flow:flow, cov:cov, be:be, ach:ach,
+    cps:cps, cpp:cpp, cpf:cpf, cpc:cpc };
 }
 
 function nd_clone(o){ return JSON.parse(JSON.stringify(o)); }
@@ -674,9 +684,10 @@ function nd_disp(v,f){
   if(f==='int')    return nd_n(v);
   if(f==='dec1')   return (Math.round(v*10)/10).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
   if(f==='pct0')   return Math.round(v*100)+'%';
+  if(f==='pct1s'){var p=v*100;return (Math.abs(p-Math.round(p))<1e-9?String(Math.round(p)):(Math.round(p*10)/10).toFixed(1))+'%';}
   if(f==='money0') return '$'+nd_n(v);
   if(f==='money0s')return (v<0?'−':'')+'$'+nd_n(Math.abs(v));
-  if(f==='money2') return '$'+(Math.round(v*100)/100).toFixed(2);
+  if(f==='money2') return '$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   if(f==='mult')   return (Math.round(v*100)/100).toFixed(2)+'×';
   if(f==='rm2')    return 'RM'+(Math.round(v*100)/100).toFixed(2);
   return String(v);
@@ -688,6 +699,7 @@ function nd_xlVal(v,f){
   if(f==='int')    fmt='#,##0';
   else if(f==='dec1')   fmt='#,##0.0';
   else if(f==='pct0')   fmt='0%';
+  else if(f==='pct1s')  fmt=(Math.abs(v*100-Math.round(v*100))<1e-9)?'0%':'0.0%';
   else if(f==='money0') fmt='$#,##0';
   else if(f==='money0s')fmt='$#,##0;-$#,##0';
   else if(f==='money2') fmt='$#,##0.00';
@@ -705,12 +717,12 @@ function nd_sections(cur){
   return [
     {title:'STAGE 1 \u2014 NEW CLIENTS', rows:[
       {l:'New registrations', t:fwdN?'in':'calc', v:m.regs, f:'int', tip:'Brand-new people who signed up for an account because of this promo, like new members joining a club.'},
-      {l:'FTD conversion', t:'in', v:cur.nf.rate/100, f:'pct0', tip:'Out of everyone who signed up, the share who actually put real money in for the first time. Signing up is free; this is who took the next step.'},
+      {l:'FTD conversion', t:'in', v:cur.nf.rate/100, f:'pct1s', tip:'Out of everyone who signed up, the share who actually put real money in for the first time. Signing up is free; this is who took the next step.'},
       {l:'New funded clients (FTDs)', t:fwdN?'calc':'in', v:m.newFTD, f:'int', tip:'The actual count of new people who funded their account. FTD just means first-time deposit.'}
     ]},
     {title:'STAGE 2 \u2014 DORMANT ACCOUNTS', rows:[
       {l:'Dormant account base', t:fwdE?'in':'calc', v:m.dorm, f:'int', tip:'People who already have an account but went quiet and stopped using it. This is how many sleepy accounts we are trying to wake up.'},
-      {l:'Activation rate', t:'in', v:cur.ef.rate/100, f:'pct0', tip:'Out of those sleepy accounts, the share we expect to wake up and start trading again.'},
+      {l:'Activation rate', t:'in', v:cur.ef.rate/100, f:'pct1s', tip:'Out of those sleepy accounts, the share we expect to wake up and start trading again.'},
       {l:'Activated clients', t:fwdE?'calc':'in', v:m.activated, f:'int', tip:'The actual count of sleepy accounts we expect to come back to life and trade.'}
     ]},
     {title:'TOTAL PARTICIPANTS', rows:[
@@ -755,8 +767,13 @@ function nd_sections(cur){
       {l:'Deposits per $1 spent', t:'calc', v:m.mkt, f:'mult', color:'ratio1', tip:'For every 1 dollar we spend on the promo, how many dollars of client money comes in. Above 1 means more comes in than we spend.'},
       {l:'Trading P&L (rev \u2212 cost)', t:'calc', v:m.flow, f:'money0s', color:'flow', tip:'The trading money made minus what the promo costs. If it is negative (red), trading alone does not cover the cost, so the promo is really an investment in winning new clients.'},
       {l:'Cost coverage', t:'calc', v:m.cov, f:'pct0', color:'ratio1', tip:'How much of the promo cost is paid for by the trading money it brings in. 100% means trading fully pays for the promo; less means it covers only part.'},
+      {l:'ROI (trading rev \u00f7 cost)', t:'calc', v:m.cov, f:'mult', color:'ratio1', tip:'For every 1 dollar the promo costs, how much comes back from trading. Above 1.00 means the trading alone pays for the promo; below 1.00 means it pays back only part.'},
       {l:'Break-even / lot', t:'calc', v:m.be, f:'money2', tip:'How much each lot would need to earn for the promo to pay for itself. If it is much higher than what we actually earn per lot, trading alone cannot cover the promo.'},
-      {l:'Achieved / lot', t:'calc', v:m.ach, f:'money2', tip:'What we actually earn per lot of trading. Compare it to the break-even number above to see the gap.'}
+      {l:'Achieved / lot', t:'calc', v:m.ach, f:'money2', tip:'What we actually earn per lot of trading. Compare it to the break-even number above to see the gap.'},
+      {l:'Cost per sign-up', t:'calc', v:m.cps, f:'money2', tip:'Everything the promo costs divided by the number of people who signed up. What we pay for each new sign-up.'},
+      {l:'Cost per participant', t:'calc', v:m.cpp, f:'money2', tip:'Everything the promo costs divided by everyone who joined in with money. What we pay for each person who takes part.'},
+      {l:'Cost per new FTD', t:'calc', v:m.cpf, f:'money2', tip:'Everything the promo costs divided by the brand-new clients who put money in. What it costs us to win each genuinely new customer.'},
+      {l:'Cost per completer', t:'calc', v:m.cpc, f:'money2', tip:'Everything the promo costs divided by the people who finished all three levels. What each champion costs us. It looks high because champions also earn the biggest rewards.'}
     ]}
   ];
 }
@@ -786,7 +803,12 @@ var ND_SCEN_OUT=[
   {l:'Deposits per $1',     f:'mult',   g:function(m){return m.mkt;}, color:'ratio1'},
   {l:'Trading P&L',         f:'money0s',g:function(m){return m.flow;}, color:'flow'},
   {l:'Cost coverage',       f:'pct0',   g:function(m){return m.cov;}, color:'ratio1'},
-  {l:'Break-even / lot',    f:'money2', g:function(m){return m.be;}}
+  {l:'ROI (trading rev \u00f7 cost)', f:'mult', g:function(m){return m.cov;}, color:'ratio1'},
+  {l:'Break-even / lot',    f:'money2', g:function(m){return m.be;}},
+  {l:'Cost per sign-up',    f:'money2', g:function(m){return m.cps;}},
+  {l:'Cost per participant',f:'money2', g:function(m){return m.cpp;}},
+  {l:'Cost per new FTD',    f:'money2', g:function(m){return m.cpf;}},
+  {l:'Cost per completer',  f:'money2', g:function(m){return m.cpc;}}
 ];
 var ND_GROUP_OUT=[
   {l:'Blended profit / lot',  f:'money2', g:function(m){return m.blend;}},
@@ -794,6 +816,7 @@ var ND_GROUP_OUT=[
   {l:'Trading revenue',       f:'money0', g:function(m){return m.rev;}},
   {l:'Trading P&L',           f:'money0s',g:function(m){return m.flow;}, color:'flow'},
   {l:'Cost coverage',         f:'pct0',   g:function(m){return m.cov;}, color:'ratio1'},
+  {l:'ROI (trading rev \u00f7 cost)', f:'mult', g:function(m){return m.cov;}, color:'ratio1'},
   {l:'Break-even / lot',      f:'money2', g:function(m){return m.be;}},
   {l:'Achieved / lot',        f:'money2', g:function(m){return m.ach;}}
 ];
@@ -811,6 +834,7 @@ function nd_fmtCode(f){
   if(f==='int')    return '#,##0';
   if(f==='dec1')   return '#,##0.0';
   if(f==='pct0')   return '0%';
+  if(f==='pct1s')  return '0.0%';
   if(f==='money0') return '$#,##0';
   if(f==='money0s')return '$#,##0;-$#,##0';
   if(f==='money2') return '$#,##0.00';
@@ -847,12 +871,12 @@ function nd_buildWorkbook(cur, dateStr){
 
   P(span('STAGE 1 \u2014 NEW CLIENTS',4,STG));
   var rRegs=P([lbl('New registrations'),tag('in'),inVal(regs,'int'),null]);
-  var rConv=P([lbl('FTD conversion'),tag('in'),inVal(conv,'pct0'),null]);
+  var rConv=P([lbl('FTD conversion'),tag('in'),inVal(conv,'pct1s'),null]);
   var rNew =P([lbl('New funded clients (FTDs)'),tag('calc'),calcVal('=ROUND('+C(rRegs)+'*'+C(rConv)+',0)','int'),null]);
 
   P(span('STAGE 2 \u2014 DORMANT ACCOUNTS',4,STG));
   var rDorm=P([lbl('Dormant account base'),tag('in'),inVal(dorm,'int'),null]);
-  var rAct =P([lbl('Activation rate'),tag('in'),inVal(act,'pct0'),null]);
+  var rAct =P([lbl('Activation rate'),tag('in'),inVal(act,'pct1s'),null]);
   var rActd=P([lbl('Activated clients'),tag('calc'),calcVal('=ROUND('+C(rDorm)+'*'+C(rAct)+',0)','int'),null]);
 
   P(span('TOTAL PARTICIPANTS',4,STG));
@@ -896,8 +920,13 @@ function nd_buildWorkbook(cur, dateStr){
   P([lbl('Deposits per $1 spent'),tag('calc'),calcVal('=IF('+C(rCost)+'>0,'+C(rNd)+'/'+C(rCost)+',0)','mult'),null]);
   P([lbl('Trading P&L (rev \u2212 cost)'),tag('calc'),calcVal('='+C(rRev)+'-'+C(rCost),'money0s'),null]);
   P([lbl('Cost coverage'),tag('calc'),calcVal('=IF('+C(rCost)+'>0,'+C(rRev)+'/'+C(rCost)+',0)','pct0'),null]);
+  P([lbl('ROI (trading rev \u00f7 cost)'),tag('calc'),calcVal('=IF('+C(rCost)+'>0,'+C(rRev)+'/'+C(rCost)+',0)','mult'),null]);
   P([lbl('Break-even / lot'),tag('calc'),calcVal('=IF('+C(rEff)+'>0,'+C(rCost)+'/'+C(rEff)+',0)','money2'),null]);
   P([lbl('Achieved / lot'),tag('calc'),calcVal('=IF('+C(rEff)+'>0,'+C(rRev)+'/'+C(rEff)+',0)','money2'),null]);
+  P([lbl('Cost per sign-up'),tag('calc'),calcVal('=IF('+C(rRegs)+'>0,'+C(rCost)+'/'+C(rRegs)+',0)','money2'),null]);
+  P([lbl('Cost per participant'),tag('calc'),calcVal('=IF('+C(rEntry)+'>0,'+C(rCost)+'/'+C(rEntry)+',0)','money2'),null]);
+  P([lbl('Cost per new FTD'),tag('calc'),calcVal('=IF('+C(rNew)+'>0,'+C(rCost)+'/'+C(rNew)+',0)','money2'),null]);
+  P([lbl('Cost per completer'),tag('calc'),calcVal('=IF('+C(rC3)+'>0,'+C(rCost)+'/'+C(rC3)+',0)','money2'),null]);
 
   P([null,null,null,null]);
   P(span('PRODUCT MIX \u2014 drives blended profit per lot (edit the Mix % column)',4,STG));
@@ -1301,6 +1330,12 @@ if (typeof module !== 'undefined' && module.exports){
     setTxt('vd_ach',money2(achieved));
     setTxt('vd_be1',money2(beS1));
     setEl('vd_cov1',Math.round(covS1*100)+'%',covS1>=1?'good':'warn');
+    setEl('vd_roi1',mult(covS1),covS1>=1?'good':'warn');
+    var regsV=newApi.top(), partsV=newApi.output()+exApi.output(), nftdV=newApi.output(), compV=(L.c3!=null?L.c3:0);
+    setTxt('vd_cps',regsV>0?money2(c1/regsV):'—');
+    setTxt('vd_cpp',partsV>0?money2(c1/partsV):'—');
+    setTxt('vd_cpf',nftdV>0?money2(c1/nftdV):'—');
+    setTxt('vd_cpc',compV>0?money2(c1/compV):'—');
     setTxt('vd_recapRev',money(rev));
     setTxt('vd_recapND',money(nd));
     setTxt('vd_frev',money(rev));setTxt('vd_fcost1',money(c1));setTxt('vd_fcost1b',money(c1));setTxt('vd_fcomm',sp(commS1));
@@ -1397,7 +1432,7 @@ if (typeof module !== 'undefined' && module.exports){
     primNameB:'Target new FTDs', primHintB:'Funded clients you want',
     topMinB:0, topMaxB:2000, topStepB:1, topDefB:12,
     rateName:'FTD conversion', rateHint:'Share who fund their account',
-    rateMin:1, rateMax:50, rateDef:8, badgeWord:'fund',
+    rateMin:0.1, rateMax:50, rateDef:8, badgeWord:'fund',
     resDef:12, resLabF:'new funded clients', resLabB:'registrations needed',
     subResF:'This is your <b>New FTDs</b> — the first stream into the funnel.',
     subResB:'That’s how many <b>sign-ups</b> you’d need to hit the target above.',
@@ -1417,7 +1452,7 @@ if (typeof module !== 'undefined' && module.exports){
     primNameB:'Target activations', primHintB:'first deposits you want',
     topMinB:0, topMaxB:6000, topStepB:1, topDefB:8,
     rateName:'Activation rate', rateHint:'share who finally fund',
-    rateMin:1, rateMax:30, rateDef:1, badgeWord:'fund',
+    rateMin:0.1, rateMax:30, rateDef:1, badgeWord:'fund',
     resDef:8, resLabF:'dormant accounts activated', resLabB:'dormant accounts needed',
     subResF:'These are your <b>activated accounts</b> — dormant clients funding for the first time, the second stream into the funnel.',
     subResB:'That’s how big a <b>dormant base</b> you’d need to hit the target above.',
@@ -1676,8 +1711,8 @@ function nd_injectUI(){
   '.nd-tbl td{text-align:right;padding:5px 8px;border-bottom:1px solid #eef1f6;font-variant-numeric:tabular-nums;color:#0B1A5E;} '+
   '.nd-tl{text-align:left!important;color:#2a3344!important;font-weight:500;} '+
   '.nd-toast{position:fixed;right:20px;bottom:74px;background:#0B1A5E;color:#fff;padding:10px 16px;border-radius:8px;z-index:100001;transition:opacity .4s;font-size:13px;box-shadow:0 8px 24px rgba(8,12,30,.3);} '+
-  '.nd-l .nd-i{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#c9d4f0;color:#0B1A5E;font:700 10px/1 inherit;font-style:normal;cursor:pointer;margin-left:5px;vertical-align:middle;-webkit-user-select:none;user-select:none;} '+
-  '.nd-l .nd-i:hover,.nd-l .nd-i:focus{background:#E8B109;outline:none;} '+
+  '.nd-i{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#c9d4f0;color:#0B1A5E;font:700 10px/1 inherit;font-style:normal;cursor:pointer;margin-left:5px;vertical-align:middle;-webkit-user-select:none;user-select:none;} '+
+  '.nd-i:hover,.nd-i:focus{background:#E8B109;outline:none;} '+
   '#nd-tip{position:fixed;max-width:264px;background:#0B1A5E;color:#fff;font:400 12.5px/1.5 inherit;padding:9px 12px;border-radius:9px;box-shadow:0 10px 30px rgba(8,12,30,.4);z-index:100002;display:none;pointer-events:none;-webkit-user-select:none;user-select:none;} '+
   '#nd-tip.nd-pin{pointer-events:auto;-webkit-user-select:text;user-select:text;cursor:text;} '+
   '@media (max-width:560px){#nd-bar{right:10px;bottom:10px;} .nd-btn{padding:8px 10px;font-size:12px;}}';
@@ -1700,13 +1735,11 @@ function nd_injectUI(){
   var tip=document.createElement('div'); tip.id='nd-tip'; document.body.appendChild(tip);
   tip.addEventListener('mousedown', function(e){ e.stopPropagation(); });
   tip.addEventListener('click', function(e){ e.stopPropagation(); });
-  var ndBody=document.getElementById('nd-body');
-  ndBody.addEventListener('mouseover', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i&&!nd_tipPinned) nd_tipShow(i); });
-  ndBody.addEventListener('mouseout', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i&&!nd_tipPinned) nd_tipHide(); });
-  ndBody.addEventListener('click', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i){ e.stopPropagation(); if(nd_tipPinned&&nd_tipCurrent===i){ nd_tipHide(); } else { nd_tipShow(i,true); nd_tipPinned=true; nd_tipCurrent=i; } } });
-  ndBody.addEventListener('keydown', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); e.stopPropagation(); if(nd_tipPinned&&nd_tipCurrent===i){ nd_tipHide(); } else { nd_tipShow(i,true); nd_tipPinned=true; nd_tipCurrent=i; } } });
-  document.getElementById('nd-card').addEventListener('scroll', function(){ nd_tipHide(); });
-  document.addEventListener('click', function(){ if(nd_tipPinned) nd_tipHide(); });
+  document.addEventListener('mouseover', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i&&!nd_tipPinned) nd_tipShow(i); });
+  document.addEventListener('mouseout', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i&&!nd_tipPinned) nd_tipHide(); });
+  document.addEventListener('click', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i){ if(nd_tipPinned&&nd_tipCurrent===i){ nd_tipHide(); } else { nd_tipShow(i,true); nd_tipPinned=true; nd_tipCurrent=i; } } else if(nd_tipPinned){ nd_tipHide(); } });
+  document.addEventListener('keydown', function(e){ var i=e.target.closest?e.target.closest('.nd-i'):null; if(i&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); if(nd_tipPinned&&nd_tipCurrent===i){ nd_tipHide(); } else { nd_tipShow(i,true); nd_tipPinned=true; nd_tipCurrent=i; } } });
+  window.addEventListener('scroll', function(){ nd_tipHide(); }, true);
 
   document.getElementById('nd-b-snap').addEventListener('click', nd_showPanel);
   document.getElementById('nd-b-xls').addEventListener('click', nd_exportExcel);
