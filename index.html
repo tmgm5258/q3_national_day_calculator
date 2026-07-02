@@ -493,11 +493,11 @@
               <div class="seg-note" id="co_scennote">$5 / $10 / $20 trading credit (cumulative per tier) + 1g gold catch for the first 3 to finish.</div>
             </div>
             <div class="field"><div class="lab"><span class="name">Estimated media spend</span><span class="hint">total ad budget for the promo</span></div>
-              <div class="row"><input type="range" id="co_mediaRange" min="0" max="30000" step="100" value="2700" aria-label="Estimated media spend" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_mediaNum" value="2700" aria-label="Estimated media spend value" /></div></div></div>
+              <div class="row"><input type="range" id="co_mediaRange" min="0" max="30000" step="100" value="1500" aria-label="Estimated media spend" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_mediaNum" value="1500" aria-label="Estimated media spend value" /></div></div></div>
             <div class="field"><div class="lab"><span class="name">Creative &amp; production</span><span class="hint">one-off, fixed</span></div>
-              <div class="row"><input type="range" id="co_crRange" min="0" max="10000" step="500" value="3000" aria-label="Creative and production" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_crNum" value="3000" aria-label="Creative and production value" /></div></div></div>
+              <div class="row"><input type="range" id="co_crRange" min="0" max="10000" step="500" value="0" aria-label="Creative and production" /><div class="numbox"><span class="pre">$</span><input type="number" id="co_crNum" value="0" aria-label="Creative and production value" /></div></div></div>
             <div class="field"><div class="lab"><span class="name">Gold price</span><span class="hint">today's rate, RM per gram</span></div>
-              <div class="row"><input type="range" id="co_goldRange" min="0" max="1000" step="0.25" value="548.33" aria-label="Gold price per gram in ringgit" /><div class="numbox"><span class="pre">RM</span><input type="number" id="co_goldNum" value="548.33" step="0.25" aria-label="Gold price per gram value" /></div></div></div>
+              <div class="row"><input type="range" id="co_goldRange" min="0" max="1000" step="0.25" value="690" aria-label="Gold price per gram in ringgit" /><div class="numbox"><span class="pre">RM</span><input type="number" id="co_goldNum" value="690" step="0.25" aria-label="Gold price per gram value" /></div></div></div>
             <div class="field"><div class="lab"><span class="name">Cost per sign-up</span><span class="hint">what that budget works out to</span></div>
               <div class="derived" id="co_cacDerived">≈ $18.00</div></div>
             <div class="presets"><div class="pl">Media spend scenario</div><div class="chips" id="co_chips">
@@ -1174,16 +1174,16 @@ if (typeof module !== 'undefined' && module.exports){
   }
 
   var SYMBOLS=[
-    {s:'EURUSD',c:'FX Major',std:7.52,pro:6.52,rw07:6.52,mix:15},
-    {s:'GBPUSD',c:'FX Major',std:8.82,pro:7.82,rw07:7.82,mix:18},
-    {s:'AUDUSD',c:'FX Major',std:8.76,pro:7.76,rw07:7.76,mix:10},
-    {s:'NZDUSD',c:'FX Major',std:11.68,pro:10.68,rw07:10.68,mix:5},
-    {s:'USDCAD',c:'FX Major',std:3.73,pro:5.28,rw07:7.26,mix:4},
-    {s:'USDCHF',c:'FX Major',std:13.12,pro:9.82,rw07:8.03,mix:5},
-    {s:'XAGUSD',c:'Silver',std:52.59,pro:52.59,rw07:52.59,mix:18},
-    {s:'XPTUSD',c:'Platinum',std:522,pro:522,rw07:522,mix:10},
-    {s:'XAUUSD',c:'Gold',std:16.97,pro:16.97,rw07:16.97,mix:15},
-    {s:'BTCUSD',c:'Bitcoin (×10)',std:125.56,pro:125.56,rw07:125.56,mix:0}
+    {s:'EURUSD',c:'FX Major',std:7.52,pro:6.52,rw07:6.52,mix:0},
+    {s:'GBPUSD',c:'FX Major',std:8.82,pro:7.82,rw07:7.82,mix:0},
+    {s:'AUDUSD',c:'FX Major',std:8.76,pro:7.76,rw07:7.76,mix:0},
+    {s:'NZDUSD',c:'FX Major',std:11.68,pro:10.68,rw07:10.68,mix:0},
+    {s:'USDCAD',c:'FX Major',std:3.73,pro:5.28,rw07:7.26,mix:0},
+    {s:'USDCHF',c:'FX Major',std:13.12,pro:9.82,rw07:8.03,mix:0},
+    {s:'XAGUSD',c:'Silver',std:52.59,pro:52.59,rw07:52.59,mix:0},
+    {s:'XPTUSD',c:'Platinum',std:522,pro:522,rw07:522,mix:0},
+    {s:'XAUUSD',c:'Gold',std:16.97,pro:16.97,rw07:16.97,mix:87},
+    {s:'BTCUSD',c:'Bitcoin (×10)',std:125.56,pro:125.56,rw07:125.56,mix:13}
   ];
   var R={group:'std',drift:1};
   function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
@@ -1258,7 +1258,7 @@ if (typeof module !== 'undefined' && module.exports){
     renderRevenue();
   }
 
-  var CO={scen:'s1',media:2700,creative:3000,goldRM:548.33};
+  var CO={scen:'s1',media:1500,creative:0,goldRM:690};
   var CREDIT={s1:[5,10,20]};
   var GOLDRM={s1:548.33}, MYR=4.14, GOLDCAP=3;
   function costParts(scen,regs,stopT1,stopT2,comp){
@@ -1428,12 +1428,12 @@ if (typeof module !== 'undefined' && module.exports){
     desc:'How many people sign up, and how many of them actually fund their account.',
     info:`<h4>In plain words</h4><p>Stage 1 is the brand-new people. We pick how many sign-ups we expect during the promo, and what share of them actually put money in. Multiply those two, and we get our new funded clients.</p><h4>Formula</h4><div class="formula">sign-ups × funding rate = new funded clients<br><span id="n_fTop">150</span> × <span id="n_fRate">8</span>% = <span id="n_fRes">12</span></div><h4>Common questions</h4><ul><li><span class="q">Where’s the <span id="n_qRate">8</span>% from?</span>It’s an assumption, our best estimate, since we’ve no history for this exact promo. Slide it, and everything below moves. When media gives us a real conversion number, we use that instead.</li><li><span class="q">What’s a “funded client”?</span>Someone who puts money in for the first time. In our world that’s an FTD, a first-time depositor.</li></ul>`,
     primNameF:'New registrations', primHintF:'People who sign up',
-    topMinF:0, topMaxF:6000, topStepF:10, topDefF:150,
+    topMinF:0, topMaxF:6000, topStepF:1, topDefF:200,
     primNameB:'Target new FTDs', primHintB:'Funded clients you want',
-    topMinB:0, topMaxB:2000, topStepB:1, topDefB:12,
+    topMinB:0, topMaxB:2000, topStepB:1, topDefB:8,
     rateName:'FTD conversion', rateHint:'Share who fund their account',
-    rateMin:0.1, rateMax:50, rateDef:8, badgeWord:'fund',
-    resDef:12, resLabF:'new funded clients', resLabB:'registrations needed',
+    rateMin:0.1, rateMax:50, rateDef:4, badgeWord:'fund',
+    resDef:8, resLabF:'new funded clients', resLabB:'registrations needed',
     subResF:'This is your <b>New FTDs</b> — the first stream into the funnel.',
     subResB:'That’s how many <b>sign-ups</b> you’d need to hit the target above.',
     funTopCap:'registrations', funBotCap:'new FTDs', dropWord:'signed up but didn’t fund',
@@ -1448,12 +1448,12 @@ if (typeof module !== 'undefined' && module.exports){
     desc:'Accounts that registered but never funded. How many make a first deposit during the promo.',
     info:`<h4>In plain words</h4><p>Stage 2 is a different group: people who already signed up with us before but never put any money in. We call them dormant. We estimate how many there are, and what small share we can wake up and get to fund.</p><h4>Formula</h4><div class="formula">dormant accounts × activation rate = activated clients<br><span id="e_fTop">800</span> × <span id="e_fRate">1</span>% = <span id="e_fRes">8</span></div><h4>Common questions</h4><ul><li><span class="q">Why is the activation rate <span id="e_qRate">1</span>%?</span>Because these people already had their chance to fund and didn’t, so waking them up is genuinely hard. We keep it cautious on purpose. If it comes in better, great, but we’d rather under-promise here than over-promise.</li><li><span class="q">What counts as “dormant”?</span>Someone who registered an account with us in the past but has never deposited or traded. The difference from Stage 1 is just timing: Stage 1 is people signing up fresh during the promo, Stage 2 is people already on our books that we’re waking up.</li></ul>`,
     primNameF:'Dormant account base', primHintF:'registered, never funded',
-    topMinF:0, topMaxF:40000, topStepF:50, topDefF:800,
+    topMinF:0, topMaxF:40000, topStepF:1, topDefF:1122,
     primNameB:'Target activations', primHintB:'first deposits you want',
-    topMinB:0, topMaxB:6000, topStepB:1, topDefB:8,
+    topMinB:0, topMaxB:6000, topStepB:1, topDefB:11,
     rateName:'Activation rate', rateHint:'share who finally fund',
     rateMin:0.1, rateMax:30, rateDef:1, badgeWord:'fund',
-    resDef:8, resLabF:'dormant accounts activated', resLabB:'dormant accounts needed',
+    resDef:11, resLabF:'dormant accounts activated', resLabB:'dormant accounts needed',
     subResF:'These are your <b>activated accounts</b> — dormant clients funding for the first time, the second stream into the funnel.',
     subResB:'That’s how big a <b>dormant base</b> you’d need to hit the target above.',
     funTopCap:'dormant accounts', funBotCap:'activated', dropWord:'stayed dormant',
